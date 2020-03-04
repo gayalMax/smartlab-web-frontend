@@ -1,5 +1,6 @@
 {
   "name": "inventory-management-system",
+  "homepage": "https://gayalmax.github.io/SmartLab/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
