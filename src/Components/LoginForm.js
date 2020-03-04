@@ -10,7 +10,7 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import clsx from 'clsx';
 
-const useStyles = makeStyles((theme)=> ({
+const useStyles = makeStyles((theme) => ({
   root: {
     flexWrap: 'wrap',
   },
