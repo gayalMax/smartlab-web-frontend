@@ -1,13 +1,8 @@
 import React from 'react';
-import './App.css';
-import LoginForm from './Components/LoginForm';
+import Router from './Router';
 
 function App() {
-  return (
-    <div className="App">
-      <LoginForm />
-    </div>
-  );
+  return <Router />;
 }
 
 export default App;
