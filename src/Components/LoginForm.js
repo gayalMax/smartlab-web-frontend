@@ -106,11 +106,6 @@ const LoginForm = () => {
       className={clsx(classes.root)}
       noValidate
       autoComplete="off"
-    // action={
-    //   console.log('Hello')
-    //   // schema.validate({ values })
-    //   // validation(values)
-    // }
     >
       <Card className={clsx(classes.outerGrid)}>
         <CardContent>
@@ -159,9 +154,10 @@ const LoginForm = () => {
           </Grid>
           <Grid>
             <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
-              <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-              <OutlinedInput
+              {/* <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel> */}
+              <TextField
                 id="outlined-adornment-password"
+                label="Password"
                 type={values.showPassword ? 'text' : 'password'}
                 variant="outlined"
                 value={values.password}
@@ -185,9 +181,10 @@ const LoginForm = () => {
           </Grid>
           <Grid>
             <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
-              <InputLabel htmlFor="outlined-adornment-password">Confirm</InputLabel>
-              <OutlinedInput
+              {/* <InputLabel htmlFor="outlined-adornment-password">Confirm</InputLabel> */}
+              <TextField
                 id="outlined-adornment-password"
+                label="Confirm"
                 type={values.showPassword ? 'text' : 'password'}
                 variant="outlined"
                 value={values.rePassword}
