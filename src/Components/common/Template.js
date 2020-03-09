@@ -1,5 +1,5 @@
-import React, { Children, useState } from "react";
-import { Drawer } from "./index";
+import React from "react";
+import { Drawer } from "../miniComponents/index";
 import Box from "@material-ui/core/Box";
 
 function Template(props) {
