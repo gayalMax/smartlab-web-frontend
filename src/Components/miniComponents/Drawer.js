@@ -18,7 +18,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import AppBar from "./AppBar";
 import { Box } from "@material-ui/core";
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -57,6 +57,7 @@ const useStyles = makeStyles(theme => ({
 function ResponsiveDrawer(props) {
   const { container } = props;
   const classes = useStyles();
+  const history = useHistory();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -64,13 +65,14 @@ function ResponsiveDrawer(props) {
     setMobileOpen(!mobileOpen);
   };
 
-  const drawerAdmin = ["Create Account", "Create Lab"];
+  const drawerAdmin = ["Create Account", "Create Lab" , "Create Role"];
 
-  // const routeChange = (pathVariable) => {
-  //   let path = `/${pathVariable}`;
-  //   let history = useHistory();
-  //   history.push(path);
-  // };
+  const routeChange = (pathVariable) => {
+    let pathArray = pathVariable.split(" ");
+    let pathString = pathArray.join("");
+    let path = `/${pathString}`;
+     history.push(path);
+   };
 
   const drawer = (
     <div>
@@ -85,7 +87,8 @@ function ResponsiveDrawer(props) {
               button
               key={text}
               style={{ backgroundColor: "white", margin: 4 }}
-              // onClick ={routeChange(text)}
+              onClick ={() => { 
+                routeChange(text)}}
             >
               <ListItemText primary={text} />
             </ListItem>
