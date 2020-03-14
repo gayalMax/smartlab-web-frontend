@@ -1,6 +1,6 @@
-import React from "react";
-import { TextareaAutosize, Box, Button } from "@material-ui/core";
-import SelectRole from "../miniComponents/DropDown";
+import React from 'react';
+import { TextareaAutosize, Box, Button } from '@material-ui/core';
+import SelectRole from '../MiniComponents/DropDown';
 
 function CreateAccount() {
   return (
@@ -10,9 +10,9 @@ function CreateAccount() {
         placeholder="email addresses"
         style={{ width: 500, height: 250 }}
       />
-      <Box style={{ flexBasis: 50 }} >
+      <Box style={{ flexBasis: 50 }}>
         <SelectRole />
-        <Button variant="contained" color="primary" style={{height:40,marginTop:50,marginLeft:200}}>
+        <Button variant="contained" color="primary" style={{ height: 40, marginTop: 50, marginLeft: 200 }}>
           CREATE ACCCOUNT
         </Button>
       </Box>
