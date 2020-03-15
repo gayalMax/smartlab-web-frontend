@@ -1,27 +1,17 @@
 /* eslint-disable no-console */
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import Joi from '@hapi/joi';
 import axios from 'axios';
-import RegisterFormPresentation from './RegisterFormPresentation';
+import LoginFormPresentation from './LoginFormPresentation';
 
-const RegisterForm = (props) => {
-  const { email, role, registertoken } = props;
-  console.log(email);
+const LoginForm = () => {
   const [values, setValues] = React.useState({
-    registertoken,
-    email,
-    firstName: '',
-    lastName: '',
+    email: '',
     password: '',
-    rePassword: '',
-    showPassword: false,
     errorMessage: '',
-    role,
-    redirect: false,
   });
-
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
@@ -36,32 +26,11 @@ const RegisterForm = (props) => {
     email: Joi.string()
       .email({ minDomainSegments: 2, tlds: { allow: false } }),
 
-    firstName: Joi.string()
-      .alphanum()
-      .min(3)
-      .max(50)
-      .required(),
-
-    lastName: Joi.string()
-      .alphanum()
-      .min(3)
-      .max(50)
-      .required(),
-
     password: Joi.string()
       .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')),
 
-    rePassword: Joi.ref('password'),
-
-    showPassword: Joi.any(),
-
     errorMessage: Joi.any(),
 
-    registertoken: Joi.any(),
-
-    role: Joi.any(),
-
-    redirect: Joi.boolean(),
   });
 
   const validation = async (ip) => {
@@ -81,17 +50,14 @@ const RegisterForm = (props) => {
 
 
     if (validationSuccess) {
-      const registrationData = {
-        token: values.registertoken, // should be taken by a token
-        firstName: values.firstName,
-        lastName: values.lastName,
+      const loginData = {
+        email: values.email,
         password: values.password,
       };
 
-      await axios.post('http://localhost:8000/api/registration/register', registrationData)
+      await axios.post('http://localhost:8000/api/login', loginData)
         .then((res) => {
-          console.log('Success: ', res);
-          setValues({ ...values, redirect: true });
+          console.log('Success: ', res.data);
         })
         .catch((err) => {
           console.log('Axios error: ', err.message);
@@ -99,15 +65,9 @@ const RegisterForm = (props) => {
     }
   };
 
-  // if (values.redirect === 'notfound') {
-  //   return <Redirect push to="" />;
-  // }
-  if (values.redirect === true) {
-    return <Redirect push to="/login" />;
-  }
   return (
     <div>
-      <RegisterFormPresentation
+      <LoginFormPresentation
         values={values}
         handleChange={handleChange}
         changeErrorMessage={changeErrorMessage}
@@ -117,4 +77,4 @@ const RegisterForm = (props) => {
   );
 };
 
-export default RegisterForm;
+export default LoginForm;

@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-const RegisterFormPresentation = (props) => {
+const LoginFormPresentation = (props) => {
   const { values } = props;
   const { handleChange } = props;
   const { handleSubmit } = props;
@@ -57,46 +57,18 @@ const RegisterFormPresentation = (props) => {
             <h2>Sign Up</h2>
             {/* {values.role === '')?} */}
             <p className={clsx(classes.paragraph)}>
-              You have been offered the role of
-              {' '}
-              {values.role}
-              .
-              Please sign up to create an account and get started
+              Please sign in to continue from where you left off
             </p>
             <p className={clsx(classes.paragraph, classes.warning)}>{values.errorMessage}</p>
           </Grid>
           <Grid>
             <TextField
               className={clsx(classes.margin, classes.textField)}
-              disabled
+              required
               id="email"
               label="Email"
               value={values.email}
-              variant="outlined"
-              InputProps={{
-                readOnly: true,
-              }}
-            />
-          </Grid>
-          <Grid>
-            <TextField
-              className={clsx(classes.margin, classes.textField)}
-              required
-              id="firstName"
-              label="First Name"
-              value={values.firstName}
-              onChange={handleChange('firstName')}
-              variant="outlined"
-            />
-          </Grid>
-          <Grid>
-            <TextField
-              className={clsx(classes.margin, classes.textField)}
-              required
-              id="lastName"
-              label="Last Name"
-              value={values.lastName}
-              onChange={handleChange('lastName')}
+              onChange={handleChange('email')}
               variant="outlined"
             />
           </Grid>
@@ -109,17 +81,6 @@ const RegisterFormPresentation = (props) => {
               onChange={handleChange('password')}
               variant="outlined"
               type="password"
-            />
-          </Grid>
-          <Grid>
-            <TextField
-              className={clsx(classes.margin, classes.textField)}
-              id="rePassword"
-              label="Confirm"
-              value={values.rePassword}
-              onChange={handleChange('rePassword')}
-              type="password"
-              variant="outlined"
             />
           </Grid>
           <Grid>
@@ -138,12 +99,4 @@ const RegisterFormPresentation = (props) => {
   );
 };
 
-// RegisterFormPresentation.propTypes = {
-//   values: PropTypes.object,
-//   handleChange: PropTypes.func,
-//   changeErrorMessage: PropTypes.func,
-//   handleSubmit: PropTypes.func,
-// };
-
-
-export default RegisterFormPresentation;
+export default LoginFormPresentation;
