@@ -1,11 +1,10 @@
-import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import RegisterManage from './components/GuestUser/RegisterManage';
-import LoginForm from './components/GuestUser/LoginForm';
-import CreateAccount from './components/AdminComponents/CreateAccount';
-import CreateRole from './components/AdminComponents/CreateRole';
-import { Template, CreateRoleTemplate } from './components/Common/index';
-import PageNotFound from './components/Common/PageNotFound';
+import React from "react";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import LoginForm from "./Components/LoginForm";
+import CreateAccount from "./Components/adminComponents/CreateAccount";
+import CreateRole from "./Components/adminComponents/createRole";
+import {Template} from "./Components/common/index";
+
 
 export default function Router() {
   return (
@@ -23,8 +22,8 @@ export default function Router() {
         <Route
           path="/createRole"
           exact
-          component={() => (
-            <CreateRoleTemplate displayCreateRole={<CreateRole />} />
+          component = {() => (
+            <Template displayDocument = {<CreateRole />}></Template>
           )}
         />
         <Route path="/" exact render={() => <div>404</div>} />
