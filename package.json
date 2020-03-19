@@ -1,34 +1,19 @@
 {
-  "name": "inventory-management-system",
-  "homepage": "https://gayalmax.github.io/SmartLab/",
+  "name": "open-inventory-web",
   "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@hapi/joi": "^17.1.0",
-    "@material-ui/core": "^4.9.5",
-    "@material-ui/icons": "^4.9.1",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.4.1",
-    "@testing-library/user-event": "^7.2.1",
-    "axios": "^0.19.2",
-    "clsx": "^1.1.0",
-    "formik": "^2.1.4",
-    "material-ui-icons": "^1.0.0-beta.36",
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0",
-    "react-redux": "^7.2.0",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.0",
-    "redux": "^4.0.5"
-  },
+  "description": "Inventory Management System Frontend",
+  "main": "index.js",
+  "repository": "https://github.com/openinventoryorg/web-frontend",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "./node_modules/.bin/eslint --ext .js config/ models/ routes/ seeders/ index.js",
-    "lint-fix": "./node_modules/.bin/eslint --fix --ext .js config/ models/ routes/ seeders/ index.js"
+    "lint-fix": "./node_modules/.bin/eslint --fix --ext .js,.jsx src/"
   },
+  "author": "openinventoryorg",
+  "license": "MIT",
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -44,13 +29,41 @@
       "last 1 safari version"
     ]
   },
+  "dependencies": {
+    "@material-ui/core": "^4.9.5",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.45",
+    "axios": "^0.19.2",
+    "clsx": "^1.1.0",
+    "formik": "^2.1.4",
+    "formik-material-ui": "^2.0.0-beta.1",
+    "immer": "^6.0.2",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
+    "react-icons": "^3.9.0",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "^3.4.0",
+    "react-service-worker": "^0.1.1",
+    "redux": "^4.0.5",
+    "redux-localstorage": "^0.4.1",
+    "redux-thunk": "^2.3.0",
+    "yup": "^0.28.3"
+  },
   "devDependencies": {
+    "@testing-library/dom": "^7.0.4",
+    "@testing-library/jest-dom": "^5.1.1",
+    "@testing-library/react": "^10.0.1",
+    "@testing-library/user-event": "^10.0.0",
     "eslint": "^6.8.0",
-    "eslint-config-airbnb": "^18.0.1",
-    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-airbnb": "^18.1.0",
+    "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.18.3",
-    "eslint-plugin-react-hooks": "^1.7.0"
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.19.0",
+    "eslint-plugin-react-hooks": "^2.5.0",
+    "prettier": "^1.19.1"
   }
 }

@@ -1,0 +1,4 @@
+export const REFRESH_ROLES = 'REFRESH_ROLES';
+export const EMAILS_ONCHANGE = 'EMAILS_ONCHANGE';
+export const ROLE_ONCHANGE = 'ROLE_ONCHANGE';
+export const FORM_SUBMIT = 'FORM_SUBMIT';
