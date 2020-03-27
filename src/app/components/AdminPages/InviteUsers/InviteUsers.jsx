@@ -21,10 +21,10 @@ function InviteUsers() {
 
   // If roles are not loaded(and the request is not already submitted) request to sync roles
   useEffect(() => {
-    if (!loading && roles.length === 0) {
+    if (!loading && roles.length === 0 && !error) {
       dispatch(adminRegistrationSyncRoles(token));
     }
-  }, [dispatch, token, loading, roles]);
+  }, [dispatch, token, loading, roles, error]);
 
   // State management of emails and roles
   const [formState, setFormState] = useState({ emails: [], role: null });
