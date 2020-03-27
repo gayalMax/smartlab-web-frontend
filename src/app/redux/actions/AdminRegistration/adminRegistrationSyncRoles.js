@@ -7,6 +7,7 @@ import {
   ADMIN_REGISTRATION_SYNC_ROLES_FAILURE
 } from '../../actionTypes';
 import { SERVER, SERVER_GET_ROLES } from '../serverConstants';
+import { capitalizeFirstLetter } from '../../../helpers/string';
 
 /**
  * Action creator for beginning of requesting roles
@@ -80,7 +81,11 @@ export default function adminRegistrationSyncRoles(token) {
     function onSuccess(success) {
       try {
         const validatedData = responseSchema.validateSync(success.data);
-        dispatch(adminRegistrationSyncRolesSuccess(validatedData));
+        const roles = validatedData.roles.map(role => {
+          // eslint-disable-next-line no-param-reassign
+          return { name: capitalizeFirstLetter(role.name), id: role.id };
+        });
+        dispatch(adminRegistrationSyncRolesSuccess({ roles }));
       } catch (err) {
         dispatch(
           adminRegistrationSyncRolesFailure(

@@ -1,8 +1,10 @@
+import axios from 'axios';
 import {
   ADMIN_REGISTRATION_INVITE_BEGIN,
   ADMIN_REGISTRATION_INVITE_SUCCESS,
   ADMIN_REGISTRATION_INVITE_FAILURE
 } from '../../actionTypes';
+import { SERVER, SERVER_POST_TOKEN } from '../serverConstants';
 
 /**
  * Action creator for beginning of inviting users
@@ -79,8 +81,14 @@ export default function adminRegistrationInvite(token, emails, role) {
     }
 
     try {
-      // TODO: Make the request
-      if (token == null) throw Error('Not Authorized');
+      const success = await axios.post(
+        `${SERVER}/${SERVER_POST_TOKEN}`,
+        { emails, role },
+        { headers: { token } }
+      );
+      if (success.status !== 200) {
+        throw Error('Server responded with an error');
+      }
       onSuccess();
     } catch (error) {
       onError(error.response);
