@@ -93,7 +93,7 @@ const entries = [
       {
         id: 'Retract Invitations',
         icon: <AiOutlineMinusSquare />,
-        route: '#'
+        route: '/admin/users/retract'
       }
     ]
   },

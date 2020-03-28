@@ -82,7 +82,6 @@ export default function adminRegistrationSyncRoles(token) {
       try {
         const validatedData = responseSchema.validateSync(success.data);
         const roles = validatedData.roles.map(role => {
-          // eslint-disable-next-line no-param-reassign
           return { name: capitalizeFirstLetter(role.name), id: role.id };
         });
         dispatch(adminRegistrationSyncRolesSuccess({ roles }));

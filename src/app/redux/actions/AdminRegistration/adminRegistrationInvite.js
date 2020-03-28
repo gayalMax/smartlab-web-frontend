@@ -8,7 +8,6 @@ import { SERVER, SERVER_POST_TOKEN } from '../serverConstants';
 
 /**
  * Action creator for beginning of inviting users
- * @param {string} invitationToken Invitation token key
  * @returns Redux action
  */
 const adminRegistrationInviteBegin = () => ({
@@ -18,10 +17,6 @@ const adminRegistrationInviteBegin = () => ({
 /**
  * Action creator for end of inviting users.
  * This is fired when API call ends in a success.
- * @param {Object} response Response data of the call
- * @param {Object[]} response.roles Roles list
- * @param {string} response.roles.id Id of the role
- * @param {string} response.roles.name Name of the role
  * @returns Redux action
  */
 const adminRegistrationInviteSuccess = () => ({
