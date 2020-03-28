@@ -18,7 +18,6 @@ import {
   TableHead,
   TableBody,
   Chip,
-  Avatar,
   Dialog,
   DialogTitle,
   DialogContent,
@@ -26,33 +25,24 @@ import {
   DialogActions
 } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
-import moment from 'moment';
 
-import styles from './RetractInvitations.styles';
+import styles from './DeleteRoles.styles';
 import ProgressOverlay from '../../Common/ProgressOverlay';
 
-function RetractInviationsPresenter({
-  classes,
-  registrationTokens,
-  error,
-  loading,
-  success,
-  onRefresh,
-  onRetract
-}) {
-  const [selectedEmail, setSelectedEmail] = React.useState(null);
+function DeleteRolesPresenter({ classes, roles, error, loading, success, onRefresh, onDelete }) {
+  const [selectedRole, setSelectedRole] = React.useState({});
 
-  const handleClick = email => () => {
-    setSelectedEmail(email);
+  const handleClick = role => () => {
+    setSelectedRole(role);
   };
 
   const handleDialogClose = () => {
-    setSelectedEmail(null);
+    setSelectedRole({});
   };
 
   const handleRetract = () => {
-    if (selectedEmail !== null) {
-      onRetract(selectedEmail);
+    if (selectedRole !== null) {
+      onDelete(selectedRole);
     }
     handleDialogClose();
   };
@@ -64,7 +54,7 @@ function RetractInviationsPresenter({
           <Toolbar>
             <Grid container spacing={2} alignItems="center">
               <Grid item xs>
-                <p className={classes.title}>Retract Invitations</p>
+                <p className={classes.title}>Delete Roles</p>
               </Grid>
             </Grid>
             <Grid item>
@@ -87,63 +77,55 @@ function RetractInviationsPresenter({
           <Grid item>
             {success && (
               <Box pb={2}>
-                <Alert severity="success">Invitation was successfully retracted.</Alert>
+                <Alert severity="success">Role was successfully deleted.</Alert>
               </Box>
             )}
           </Grid>
 
           <Grid item>
             <Box px={2} pb={2}>
-              Retract Invitations by clicking the button.
+              Delete roles by clicking the button. Note that primitive roles such as
+              Student/Administrator&nbsp;
+              <b>cannot be deleted.</b>
               <br />
-              Note that users with accepted invitations&nbsp;
-              <b>cannot be removed.</b>
-              <br />
-              <b>Retracting action cannot be undone.</b>
+              <b>Deleting action cannot be undone.</b>
             </Box>
           </Grid>
 
           <Grid item>
             <TableContainer>
-              <Table className={classes.table} aria-label="invitations table" size="small">
+              <Table className={classes.table} aria-label="roles tab;e" size="small">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Email Address</TableCell>
                     <TableCell>Role</TableCell>
-                    <TableCell>Last Updated</TableCell>
+                    <TableCell>Permissions</TableCell>
                     <TableCell />
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {registrationTokens.map(row => (
-                    <TableRow key={row.email}>
+                  {roles.map(row => (
+                    <TableRow key={row.id}>
                       <TableCell component="th" scope="row">
-                        {row.email}
+                        {row.name}
                       </TableCell>
                       <TableCell>
-                        <Chip
-                          variant="outlined"
-                          color="primary"
-                          avatar={<Avatar>{row.Role.name[0]}</Avatar>}
-                          label={row.Role.name}
-                        />
-                      </TableCell>
-                      <TableCell>
-                        <i>{moment(row.updatedAt).fromNow()}</i>
+                        {row.RolePermissions.map(permission => (
+                          <Chip key={permission.name} size="small" label={permission.name} />
+                        ))}
                       </TableCell>
                       <TableCell align="right">
-                        {row.valid ? (
+                        {row.name === 'Student' || row.name === 'Administrator' ? (
+                          <Button variant="text" disabled>
+                            Cannot Delete
+                          </Button>
+                        ) : (
                           <Button
                             color="secondary"
                             variant="contained"
-                            onClick={handleClick(row.email)}
+                            onClick={handleClick(row)}
                             startIcon={<AiOutlineDelete />}
                           >
-                            Retract
-                          </Button>
-                        ) : (
-                          <Button variant="text" disabled>
-                            Invitation Accepted
+                            Delete
                           </Button>
                         )}
                       </TableCell>
@@ -157,22 +139,22 @@ function RetractInviationsPresenter({
       </Paper>
 
       <Dialog
-        open={selectedEmail !== null}
+        open={selectedRole.id != null}
         onClose={handleDialogClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">Retract Invitation?</DialogTitle>
+        <DialogTitle id="alert-dialog-title">Delete Role?</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            If you retract the invitation, the user won&apos;t be able to register. If the user had
-            already recieved the invitation, the token will be invalidated.
+            If you retract the invitation, the user who were using the role will get minimum roles
+            and will be logged out.
             <br />
             This action cannot be undone.
             <br />
             <br />
-            Email Address:&nbsp;
-            <b>{selectedEmail}</b>
+            Role:&nbsp;
+            <b>{selectedRole.name}</b>
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -188,18 +170,18 @@ function RetractInviationsPresenter({
   );
 }
 
-RetractInviationsPresenter.defaultProps = {
+DeleteRolesPresenter.defaultProps = {
   error: null
 };
 
-RetractInviationsPresenter.propTypes = {
+DeleteRolesPresenter.propTypes = {
   classes: PropTypes.object.isRequired,
-  registrationTokens: PropTypes.array.isRequired,
+  roles: PropTypes.array.isRequired,
   error: PropTypes.string,
   loading: PropTypes.bool.isRequired,
   success: PropTypes.bool.isRequired,
   onRefresh: PropTypes.func.isRequired,
-  onRetract: PropTypes.func.isRequired
+  onDelete: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(RetractInviationsPresenter);
+export default withStyles(styles)(DeleteRolesPresenter);

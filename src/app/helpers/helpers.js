@@ -7,6 +7,13 @@ export function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+export function formatPermission(permission) {
+  return permission
+    .split('_')
+    .map(v => capitalizeFirstLetter(v.toLowerCase()))
+    .join(' ');
+}
+
 /**
  * Slices a state slice by its action. If the action is the specified
  * one, normal slice. Otherwise error and success is reset to default.

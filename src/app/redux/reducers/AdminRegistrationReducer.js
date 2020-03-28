@@ -32,6 +32,7 @@ const adminRegistrationReducer = produce((draft, { type, payload }) => {
   switch (type) {
     // Syncing roles
     case ADMIN_REGISTRATION_SYNC_ROLES_BEGIN:
+      draft.action = ADMIN_REGISTRATION_INVITE;
       draft.success = false;
       draft.roles = [];
       draft.error = null;
@@ -62,6 +63,7 @@ const adminRegistrationReducer = produce((draft, { type, payload }) => {
       return draft;
     // Syncing tokens
     case ADMIN_REGISTRATION_SYNC_TOKENS_BEGIN:
+      draft.action = ADMIN_REGISTRATION_RETRACTION;
       draft.tokens = [];
       draft.error = null;
       draft.loading = true;
