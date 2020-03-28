@@ -12,7 +12,9 @@ import {
   ADMIN_REGISTRATION_SYNC_TOKENS_BEGIN,
   ADMIN_REGISTRATION_RETRACTION_BEGIN,
   ADMIN_REGISTRATION_RETRACTION_SUCCESS,
-  ADMIN_REGISTRATION_RETRACTION_FAILURE
+  ADMIN_REGISTRATION_RETRACTION_FAILURE,
+  ADMIN_REGISTRATION_RETRACTION,
+  ADMIN_REGISTRATION_INVITE
 } from '../actionTypes';
 import initialState from '../states/adminRegistrationState';
 
@@ -45,6 +47,7 @@ const adminRegistrationReducer = produce((draft, { type, payload }) => {
       return draft;
     // Submit invitations
     case ADMIN_REGISTRATION_INVITE_BEGIN:
+      draft.action = ADMIN_REGISTRATION_INVITE;
       draft.error = null;
       draft.success = false;
       draft.loading = true;
@@ -59,7 +62,6 @@ const adminRegistrationReducer = produce((draft, { type, payload }) => {
       return draft;
     // Syncing tokens
     case ADMIN_REGISTRATION_SYNC_TOKENS_BEGIN:
-      draft.success = false;
       draft.tokens = [];
       draft.error = null;
       draft.loading = true;
@@ -74,6 +76,7 @@ const adminRegistrationReducer = produce((draft, { type, payload }) => {
       return draft;
     // Submit Retraction
     case ADMIN_REGISTRATION_RETRACTION_BEGIN:
+      draft.action = ADMIN_REGISTRATION_RETRACTION;
       draft.error = null;
       draft.success = false;
       draft.loading = true;

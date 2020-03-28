@@ -7,7 +7,7 @@ import {
   ADMIN_REGISTRATION_SYNC_ROLES_FAILURE
 } from '../../actionTypes';
 import { SERVER, SERVER_GET_ROLES } from '../serverConstants';
-import { capitalizeFirstLetter } from '../../../helpers/string';
+import { capitalizeFirstLetter } from '../../../helpers/helpers';
 
 /**
  * Action creator for beginning of requesting roles

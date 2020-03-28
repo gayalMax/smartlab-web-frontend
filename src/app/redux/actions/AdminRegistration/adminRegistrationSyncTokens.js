@@ -7,7 +7,7 @@ import {
   ADMIN_REGISTRATION_SYNC_TOKENS_FAILURE
 } from '../../actionTypes';
 import { SERVER, SERVER_GET_TOKENS } from '../serverConstants';
-import { capitalizeFirstLetter } from '../../../helpers/string';
+import { capitalizeFirstLetter } from '../../../helpers/helpers';
 
 /**
  * Action creator for beginning of requesting tokens

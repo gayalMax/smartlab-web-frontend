@@ -7,17 +7,16 @@ import {
 } from '../../../redux/actions/AdminRegistrationActions';
 import InviteUsersPresenter from './InviteUsers.presenter';
 import * as EVENTS from './InviteUsers.events';
+import { ADMIN_REGISTRATION_INVITE } from '../../../redux/actionTypes';
+import { sliceStateByAction } from '../../../helpers/helpers';
 
 function InviteUsers() {
   // To dispatch api calls
   const dispatch = useDispatch();
   // Take token and other state slice. Token is required for api call.
-  const { roles, error, loading, token, success } = useSelector(state => {
-    return {
-      ...state.adminRegistration,
-      token: state.auth.token
-    };
-  });
+  const { roles, error, loading, token, success } = useSelector(state =>
+    sliceStateByAction(state.adminRegistration, ADMIN_REGISTRATION_INVITE, state)
+  );
 
   // If roles are not loaded(and the request is not already submitted) request to sync roles
   useEffect(() => {

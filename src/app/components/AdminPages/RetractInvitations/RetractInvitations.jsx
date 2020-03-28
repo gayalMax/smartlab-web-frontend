@@ -6,16 +6,15 @@ import {
   adminRegistrationRetract
 } from '../../../redux/actions/AdminRegistrationActions';
 import RetractInvitationsPresenter from './RetractInvitations.presenter';
+import { ADMIN_REGISTRATION_RETRACTION } from '../../../redux/actionTypes';
+import { sliceStateByAction } from '../../../helpers/helpers';
 
 function RetractInvitations() {
   // NOTE: Here token refers to user JWT token, tokens refer to registration tokens
   const dispatch = useDispatch();
-  const { tokens, error, loading, token, success } = useSelector(state => {
-    return {
-      ...state.adminRegistration,
-      token: state.auth.token
-    };
-  });
+  const { tokens, error, loading, token, success } = useSelector(state =>
+    sliceStateByAction(state.adminRegistration, ADMIN_REGISTRATION_RETRACTION, state)
+  );
   const registrationTokens = tokens;
 
   useEffect(() => {
