@@ -54,7 +54,7 @@ const entries = [
       {
         id: 'Delete Roles',
         icon: <AiOutlineBlock />,
-        route: '#'
+        route: '/admin/administration/roles/delete'
       },
       {
         id: 'Manage Users',

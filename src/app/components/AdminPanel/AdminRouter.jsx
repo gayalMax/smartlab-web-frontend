@@ -7,7 +7,8 @@ import {
   Dashboard,
   InviteUsers,
   RetractInvitations,
-  CreateRoles
+  CreateRoles,
+  DeleteRoles
 } from '../AdminPages';
 
 export default function AdminRouter() {
@@ -29,6 +30,9 @@ export default function AdminRouter() {
       </Route>
       <Route exact path={`${match.url}/administration/roles/create`}>
         <CreateRoles />
+      </Route>
+      <Route exact path={`${match.url}/administration/roles/delete`}>
+        <DeleteRoles />
       </Route>
       <Route>
         <PageNotFound />

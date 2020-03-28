@@ -3,6 +3,7 @@
  */
 const initialState = {
   permissions: [],
+  roles: [],
   error: null,
   loading: false,
   success: false

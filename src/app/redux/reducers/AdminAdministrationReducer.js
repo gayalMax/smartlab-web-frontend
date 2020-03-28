@@ -7,7 +7,11 @@ import {
   ADMIN_ADMINISTRATION_CREATE_ROLE,
   ADMIN_ADMINISTRATION_CREATE_ROLE_BEGIN,
   ADMIN_ADMINISTRATION_CREATE_ROLE_SUCCESS,
-  ADMIN_ADMINISTRATION_CREATE_ROLE_FAILURE
+  ADMIN_ADMINISTRATION_CREATE_ROLE_FAILURE,
+  ADMIN_ADMINISTRATION_SYNC_ROLES_BEGIN,
+  ADMIN_ADMINISTRATION_SYNC_ROLES_SUCCESS,
+  ADMIN_ADMINISTRATION_SYNC_ROLES_FAILURE,
+  ADMIN_ADMINISTRATION_DELETE_ROLE
 } from '../actionTypes';
 import initialState from '../states/adminAdministrationState';
 
@@ -50,6 +54,22 @@ const adminAdministrationReducer = produce((draft, { type, payload }) => {
       draft.success = true;
       return draft;
     case ADMIN_ADMINISTRATION_CREATE_ROLE_FAILURE:
+      draft.loading = false;
+      draft.error = payload.error;
+      return draft;
+    // Syncing roles
+    case ADMIN_ADMINISTRATION_SYNC_ROLES_BEGIN:
+      draft.action = ADMIN_ADMINISTRATION_DELETE_ROLE;
+      draft.success = false;
+      draft.roles = [];
+      draft.error = null;
+      draft.loading = true;
+      return draft;
+    case ADMIN_ADMINISTRATION_SYNC_ROLES_SUCCESS:
+      draft.roles = payload.roles;
+      draft.loading = false;
+      return draft;
+    case ADMIN_ADMINISTRATION_SYNC_ROLES_FAILURE:
       draft.loading = false;
       draft.error = payload.error;
       return draft;
