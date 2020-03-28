@@ -23,6 +23,10 @@ const entries = [
   {
     path: '/admin/users/retract',
     name: 'Retract Invitations'
+  },
+  {
+    path: '/admin/administration/roles/create',
+    name: 'Create Roles'
   }
 ];
 
