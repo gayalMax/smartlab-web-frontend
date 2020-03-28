@@ -1,12 +1,13 @@
+import axios from 'axios';
 import {
   ADMIN_REGISTRATION_INVITE_BEGIN,
   ADMIN_REGISTRATION_INVITE_SUCCESS,
   ADMIN_REGISTRATION_INVITE_FAILURE
 } from '../../actionTypes';
+import { SERVER, SERVER_POST_TOKEN } from '../serverConstants';
 
 /**
  * Action creator for beginning of inviting users
- * @param {string} invitationToken Invitation token key
  * @returns Redux action
  */
 const adminRegistrationInviteBegin = () => ({
@@ -16,10 +17,6 @@ const adminRegistrationInviteBegin = () => ({
 /**
  * Action creator for end of inviting users.
  * This is fired when API call ends in a success.
- * @param {Object} response Response data of the call
- * @param {Object[]} response.roles Roles list
- * @param {string} response.roles.id Id of the role
- * @param {string} response.roles.name Name of the role
  * @returns Redux action
  */
 const adminRegistrationInviteSuccess = () => ({
@@ -79,8 +76,14 @@ export default function adminRegistrationInvite(token, emails, role) {
     }
 
     try {
-      // TODO: Make the request
-      if (token == null) throw Error('Not Authorized');
+      const success = await axios.post(
+        `${SERVER}/${SERVER_POST_TOKEN}`,
+        { emails, role },
+        { headers: { token } }
+      );
+      if (success.status !== 200) {
+        throw Error('Server responded with an error');
+      }
       onSuccess();
     } catch (error) {
       onError(error.response);
