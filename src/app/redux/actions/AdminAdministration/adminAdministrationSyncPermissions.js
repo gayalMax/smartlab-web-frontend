@@ -7,7 +7,6 @@ import {
   ADMIN_ADMINISTRATION_SYNC_PERMISSIONS_FAILURE
 } from '../../actionTypes';
 import { SERVER, SERVER_GET_PERMISSIONS } from '../serverConstants';
-import { capitalizeFirstLetter } from '../../../helpers/helpers';
 
 /**
  * Action creator for beginning of requesting permissions
@@ -27,7 +26,7 @@ const adminAdministrationSyncPermissionsBegin = () => ({
  */
 const adminAdministrationSyncPermissionsSuccess = ({ permissions }) => ({
   type: ADMIN_ADMINISTRATION_SYNC_PERMISSIONS_SUCCESS,
-  payload: { permissions }
+  payload: permissions
 });
 
 /**
@@ -57,7 +56,7 @@ const responseSchema = yup.object().shape({
  * This is an action that will do the API call and fire other actions.
  * @returns Thunk for request permission API call
  */
-export default function adminAdministrationSyncPermissions(token) {
+export default function adminAdministrationSyncPermissions() {
   return async dispatch => {
     dispatch(adminAdministrationSyncPermissionsBegin());
 
@@ -70,10 +69,7 @@ export default function adminAdministrationSyncPermissions(token) {
 
     function onSuccess(success) {
       try {
-        const validatedData = responseSchema.validateSync(success.data);
-        const permissions = validatedData.permissions.map(permission => {
-          return capitalizeFirstLetter(permission.toLowerCase());
-        });
+        const permissions = responseSchema.validateSync(success.data);
         dispatch(adminAdministrationSyncPermissionsSuccess({ permissions }));
       } catch (err) {
         dispatch(
@@ -86,9 +82,7 @@ export default function adminAdministrationSyncPermissions(token) {
 
     try {
       // Make the get request
-      const success = await axios.get(`${SERVER}/${SERVER_GET_PERMISSIONS}`, {
-        headers: { token }
-      });
+      const success = await axios.get(`${SERVER}/${SERVER_GET_PERMISSIONS}`);
       onSuccess(success);
     } catch (error) {
       onError(error.response);

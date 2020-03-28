@@ -4,7 +4,10 @@ import {
   ADMIN_ADMINISTRATION_SYNC_PERMISSIONS_BEGIN,
   ADMIN_ADMINISTRATION_SYNC_PERMISSIONS_SUCCESS,
   ADMIN_ADMINISTRATION_SYNC_PERMISSIONS_FAILURE,
-  ADMIN_ADMINISTRATION_CREATE_ROLES
+  ADMIN_ADMINISTRATION_CREATE_ROLE,
+  ADMIN_ADMINISTRATION_CREATE_ROLE_BEGIN,
+  ADMIN_ADMINISTRATION_CREATE_ROLE_SUCCESS,
+  ADMIN_ADMINISTRATION_CREATE_ROLE_FAILURE
 } from '../actionTypes';
 import initialState from '../states/adminAdministrationState';
 
@@ -21,7 +24,7 @@ const adminAdministrationReducer = produce((draft, { type, payload }) => {
   switch (type) {
     // Syncing permissions
     case ADMIN_ADMINISTRATION_SYNC_PERMISSIONS_BEGIN:
-      draft.action = ADMIN_ADMINISTRATION_CREATE_ROLES;
+      draft.action = ADMIN_ADMINISTRATION_CREATE_ROLE;
       draft.success = false;
       draft.permissions = [];
       draft.error = null;
@@ -32,6 +35,21 @@ const adminAdministrationReducer = produce((draft, { type, payload }) => {
       draft.loading = false;
       return draft;
     case ADMIN_ADMINISTRATION_SYNC_PERMISSIONS_FAILURE:
+      draft.loading = false;
+      draft.error = payload.error;
+      return draft;
+    // Creating role
+    case ADMIN_ADMINISTRATION_CREATE_ROLE_BEGIN:
+      draft.action = ADMIN_ADMINISTRATION_CREATE_ROLE;
+      draft.error = null;
+      draft.success = false;
+      draft.loading = true;
+      return draft;
+    case ADMIN_ADMINISTRATION_CREATE_ROLE_SUCCESS:
+      draft.loading = false;
+      draft.success = true;
+      return draft;
+    case ADMIN_ADMINISTRATION_CREATE_ROLE_FAILURE:
       draft.loading = false;
       draft.error = payload.error;
       return draft;

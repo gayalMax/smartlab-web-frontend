@@ -1,4 +1,4 @@
 import adminAdministrationSyncPermissions from './AdminAdministration/adminAdministrationSyncPermissions';
+import adminAdministrationCreateRole from './AdminAdministration/adminAdministrationCreateRole';
 
-// eslint-disable-next-line import/prefer-default-export
-export { adminAdministrationSyncPermissions };
+export { adminAdministrationSyncPermissions, adminAdministrationCreateRole };
