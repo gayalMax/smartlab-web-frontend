@@ -4,7 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import DeleteRolesPresenter from './DeleteRoles.presenter';
 import { ADMIN_ADMINISTRATION_DELETE_ROLE } from '../../../redux/actionTypes';
 import { sliceStateByAction } from '../../../helpers/helpers';
-import adminAdministrationSyncRoles from '../../../redux/actions/AdminAdministration/adminAdministrationSyncRoles';
+import {
+  adminAdministrationSyncRoles,
+  adminAdministrationDeleteRole
+} from '../../../redux/actions/AdminAdministrationActions';
 
 function DeleteRoles() {
   // NOTE: Here token refers to user JWT token, tokens refer to registration tokens
@@ -23,8 +26,8 @@ function DeleteRoles() {
     dispatch(adminAdministrationSyncRoles(token));
   };
 
-  const onDelete = () => {
-    // dispatch(adminRegistrationRetract(token, email));
+  const onDelete = role => {
+    dispatch(adminAdministrationDeleteRole(token, role.id));
   };
 
   return (

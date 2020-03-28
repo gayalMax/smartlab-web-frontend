@@ -5,7 +5,7 @@ import CreateRolesPresenter from './CreateRoles.presenter';
 import { ADMIN_ADMINISTRATION_CREATE_ROLE } from '../../../redux/actionTypes';
 import { sliceStateByAction } from '../../../helpers/helpers';
 import adminAdministrationSyncPermissions from '../../../redux/actions/AdminAdministration/adminAdministrationSyncPermissions';
-import { adminAdministrationCreateRole } from '../../../redux/actions/AdminAdministration';
+import { adminAdministrationCreateRole } from '../../../redux/actions/AdminAdministrationActions';
 
 function CreateRoles() {
   const dispatch = useDispatch();

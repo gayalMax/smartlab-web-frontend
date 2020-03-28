@@ -110,7 +110,7 @@ function DeleteRolesPresenter({ classes, roles, error, loading, success, onRefre
                       </TableCell>
                       <TableCell>
                         {row.RolePermissions.map(permission => (
-                          <Chip size="small" label={permission.name} />
+                          <Chip key={permission.name} size="small" label={permission.name} />
                         ))}
                       </TableCell>
                       <TableCell align="right">

@@ -9,5 +9,6 @@ export const SERVER_POST_TOKEN = 'api/registrar/token';
 export const SERVER_CREATE_ROLE = 'api/roles/create';
 export const SERVER_GET_TOKENS = 'api/registrar/token';
 export const SERVER_DELETE_TOKENS = 'api/registrar/token';
+export const SERVER_DELETE_ROLE = 'api/roles';
 
 export const ROLE_STUDENT = 'Student';
