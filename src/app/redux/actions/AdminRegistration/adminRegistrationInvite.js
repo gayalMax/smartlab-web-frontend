@@ -19,8 +19,9 @@ const adminRegistrationInviteBegin = () => ({
  * This is fired when API call ends in a success.
  * @returns Redux action
  */
-const adminRegistrationInviteSuccess = () => ({
-  type: ADMIN_REGISTRATION_INVITE_SUCCESS
+const adminRegistrationInviteSuccess = success => ({
+  type: ADMIN_REGISTRATION_INVITE_SUCCESS,
+  payload: { success }
 });
 
 /**
@@ -65,14 +66,8 @@ export default function adminRegistrationInvite(token, emails, role) {
     }
 
     // Function to call if ended in success
-    function onSuccess() {
-      try {
-        dispatch(adminRegistrationInviteSuccess());
-      } catch (err) {
-        dispatch(
-          adminRegistrationInviteFailure('Server connection failed. Please check your connection.')
-        );
-      }
+    function onSuccess(success) {
+      dispatch(adminRegistrationInviteSuccess(success));
     }
 
     try {
@@ -84,7 +79,7 @@ export default function adminRegistrationInvite(token, emails, role) {
       if (success.status !== 200) {
         throw Error('Server responded with an error');
       }
-      onSuccess();
+      onSuccess(`Invitations sent for ${emails.length} emails.`);
     } catch (error) {
       onError(error.response);
     }

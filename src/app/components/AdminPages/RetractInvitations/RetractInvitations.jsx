@@ -6,22 +6,31 @@ import {
   adminRegistrationRetract
 } from '../../../redux/actions/AdminRegistrationActions';
 import RetractInvitationsPresenter from './RetractInvitations.presenter';
-import { ADMIN_REGISTRATION_RETRACTION } from '../../../redux/actionTypes';
-import { sliceStateByAction } from '../../../helpers/helpers';
 
 function RetractInvitations() {
   // NOTE: Here token refers to user JWT token, tokens refer to registration tokens
   const dispatch = useDispatch();
-  const { tokens, error, loading, token, success } = useSelector(state =>
-    sliceStateByAction(state.adminRegistration, ADMIN_REGISTRATION_RETRACTION, state)
-  );
+
+  const {
+    tokens,
+    token,
+    tokenSyncLoading,
+    tokenSyncError,
+    tokenSyncSuccess,
+    retractLoading,
+    retractError,
+    retractSuccess
+  } = useSelector(state => ({
+    ...state.adminRegistration,
+    token: state.auth.token
+  }));
   const registrationTokens = tokens;
 
   useEffect(() => {
-    if (!loading && registrationTokens.length === 0 && !error) {
+    if (!tokenSyncLoading && !tokenSyncSuccess && !tokenSyncError) {
       dispatch(adminRegistrationSyncTokens(token));
     }
-  }, [dispatch, token, loading, registrationTokens, error]);
+  }, [dispatch, token, tokenSyncLoading, tokenSyncSuccess, tokenSyncError]);
 
   const onRefresh = () => {
     dispatch(adminRegistrationSyncTokens(token));
@@ -32,10 +41,10 @@ function RetractInvitations() {
 
   return (
     <RetractInvitationsPresenter
-      loading={loading}
+      loading={tokenSyncLoading || retractLoading}
       registrationTokens={registrationTokens}
-      error={error}
-      success={success}
+      error={retractError || tokenSyncError}
+      success={retractSuccess}
       onRefresh={onRefresh}
       onRetract={onRetract}
     />

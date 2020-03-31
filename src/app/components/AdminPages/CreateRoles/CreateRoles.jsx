@@ -2,23 +2,31 @@ import React, { useEffect } from 'react';
 import * as yup from 'yup';
 import { useSelector, useDispatch } from 'react-redux';
 import CreateRolesPresenter from './CreateRoles.presenter';
-import { ADMIN_ADMINISTRATION_CREATE_ROLE } from '../../../redux/actionTypes';
-import { sliceStateByAction } from '../../../helpers/helpers';
 import adminAdministrationSyncPermissions from '../../../redux/actions/AdminAdministration/adminAdministrationSyncPermissions';
 import { adminAdministrationCreateRole } from '../../../redux/actions/AdminAdministrationActions';
 
 function CreateRoles() {
   const dispatch = useDispatch();
 
-  const { permissions, error, loading, token, success } = useSelector(state =>
-    sliceStateByAction(state.adminAdministration, ADMIN_ADMINISTRATION_CREATE_ROLE, state)
-  );
+  const {
+    permissions,
+    permissionsSyncLoading,
+    permissionsSyncSuccess,
+    permissionsSyncError,
+    roleCreateLoading,
+    roleCreateSuccess,
+    roleCreateError,
+    token
+  } = useSelector(state => ({
+    ...state.adminAdministration,
+    token: state.auth.token
+  }));
 
   useEffect(() => {
-    if (!loading && permissions.length === 0 && !error) {
+    if (!permissionsSyncLoading && !permissionsSyncSuccess && !permissionsSyncError) {
       dispatch(adminAdministrationSyncPermissions(token));
     }
-  }, [token, permissions, loading, error, dispatch]);
+  }, [token, dispatch, permissionsSyncLoading, permissionsSyncSuccess, permissionsSyncError]);
 
   const schema = yup.object().shape({
     name: yup.string().required('Required'),
@@ -41,9 +49,9 @@ function CreateRoles() {
   return (
     <CreateRolesPresenter
       permissions={permissions}
-      error={error}
-      loading={loading}
-      success={success}
+      error={roleCreateError || permissionsSyncError}
+      loading={roleCreateLoading || permissionsSyncLoading}
+      success={roleCreateSuccess}
       validationSchema={schema}
       onSubmit={onSubmit}
     />

@@ -15,13 +15,13 @@ import {
   FormHelperText,
   Typography
 } from '@material-ui/core';
-import { Alert } from '@material-ui/lab';
 import { TextField, Checkbox } from 'formik-material-ui';
 import { Formik, Form, Field } from 'formik';
 
 import styles from './CreateRoles.styles';
 import ProgressOverlay from '../../Common/ProgressOverlay';
 import { formatPermission } from '../../../helpers/helpers';
+import SuccessErrorAlert from '../../Common/SuccessErrorAlert';
 
 function WrappedCheckbox(key, value) {
   return (
@@ -60,20 +60,7 @@ function CreateRolesPresenter({
           </Toolbar>
         </AppBar>
         <Grid container direction="column" alignItems="stretch" className={classes.wrapper}>
-          <Grid item>
-            {error && (
-              <Box pb={2}>
-                <Alert severity="error">{error}</Alert>
-              </Box>
-            )}
-          </Grid>
-          <Grid item>
-            {success && (
-              <Box pb={2}>
-                <Alert severity="success">Role successfully created.</Alert>
-              </Box>
-            )}
-          </Grid>
+          <SuccessErrorAlert success={success} error={error} />
           <Grid item>
             <Box px={2} pb={2}>
               Select the permissions from the given options and give a name. Note that name of the
@@ -111,7 +98,7 @@ function CreateRolesPresenter({
                       />
                     </Grid>
                     <FormControl
-                      error={errors.permissions && touched.permissions}
+                      error={errors.permissions != null && touched.permissions != null}
                       component="fieldset"
                       className={classes.margin}
                     >
@@ -166,15 +153,16 @@ function CreateRolesPresenter({
 }
 
 CreateRolesPresenter.defaultProps = {
-  error: null
+  error: null,
+  success: null
 };
 
 CreateRolesPresenter.propTypes = {
   classes: PropTypes.object.isRequired,
   validationSchema: PropTypes.object.isRequired,
   error: PropTypes.string,
+  success: PropTypes.string,
   loading: PropTypes.bool.isRequired,
-  success: PropTypes.bool.isRequired,
   permissions: PropTypes.array.isRequired,
   onSubmit: PropTypes.func.isRequired
 };

@@ -20,8 +20,9 @@ const adminAdministrationDeleteRoleBegin = () => ({
  * This is fired when API call ends in a success.
  * @returns Redux action
  */
-const adminAdministrationDeleteRoleSuccess = () => ({
-  type: ADMIN_ADMINISTRATION_DELETE_ROLE_SUCCESS
+const adminAdministrationDeleteRoleSuccess = success => ({
+  type: ADMIN_ADMINISTRATION_DELETE_ROLE_SUCCESS,
+  payload: { success }
 });
 
 /**
@@ -41,7 +42,7 @@ const adminAdministrationDeleteRoleFailure = error => ({
  * This is an action that will do the API call and fire other actions.
  * @returns Thunk for user sign in API call
  */
-export default function adminAdministrationDeleteRole(token, roleId) {
+export default function adminAdministrationDeleteRole(token, { id, name }) {
   return async dispatch => {
     dispatch(adminAdministrationDeleteRoleBegin());
 
@@ -52,27 +53,19 @@ export default function adminAdministrationDeleteRole(token, roleId) {
       dispatch(adminAdministrationDeleteRoleFailure(message));
     }
 
-    function onSuccess() {
-      try {
-        dispatch(adminAdministrationDeleteRoleSuccess());
-        dispatch(adminAdministrationSyncRoles());
-      } catch (err) {
-        dispatch(
-          adminAdministrationDeleteRoleFailure(
-            'Server connection failed. Please check your connection.'
-          )
-        );
-      }
+    function onSuccess(success) {
+      dispatch(adminAdministrationDeleteRoleSuccess(success));
+      dispatch(adminAdministrationSyncRoles());
     }
 
     try {
-      const success = await axios.delete(`${SERVER}/${SERVER_DELETE_ROLE}/${roleId}`, {
+      const success = await axios.delete(`${SERVER}/${SERVER_DELETE_ROLE}/${id}`, {
         headers: { token }
       });
       if (success.status !== 200) {
         throw Error('Server responded with an error');
       }
-      onSuccess();
+      onSuccess(`Role '${name}' deleted successfully.`);
     } catch (error) {
       onError(error.response);
     }

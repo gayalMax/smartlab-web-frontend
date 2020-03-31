@@ -16,12 +16,12 @@ import {
   IconButton,
   Tooltip
 } from '@material-ui/core';
-import { Alert } from '@material-ui/lab';
 
 import styles from './InviteUsers.styles';
 import ProgressOverlay from '../../Common/ProgressOverlay';
 import EmailTextBox from './EmailTextBox/EmailTextBox';
 import * as EVENTS from './InviteUsers.events';
+import SuccessErrorAlert from '../../Common/SuccessErrorAlert';
 
 function InviteUsersPresenter({ classes, roles, error, loading, handleEvent, success }) {
   return (
@@ -44,22 +44,8 @@ function InviteUsersPresenter({ classes, roles, error, loading, handleEvent, suc
           </Toolbar>
         </AppBar>
         <Grid container direction="column" alignItems="stretch" className={classes.wrapper}>
-          <Grid item>
-            {error && (
-              <Box pb={2}>
-                <Alert severity="error">{error}</Alert>
-              </Box>
-            )}
-          </Grid>
-          <Grid item>
-            {success && (
-              <Box pb={2}>
-                <Alert severity="success">
-                  Invitations were sent to the given email addresses.
-                </Alert>
-              </Box>
-            )}
-          </Grid>
+          <SuccessErrorAlert success={success} error={error} />
+
           <EmailTextBox onChange={handleEvent(EVENTS.EMAILS_ONCHANGE)} />
           <Grid item>
             <p>
@@ -106,15 +92,16 @@ function InviteUsersPresenter({ classes, roles, error, loading, handleEvent, suc
 }
 
 InviteUsersPresenter.defaultProps = {
-  error: null
+  error: null,
+  success: null
 };
 
 InviteUsersPresenter.propTypes = {
   classes: PropTypes.object.isRequired,
   roles: PropTypes.array.isRequired,
   error: PropTypes.string,
+  success: PropTypes.string,
   loading: PropTypes.bool.isRequired,
-  success: PropTypes.bool.isRequired,
   handleEvent: PropTypes.func.isRequired
 };
 

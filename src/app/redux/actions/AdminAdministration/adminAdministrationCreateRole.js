@@ -19,8 +19,9 @@ const adminAdministrationCreateRoleBegin = () => ({
  * This is fired when API call ends in a success.
  * @returns Redux action
  */
-const adminAdministrationCreateRoleSuccess = () => ({
-  type: ADMIN_ADMINISTRATION_CREATE_ROLE_SUCCESS
+const adminAdministrationCreateRoleSuccess = success => ({
+  type: ADMIN_ADMINISTRATION_CREATE_ROLE_SUCCESS,
+  payload: { success }
 });
 
 /**
@@ -51,16 +52,8 @@ export default function adminAdministrationCreateRole(token, roleName, permissio
       dispatch(adminAdministrationCreateRoleFailure(message));
     }
 
-    function onSuccess() {
-      try {
-        dispatch(adminAdministrationCreateRoleSuccess());
-      } catch (err) {
-        dispatch(
-          adminAdministrationCreateRoleFailure(
-            'Server connection failed. Please check your connection.'
-          )
-        );
-      }
+    function onSuccess(success) {
+      dispatch(adminAdministrationCreateRoleSuccess(success));
     }
 
     try {
@@ -72,7 +65,7 @@ export default function adminAdministrationCreateRole(token, roleName, permissio
       if (success.status !== 200) {
         throw Error('Server responded with an error');
       }
-      onSuccess();
+      onSuccess(`Role '${roleName}' created successfully.`);
       complete();
     } catch (error) {
       onError(error.response);

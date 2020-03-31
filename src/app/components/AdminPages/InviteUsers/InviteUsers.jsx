@@ -7,23 +7,28 @@ import {
 } from '../../../redux/actions/AdminRegistrationActions';
 import InviteUsersPresenter from './InviteUsers.presenter';
 import * as EVENTS from './InviteUsers.events';
-import { ADMIN_REGISTRATION_INVITE } from '../../../redux/actionTypes';
-import { sliceStateByAction } from '../../../helpers/helpers';
 
 function InviteUsers() {
   // To dispatch api calls
   const dispatch = useDispatch();
   // Take token and other state slice. Token is required for api call.
-  const { roles, error, loading, token, success } = useSelector(state =>
-    sliceStateByAction(state.adminRegistration, ADMIN_REGISTRATION_INVITE, state)
-  );
+  const {
+    roles,
+    rolesSyncLoading,
+    rolesSyncError,
+    rolesSyncSuccess,
+    inviteLoading,
+    inviteError,
+    inviteSuccess,
+    token
+  } = useSelector(state => ({ ...state.adminRegistration, token: state.auth.token }));
 
   // If roles are not loaded(and the request is not already submitted) request to sync roles
   useEffect(() => {
-    if (!loading && roles.length === 0 && !error) {
+    if (!rolesSyncLoading && !rolesSyncSuccess && !rolesSyncError) {
       dispatch(adminRegistrationSyncRoles(token));
     }
-  }, [dispatch, token, loading, roles, error]);
+  }, [dispatch, token, rolesSyncError, rolesSyncSuccess, rolesSyncLoading]);
 
   // State management of emails and roles
   const [formState, setFormState] = useState({ emails: [], role: null });
@@ -66,10 +71,10 @@ function InviteUsers() {
 
   return (
     <InviteUsersPresenter
-      loading={loading}
+      loading={inviteLoading || rolesSyncLoading}
       roles={roles}
-      error={error}
-      success={success}
+      error={inviteError || rolesSyncError}
+      success={inviteSuccess}
       handleEvent={handleEvent}
     />
   );

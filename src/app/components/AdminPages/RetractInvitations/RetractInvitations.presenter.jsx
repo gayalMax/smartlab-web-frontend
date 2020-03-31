@@ -25,11 +25,11 @@ import {
   DialogContentText,
   DialogActions
 } from '@material-ui/core';
-import { Alert } from '@material-ui/lab';
 import moment from 'moment';
 
 import styles from './RetractInvitations.styles';
 import ProgressOverlay from '../../Common/ProgressOverlay';
+import SuccessErrorAlert from '../../Common/SuccessErrorAlert';
 
 function RetractInviationsPresenter({
   classes,
@@ -77,20 +77,7 @@ function RetractInviationsPresenter({
           </Toolbar>
         </AppBar>
         <Grid container direction="column" alignItems="stretch" className={classes.wrapper}>
-          <Grid item>
-            {error && (
-              <Box pb={2}>
-                <Alert severity="error">{error}</Alert>
-              </Box>
-            )}
-          </Grid>
-          <Grid item>
-            {success && (
-              <Box pb={2}>
-                <Alert severity="success">Invitation was successfully retracted.</Alert>
-              </Box>
-            )}
-          </Grid>
+          <SuccessErrorAlert success={success} error={error} />
 
           <Grid item>
             <Box px={2} pb={2}>
@@ -189,15 +176,16 @@ function RetractInviationsPresenter({
 }
 
 RetractInviationsPresenter.defaultProps = {
-  error: null
+  error: null,
+  success: null
 };
 
 RetractInviationsPresenter.propTypes = {
   classes: PropTypes.object.isRequired,
   registrationTokens: PropTypes.array.isRequired,
   error: PropTypes.string,
+  success: PropTypes.string,
   loading: PropTypes.bool.isRequired,
-  success: PropTypes.bool.isRequired,
   onRefresh: PropTypes.func.isRequired,
   onRetract: PropTypes.func.isRequired
 };

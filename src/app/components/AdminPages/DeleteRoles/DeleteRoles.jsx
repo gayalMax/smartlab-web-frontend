@@ -2,40 +2,47 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import DeleteRolesPresenter from './DeleteRoles.presenter';
-import { ADMIN_ADMINISTRATION_DELETE_ROLE } from '../../../redux/actionTypes';
-import { sliceStateByAction } from '../../../helpers/helpers';
 import {
   adminAdministrationSyncRoles,
   adminAdministrationDeleteRole
 } from '../../../redux/actions/AdminAdministrationActions';
 
 function DeleteRoles() {
-  // NOTE: Here token refers to user JWT token, tokens refer to registration tokens
   const dispatch = useDispatch();
-  const { roles, error, loading, token, success } = useSelector(state =>
-    sliceStateByAction(state.adminAdministration, ADMIN_ADMINISTRATION_DELETE_ROLE, state)
-  );
+  const {
+    roles,
+    rolesSyncLoading,
+    rolesSyncSuccess,
+    rolesSyncError,
+    roleDeleteLoading,
+    roleDeleteSuccess,
+    roleDeleteError,
+    token
+  } = useSelector(state => ({
+    ...state.adminAdministration,
+    token: state.auth.token
+  }));
 
   useEffect(() => {
-    if (!loading && roles.length === 0 && !error) {
+    if (!rolesSyncLoading && !rolesSyncSuccess && !rolesSyncError) {
       dispatch(adminAdministrationSyncRoles(token));
     }
-  }, [dispatch, token, loading, roles, error]);
+  }, [dispatch, token, rolesSyncLoading, rolesSyncSuccess, rolesSyncError]);
 
   const onRefresh = () => {
     dispatch(adminAdministrationSyncRoles(token));
   };
 
   const onDelete = role => {
-    dispatch(adminAdministrationDeleteRole(token, role.id));
+    dispatch(adminAdministrationDeleteRole(token, role));
   };
 
   return (
     <DeleteRolesPresenter
-      loading={loading}
+      loading={roleDeleteLoading || rolesSyncLoading}
       roles={roles}
-      error={error}
-      success={success}
+      error={roleDeleteError || rolesSyncError}
+      success={roleDeleteSuccess}
       onRefresh={onRefresh}
       onDelete={onDelete}
     />

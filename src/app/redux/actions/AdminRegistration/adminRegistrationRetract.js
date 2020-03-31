@@ -20,8 +20,9 @@ const adminRegistrationRetractBegin = () => ({
  * This is fired when API call ends in a success.
  * @returns Redux action
  */
-const adminRegistrationRetractSuccess = () => ({
-  type: ADMIN_REGISTRATION_RETRACTION_SUCCESS
+const adminRegistrationRetractSuccess = success => ({
+  type: ADMIN_REGISTRATION_RETRACTION_SUCCESS,
+  payload: { success }
 });
 
 /**
@@ -57,15 +58,9 @@ export default function adminRegistrationRetract(token, email) {
       dispatch(adminRegistrationRetractFailure(message));
     }
 
-    function onSuccess() {
-      try {
-        dispatch(adminRegistrationRetractSuccess());
-        dispatch(adminRegistrationSyncTokens(token));
-      } catch (err) {
-        dispatch(
-          adminRegistrationRetractFailure('Server connection failed. Please check your connection.')
-        );
-      }
+    function onSuccess(success) {
+      dispatch(adminRegistrationRetractSuccess(success));
+      dispatch(adminRegistrationSyncTokens(token));
     }
 
     try {
@@ -76,7 +71,7 @@ export default function adminRegistrationRetract(token, email) {
       if (success.status !== 200) {
         throw Error('Server responded with an error');
       }
-      onSuccess();
+      onSuccess(`Invitation retracted from '${email}.'`);
     } catch (error) {
       onError(error.response);
     }

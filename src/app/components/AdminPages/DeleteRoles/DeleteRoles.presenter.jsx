@@ -24,10 +24,10 @@ import {
   DialogContentText,
   DialogActions
 } from '@material-ui/core';
-import { Alert } from '@material-ui/lab';
 
 import styles from './DeleteRoles.styles';
 import ProgressOverlay from '../../Common/ProgressOverlay';
+import SuccessErrorAlert from '../../Common/SuccessErrorAlert';
 
 function DeleteRolesPresenter({ classes, roles, error, loading, success, onRefresh, onDelete }) {
   const [selectedRole, setSelectedRole] = React.useState({});
@@ -67,20 +67,7 @@ function DeleteRolesPresenter({ classes, roles, error, loading, success, onRefre
           </Toolbar>
         </AppBar>
         <Grid container direction="column" alignItems="stretch" className={classes.wrapper}>
-          <Grid item>
-            {error && (
-              <Box pb={2}>
-                <Alert severity="error">{error}</Alert>
-              </Box>
-            )}
-          </Grid>
-          <Grid item>
-            {success && (
-              <Box pb={2}>
-                <Alert severity="success">Role was successfully deleted.</Alert>
-              </Box>
-            )}
-          </Grid>
+          <SuccessErrorAlert success={success} error={error} />
 
           <Grid item>
             <Box px={2} pb={2}>
@@ -171,7 +158,8 @@ function DeleteRolesPresenter({ classes, roles, error, loading, success, onRefre
 }
 
 DeleteRolesPresenter.defaultProps = {
-  error: null
+  error: null,
+  success: null
 };
 
 DeleteRolesPresenter.propTypes = {
@@ -179,7 +167,7 @@ DeleteRolesPresenter.propTypes = {
   roles: PropTypes.array.isRequired,
   error: PropTypes.string,
   loading: PropTypes.bool.isRequired,
-  success: PropTypes.bool.isRequired,
+  success: PropTypes.string,
   onRefresh: PropTypes.func.isRequired,
   onDelete: PropTypes.func.isRequired
 };
