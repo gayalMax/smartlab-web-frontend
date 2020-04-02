@@ -34,6 +34,7 @@
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.45",
     "axios": "^0.19.2",
+    "cloudinary-react": "^1.4.0",
     "clsx": "^1.1.0",
     "formik": "^2.1.4",
     "formik-material-ui": "^2.0.0-beta.1",
