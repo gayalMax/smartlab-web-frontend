@@ -19,7 +19,11 @@ const entries = [
   {
     path: '/admin/users/invite',
     name: 'Invite Users'
-  }
+  },
+ {
+   path:'/admin/labs/createlabs',
+   name:'Create Labs'
+ }
 ];
 
 export default entries;
