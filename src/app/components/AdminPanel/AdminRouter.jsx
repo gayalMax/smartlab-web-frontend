@@ -11,6 +11,8 @@ import {
   DeleteRoles
 } from '../AdminPages';
 
+import { CreateItemsets } from '../LabManagementPages';
+
 export default function AdminRouter() {
   const match = useRouteMatch();
 
@@ -33,6 +35,9 @@ export default function AdminRouter() {
       </Route>
       <Route exact path={`${match.url}/administration/roles/delete`}>
         <DeleteRoles />
+      </Route>
+      <Route exact path={`${match.url}/lab/itemsets/create`}>
+        <CreateItemsets />
       </Route>
       <Route>
         <PageNotFound />
