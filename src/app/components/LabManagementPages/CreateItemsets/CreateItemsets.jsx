@@ -16,7 +16,7 @@ function CreateItemSets() {
 
   const schema = yup.object().shape({
     title: yup.string().required('Required'),
-    imageURL: yup.string().required('Required'),
+    image: yup.string().nullable(),
     attributes: yup
       .array()
       .min(1, 'Choose at least one')
@@ -25,8 +25,8 @@ function CreateItemSets() {
           .object()
           .shape({
             editable: yup.boolean(),
-            attributeName: yup.string(),
-            attributeValue: yup.string().when('editable', {
+            key: yup.string().required('Required'),
+            defaultValue: yup.string().when('editable', {
               is: false,
               then: yup.string().required('Required')
             })
@@ -35,25 +35,19 @@ function CreateItemSets() {
       )
   });
 
-  const onUpload = publicId => {
-    console.log(publicId);
-    return publicId;
-  };
-
-  const onSubmit = (values, { setSubmitting }) => {
+  const onSubmit = async (values, { setSubmitting }) => {
     console.log(values);
     const complete = () => {
       setSubmitting(false);
     };
 
-    dispatch(
-      adminLabCreateItemset(token, values.title, values.image, values.permissions, complete)
+    await dispatch(
+      adminLabCreateItemset(token, values.title, values.image, values.attributes, complete)
     );
   };
   return (
     <CreateItemSetsPresenter
       validationSchema={schema}
-      onUpload={onUpload}
       onSubmit={onSubmit}
       error={error}
       success={success}

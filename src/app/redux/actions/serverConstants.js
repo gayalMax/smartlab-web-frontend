@@ -10,6 +10,6 @@ export const SERVER_CREATE_ROLE = 'api/roles/create';
 export const SERVER_GET_TOKENS = 'api/registrar/token';
 export const SERVER_DELETE_TOKENS = 'api/registrar/token';
 export const SERVER_DELETE_ROLE = 'api/roles';
-export const SERVER_CREATE_ITEMSET = 'api/itemset/create';
+export const SERVER_CREATE_ITEMSET = 'api/itemsets/create';
 
 export const ROLE_STUDENT = 'Student';
