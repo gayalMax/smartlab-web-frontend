@@ -5,6 +5,7 @@ import InviteUsers from './InviteUsers/InviteUsers';
 import RetractInvitations from './RetractInvitations/RetractInvitations';
 import CreateRoles from './CreateRoles/CreateRoles';
 import DeleteRoles from './DeleteRoles/DeleteRoles';
+import CreateItemsets from './CreateItemsets/CreateItemsets';
 
 export {
   Dashboard,
@@ -13,5 +14,6 @@ export {
   InviteUsers,
   RetractInvitations,
   CreateRoles,
-  DeleteRoles
+  DeleteRoles,
+  CreateItemsets
 };

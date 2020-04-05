@@ -79,7 +79,7 @@ const entries = [
       {
         id: 'Manage Item Sets',
         icon: <AiOutlineDiff />,
-        route: '#'
+        route: '/admin/lab/itemsets/create'
       },
       {
         id: 'Manage Items',
