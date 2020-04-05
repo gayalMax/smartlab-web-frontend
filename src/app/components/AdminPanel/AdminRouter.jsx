@@ -8,10 +8,9 @@ import {
   InviteUsers,
   RetractInvitations,
   CreateRoles,
-  DeleteRoles
+  DeleteRoles,
+  CreateItemsets
 } from '../AdminPages';
-
-import { CreateItemsets } from '../LabManagementPages';
 
 export default function AdminRouter() {
   const match = useRouteMatch();

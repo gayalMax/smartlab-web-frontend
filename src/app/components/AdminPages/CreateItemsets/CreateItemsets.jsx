@@ -7,7 +7,7 @@ import { ADMIN_LAB_CREATE_ITEMSET } from '../../../redux/actionTypes';
 import { sliceStateByAction } from '../../../helpers/helpers';
 import { adminLabCreateItemset } from '../../../redux/actions/AdminLabItemset';
 
-function CreateItemSets() {
+function CreateItemsets() {
   const dispatch = useDispatch();
 
   const { error, loading, token, success } = useSelector(state =>
@@ -36,7 +36,6 @@ function CreateItemSets() {
   });
 
   const onSubmit = async (values, { setSubmitting }) => {
-    console.log(values);
     const complete = () => {
       setSubmitting(false);
     };
@@ -56,4 +55,4 @@ function CreateItemSets() {
   );
 }
 
-export default CreateItemSets;
+export default CreateItemsets;

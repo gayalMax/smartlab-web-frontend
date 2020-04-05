@@ -61,7 +61,6 @@ export default function adminLabCreateItemset(token, title, image, attributes, c
     }
 
     try {
-      console.log({ title, image, attributes });
       const success = await axios.post(
         `${SERVER}/${SERVER_CREATE_ITEMSET}`,
         { title, image, attributes },
