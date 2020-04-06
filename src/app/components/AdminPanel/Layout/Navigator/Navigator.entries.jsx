@@ -75,14 +75,29 @@ const entries = [
         id: 'Assign Staff Members',
         icon: <AiOutlineIdcard />,
         route: '#'
-      },
+      }
+    ]
+  },
+  {
+    id: 'Item Management',
+    children: [
       {
-        id: 'Manage Item Sets',
+        id: 'Create Item Sets',
         icon: <AiOutlineDiff />,
         route: '/admin/lab/itemsets/create'
       },
       {
-        id: 'Manage Items',
+        id: 'Delete Item Sets',
+        icon: <AiOutlineDiff />,
+        route: '#'
+      },
+      {
+        id: 'Create Items',
+        icon: <AiOutlineFileText />,
+        route: '#'
+      },
+      {
+        id: 'Delete Items',
         icon: <AiOutlineFileText />,
         route: '#'
       }

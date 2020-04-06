@@ -34,7 +34,7 @@ const entries = [
   },
   {
     path: '/admin/lab/itemsets/create',
-    name: 'Create Itemsets'
+    name: 'Create Item Sets'
   }
 ];
 
