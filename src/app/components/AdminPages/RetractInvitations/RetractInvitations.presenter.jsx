@@ -103,7 +103,11 @@ function RetractInviationsPresenter({
                   title: 'Last Updated',
                   field: 'updatedAt',
                   searchable: false,
-                  render: row => <i>{moment(row.updatedAt).fromNow()}</i>
+                  render: row => (
+                    <Tooltip title={row.updatedAt.toString()}>
+                      <i>{moment(row.updatedAt).fromNow()}</i>
+                    </Tooltip>
+                  )
                 },
                 {
                   title: '',

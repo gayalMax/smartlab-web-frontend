@@ -85,13 +85,21 @@ function ViewLabsPresenter({ classes, labs, error, loading, onRefresh }) {
                   title: 'Created',
                   field: 'createdAt',
                   searchable: false,
-                  render: row => <i>{moment(row.createdAt).fromNow()}</i>
+                  render: row => (
+                    <Tooltip title={row.createdAt.toString()}>
+                      <i>{moment(row.createdAt).fromNow()}</i>
+                    </Tooltip>
+                  )
                 },
                 {
                   title: 'Last Updated',
                   field: 'updatedAt',
                   searchable: false,
-                  render: row => <i>{moment(row.updatedAt).fromNow()}</i>
+                  render: row => (
+                    <Tooltip title={row.updatedAt.toString()}>
+                      <i>{moment(row.updatedAt).fromNow()}</i>
+                    </Tooltip>
+                  )
                 },
                 {
                   title: '',
