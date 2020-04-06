@@ -13,6 +13,7 @@ import {
   CreateItemsets,
   ViewUsers
 } from '../AdminPages';
+import ViewLabs from '../AdminPages/ViewLabs/ViewLabs';
 
 export default function AdminRouter() {
   const match = useRouteMatch();
@@ -42,6 +43,9 @@ export default function AdminRouter() {
       </Route>
       <Route exact path={`${match.url}/lab/itemsets/create`}>
         <CreateItemsets />
+      </Route>
+      <Route exact path={`${match.url}/labs/labs`}>
+        <ViewLabs />
       </Route>
       <Route>
         <PageNotFound />

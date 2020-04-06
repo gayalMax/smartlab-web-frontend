@@ -3,9 +3,15 @@
  */
 
 const initialState = {
+  labs: [],
+
   labCreationLoading: false,
   labCreationError: null,
-  labCreationSuccess: null
+  labCreationSuccess: null,
+
+  labsSyncLoading: false,
+  labsSyncError: null,
+  labsSyncSuccess: null
 };
 
 export default initialState;

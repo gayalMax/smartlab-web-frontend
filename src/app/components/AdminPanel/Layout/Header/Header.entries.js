@@ -39,6 +39,10 @@ const entries = [
   {
     path: '/admin/lab/itemsets/create',
     name: 'Create Item Sets'
+  },
+  {
+    path: '/admin/labs/labs',
+    name: 'View Labs'
   }
 ];
 

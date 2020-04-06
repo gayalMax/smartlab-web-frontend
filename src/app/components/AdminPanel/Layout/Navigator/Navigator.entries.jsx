@@ -67,14 +67,14 @@ const entries = [
     id: 'Lab Management',
     children: [
       {
-        id: 'Manage Laboratories',
-        icon: <AiOutlineLaptop />,
-        route: '#'
-      },
-      {
         id: 'Create Laboratories',
         icon: <AiOutlineIdcard />,
         route: '/admin/labs/createlabs'
+      },
+      {
+        id: 'View Laboratories',
+        icon: <AiOutlineLaptop />,
+        route: '/admin/labs/labs'
       },
       {
         id: 'Assign Staff Members',

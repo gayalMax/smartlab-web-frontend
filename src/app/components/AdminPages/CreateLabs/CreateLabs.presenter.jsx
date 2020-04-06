@@ -26,7 +26,7 @@ function CreateLabsPresenter({ classes, onSubmit, validationSchema, loading, suc
           <Grid item>
             <Box px={1} mb={2}>
               Create a lab with a suitable title and a subtitle. Uploading an image is &nbsp;
-              <b>not required</b>
+              <b>not required.</b>
               &nbsp;
               <br />
               <b>Lab creation action cannot be undone.</b>

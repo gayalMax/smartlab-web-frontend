@@ -1,5 +1,4 @@
 import adminLabManagementCreateLab from './AdminLabManagement/adminLabManagementCreateLab';
+import adminLabManagementSyncLabs from './AdminLabManagement/adminLabManagementSyncLabs';
 
-const ignored = null;
-
-export { adminLabManagementCreateLab, ignored };
+export { adminLabManagementCreateLab, adminLabManagementSyncLabs };
