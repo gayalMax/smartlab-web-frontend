@@ -1,8 +1,8 @@
 import axios from 'axios';
 import {
-  ADMIN_LAB_CREATE_ITEMSET_BEGIN,
-  ADMIN_LAB_CREATE_ITEMSET_FAILURE,
-  ADMIN_LAB_CREATE_ITEMSET_SUCCESS
+  ADMIN_ITEM_MANAGEMENT_CREATE_ITEMSET_BEGIN,
+  ADMIN_ITEM_MANAGEMENT_CREATE_ITEMSET_FAILURE,
+  ADMIN_ITEM_MANAGEMENT_CREATE_ITEMSET_SUCCESS
 } from '../../actionTypes';
 import { SERVER, SERVER_CREATE_ITEMSET } from '../serverConstants';
 
@@ -10,8 +10,8 @@ import { SERVER, SERVER_CREATE_ITEMSET } from '../serverConstants';
  * Action creator for beggining of creating itemsets
  * @returns Redux action
  */
-const adminLabCreateItemsetBegin = () => ({
-  type: ADMIN_LAB_CREATE_ITEMSET_BEGIN
+const adminItemManagementCreateItemsetBegin = () => ({
+  type: ADMIN_ITEM_MANAGEMENT_CREATE_ITEMSET_BEGIN
 });
 
 /**
@@ -19,8 +19,9 @@ const adminLabCreateItemsetBegin = () => ({
  * Action fired when the API call is successful
  * @returns Redux action
  */
-const adminLabCreateItemsetSuccess = () => ({
-  type: ADMIN_LAB_CREATE_ITEMSET_SUCCESS
+const adminItemManagementCreateItemsetSuccess = success => ({
+  type: ADMIN_ITEM_MANAGEMENT_CREATE_ITEMSET_SUCCESS,
+  payload: { success }
 });
 
 /**
@@ -28,8 +29,8 @@ const adminLabCreateItemsetSuccess = () => ({
  * Action fired when the API cal is failed
  * @returns Redux action
  */
-const adminLabCreateItemsetFailure = error => ({
-  type: ADMIN_LAB_CREATE_ITEMSET_FAILURE,
+const adminItemManagementCreateItemsetFailure = error => ({
+  type: ADMIN_ITEM_MANAGEMENT_CREATE_ITEMSET_FAILURE,
   payload: { error }
 });
 
@@ -39,23 +40,33 @@ const adminLabCreateItemsetFailure = error => ({
  * This is an action that will do the API call and fire other actions.
  * @returns Thunk for user sign in API call
  */
-export default function adminLabCreateItemset(token, title, image, attributes, complete) {
+export default function adminItemManagementCreateItemset(
+  token,
+  title,
+  image,
+  attributes,
+  complete
+) {
   return async dispatch => {
-    dispatch(adminLabCreateItemsetBegin());
+    dispatch(adminItemManagementCreateItemsetBegin());
 
     function onError(error) {
       let message;
       if (error) message = error.data.message;
       if (!message) message = 'Server connection failed';
-      dispatch(adminLabCreateItemsetFailure(message));
+      dispatch(adminItemManagementCreateItemsetFailure(message));
     }
 
     function onSuccess() {
       try {
-        dispatch(adminLabCreateItemsetSuccess());
+        dispatch(
+          adminItemManagementCreateItemsetSuccess(`Item set '${title} was created successfully.'`)
+        );
       } catch (err) {
         dispatch(
-          adminLabCreateItemsetFailure('Server connection failed. Please check your connection.')
+          adminItemManagementCreateItemsetFailure(
+            'Server connection failed. Please check your connection.'
+          )
         );
       }
     }

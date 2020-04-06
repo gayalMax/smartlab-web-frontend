@@ -4,9 +4,9 @@
 const initialState = {
   attributes: [],
   itemsets: [],
-  error: null,
-  loading: false,
-  success: false
+  createItemsetError: null,
+  createItemsetLoading: false,
+  createItemsetSuccess: null
 };
 
 export default initialState;

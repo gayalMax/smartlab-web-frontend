@@ -3,15 +3,16 @@ import * as yup from 'yup';
 import { useSelector, useDispatch } from 'react-redux';
 
 import CreateItemSetsPresenter from './CreateItemsets.presenter';
-import { ADMIN_LAB_CREATE_ITEMSET } from '../../../redux/actionTypes';
-import { sliceStateByAction } from '../../../helpers/helpers';
-import { adminLabCreateItemset } from '../../../redux/actions/AdminLabItemset';
+import { adminItemManagementCreateItemset } from '../../../redux/actions/AdminItemManagementActions';
 
 function CreateItemsets() {
   const dispatch = useDispatch();
 
-  const { error, loading, token, success } = useSelector(state =>
-    sliceStateByAction(state.adminLab, ADMIN_LAB_CREATE_ITEMSET, state)
+  const { createItemsetError, createItemsetLoading, createItemsetSuccess, token } = useSelector(
+    state => ({
+      ...state.adminItemManagement,
+      token: state.auth.token
+    })
   );
 
   const schema = yup.object().shape({
@@ -41,16 +42,22 @@ function CreateItemsets() {
     };
 
     await dispatch(
-      adminLabCreateItemset(token, values.title, values.image, values.attributes, complete)
+      adminItemManagementCreateItemset(
+        token,
+        values.title,
+        values.image,
+        values.attributes,
+        complete
+      )
     );
   };
   return (
     <CreateItemSetsPresenter
       validationSchema={schema}
       onSubmit={onSubmit}
-      error={error}
-      success={success}
-      loading={loading}
+      error={createItemsetError}
+      success={createItemsetSuccess}
+      loading={createItemsetLoading}
     />
   );
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {
   Paper,
@@ -12,32 +12,18 @@ import {
   GridList,
   GridListTile,
   FormControlLabel,
-  IconButton,
-  Snackbar
+  IconButton
 } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { Alert } from '@material-ui/lab';
 import { TextField, Switch } from 'formik-material-ui';
 import { Formik, Form, Field, FieldArray } from 'formik';
 
 import styles from './CreateItemsets.styles';
 import ImageUpload from '../../Common/ImageUpload';
+import SuccessErrorAlert from '../../Common/SuccessErrorAlert';
 
 function CreateItemSetsPresenter({ classes, error, success, validationSchema, onSubmit }) {
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    setOpen(true);
-  }, [success, error]);
-
-  const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    setOpen(false);
-  };
-
   return (
     <Paper className={classes.root}>
       <AppBar position="static" color="inherit" elevation={0}>
@@ -50,20 +36,7 @@ function CreateItemSetsPresenter({ classes, error, success, validationSchema, on
         </Toolbar>
       </AppBar>
       <Grid container direction="column" alignItems="stretch" className={classes.wrapper}>
-        <Grid item>
-          <Snackbar
-            open={typeof error === 'string' && open}
-            autoHideDuration={6000}
-            onClose={handleClose}
-          >
-            <Alert severity="error">{error}</Alert>
-          </Snackbar>
-        </Grid>
-        <Grid item>
-          <Snackbar open={success && open} autoHideDuration={6000} onClose={handleClose}>
-            <Alert severity="success">Itemset successfully created.</Alert>
-          </Snackbar>
-        </Grid>
+        <SuccessErrorAlert success={success} error={error} />
         <Grid item>
           <Box px={2} pb={2}>
             Provide a title, image(optional) and attribute name, value pairs.
@@ -227,12 +200,13 @@ function CreateItemSetsPresenter({ classes, error, success, validationSchema, on
 }
 
 CreateItemSetsPresenter.defaultProps = {
-  error: null
+  error: null,
+  success: null
 };
 
 CreateItemSetsPresenter.propTypes = {
   classes: PropTypes.object.isRequired,
-  success: PropTypes.bool.isRequired,
+  success: PropTypes.string,
   error: PropTypes.string,
   validationSchema: PropTypes.object.isRequired,
   onSubmit: PropTypes.func.isRequired

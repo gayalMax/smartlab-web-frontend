@@ -1,38 +1,30 @@
 import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
-import { Grid, Box, IconButton, Collapse } from '@material-ui/core';
+import React, { useEffect, useState } from 'react';
+import { Grid, Snackbar, IconButton } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 import { AiOutlineClose } from 'react-icons/ai';
 
 const SuccessErrorAlert = ({ error, success }) => {
-  const [successShow, setSuccessShow] = React.useState(false);
-  const [errorShow, setErrorShow] = React.useState(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    setSuccessShow(success !== null);
-    setErrorShow(error !== null);
-  }, [error, success, setErrorShow, setSuccessShow]);
+    setOpen(true);
+  }, [success, error]);
 
-  const successCloseButton = (
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  };
+
+  const button = (
     <IconButton
       aria-label="close"
       color="inherit"
       size="small"
       onClick={() => {
-        setSuccessShow(false);
-      }}
-    >
-      <AiOutlineClose fontSize="inherit" />
-    </IconButton>
-  );
-
-  const errorCloseButton = (
-    <IconButton
-      aria-label="close"
-      color="inherit"
-      size="small"
-      onClick={() => {
-        setErrorShow(false);
+        setOpen(false);
       }}
     >
       <AiOutlineClose fontSize="inherit" />
@@ -42,20 +34,28 @@ const SuccessErrorAlert = ({ error, success }) => {
   return (
     <>
       <Grid item>
-        <Collapse in={errorShow}>
-          <Box pb={2}>
-            <Alert severity="error" action={errorCloseButton}>
-              {error}
-            </Alert>
-          </Box>
-        </Collapse>
+        <Snackbar
+          open={error && open}
+          autoHideDuration={6000}
+          onClose={handleClose}
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        >
+          <Alert severity="error" action={button}>
+            {error}
+          </Alert>
+        </Snackbar>
       </Grid>
       <Grid item>
-        <Collapse in={successShow}>
-          <Box pb={2}>
-            <Alert action={successCloseButton}>{success}</Alert>
-          </Box>
-        </Collapse>
+        <Snackbar
+          open={success && open}
+          autoHideDuration={6000}
+          onClose={handleClose}
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+        >
+          <Alert severity="success" action={button}>
+            {success}
+          </Alert>
+        </Snackbar>
       </Grid>
     </>
   );
