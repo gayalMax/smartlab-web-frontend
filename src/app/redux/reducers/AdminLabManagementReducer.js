@@ -20,8 +20,8 @@ const adminLabManagementReducer = produce((draft, { type, payload }) => {
   switch (type) {
     case ADMIN_LABMANAGEMENT_CREATE_LAB_BEGIN:
       draft.labCreationLoading = true;
-      draft.labCreationError = false;
-      draft.labCreationSuccess = false;
+      draft.labCreationError = null;
+      draft.labCreationSuccess = null;
       return draft;
     case ADMIN_LABMANAGEMENT_CREATE_LAB_SUCCESS:
       draft.labCreationLoading = false;

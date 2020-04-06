@@ -42,7 +42,7 @@ const adminAdministrationCreateLabFailure = error => ({
  * @returns Thunk for user sign in API call
  */
 
-export default function adminLabManagementCreateLab(token, title, subTitle, imageID, complete) {
+export default function adminLabManagementCreateLab(token, title, subTitle, image, complete) {
   return async dispatch => {
     dispatch(adminAdministrationCreateLabBegin());
 
@@ -61,7 +61,7 @@ export default function adminLabManagementCreateLab(token, title, subTitle, imag
     try {
       const success = await axios.post(
         `${SERVER}/${SERVER_CREATE_LAB}`,
-        { title, subtitle: subTitle, imageID },
+        { title, subtitle: subTitle, image },
         { headers: { token } }
       );
       if (success.status !== 200) {
@@ -71,7 +71,7 @@ export default function adminLabManagementCreateLab(token, title, subTitle, imag
       complete();
     } catch (error) {
       onError(error.response);
-      // complete();
+      complete();
     }
   };
 }

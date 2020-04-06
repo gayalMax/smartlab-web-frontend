@@ -1,9 +1,7 @@
 import authInitialState from './authState';
-import labManagementState from  './adminLabManagementState'
 
 const initialState = {
-  auth: authInitialState,
-  lab : labManagementState
+  auth: authInitialState
 };
 
 export default initialState;
