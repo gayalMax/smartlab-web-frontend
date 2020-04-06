@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 import { authReducer } from './AuthReducer';
 import { adminRegistrationReducer } from './AdminRegistrationReducer';
 import { adminAdministrationReducer } from './AdminAdministrationReducer';
+import { adminItemManagementReducer } from './AdminItemManagementReducer';
 import { adminLabManagementReducer } from './AdminLabManagementReducer';
 
 export default combineReducers({
@@ -10,4 +11,5 @@ export default combineReducers({
   adminRegistration: adminRegistrationReducer,
   adminAdministration: adminAdministrationReducer,
   adminLabManagement: adminLabManagementReducer
+  adminItemManagement: adminItemManagementReducer
 });

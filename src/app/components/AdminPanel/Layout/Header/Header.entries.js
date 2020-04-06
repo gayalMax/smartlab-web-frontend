@@ -30,11 +30,15 @@ const entries = [
   },
   {
     path: '/admin/administration/roles/create',
-    name: 'Create Roles'
+    name: 'Create New Role'
   },
   {
     path: '/admin/administration/roles/delete',
-    name: 'Delete Roles'
+    name: 'View Roles'
+  },
+  {
+    path: '/admin/lab/itemsets/create',
+    name: 'Create Item Sets'
   }
 ];
 

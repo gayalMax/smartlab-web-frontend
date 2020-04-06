@@ -75,8 +75,8 @@ function CreateRolesPresenter({
           <Grid item>
             <Formik
               initialValues={{
-                permissions: [],
-                name: ''
+                name: '',
+                permissions: []
               }}
               validationSchema={validationSchema}
               onSubmit={onSubmit}

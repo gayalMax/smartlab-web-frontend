@@ -47,12 +47,12 @@ const entries = [
     id: 'Administration',
     children: [
       {
-        id: 'Create Roles',
+        id: 'Create New Role',
         icon: <AiOutlineUnlock />,
         route: '/admin/administration/roles/create'
       },
       {
-        id: 'Delete Roles',
+        id: 'View Roles',
         icon: <AiOutlineBlock />,
         route: '/admin/administration/roles/delete'
       },
@@ -80,14 +80,29 @@ const entries = [
         id: 'Assign Staff Members',
         icon: <AiOutlineIdcard />,
         route: '#'
+      }
+    ]
+  },
+  {
+    id: 'Item Management',
+    children: [
+      {
+        id: 'Create Item Sets',
+        icon: <AiOutlineDiff />,
+        route: '/admin/lab/itemsets/create'
       },
       {
-        id: 'Manage Item Sets',
+        id: 'Delete Item Sets',
         icon: <AiOutlineDiff />,
         route: '#'
       },
       {
-        id: 'Manage Items',
+        id: 'Create Items',
+        icon: <AiOutlineFileText />,
+        route: '#'
+      },
+      {
+        id: 'Delete Items',
         icon: <AiOutlineFileText />,
         route: '#'
       }
