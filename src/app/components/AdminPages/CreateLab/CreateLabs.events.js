@@ -1,0 +1,4 @@
+export const TITLE_ON_CHANGE = 'TITLE_ON_CHANGE';
+export const SUBTITLE_ON_CHANGE = 'SUBTITLE_ON_CHANGE';
+export const FORM_SUBMIT = 'FORM_SUBMIT';
+export const UPLOAD_IMAGE = 'UPLOAD_IMAGE';

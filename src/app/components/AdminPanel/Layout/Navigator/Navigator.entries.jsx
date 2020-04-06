@@ -72,6 +72,11 @@ const entries = [
         route: '#'
       },
       {
+        id: 'Create Laboratories',
+        icon: <AiOutlineIdcard />,
+        route: '/admin/labs/createlabs'
+      },
+      {
         id: 'Assign Staff Members',
         icon: <AiOutlineIdcard />,
         route: '#'

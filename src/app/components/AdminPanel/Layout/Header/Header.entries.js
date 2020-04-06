@@ -21,6 +21,10 @@ const entries = [
     name: 'Invite Users'
   },
   {
+    path: '/admin/labs/createlabs',
+    name: 'Create Labs'
+  },
+  {
     path: '/admin/users/retract',
     name: 'Retract Invitations'
   },

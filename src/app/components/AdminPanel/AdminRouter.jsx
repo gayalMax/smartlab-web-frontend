@@ -1,10 +1,12 @@
 import React from 'react';
 import { Switch, Route, useRouteMatch } from 'react-router-dom';
 
+// import { PageNotFound, ManageUsers, Dashboard, InviteUsers, CreateLabs } from '../AdminPages';
 import {
   PageNotFound,
   Dashboard,
   InviteUsers,
+  CreateLabs,
   RetractInvitations,
   CreateRoles,
   DeleteRoles,
@@ -25,6 +27,9 @@ export default function AdminRouter() {
       </Route>
       <Route exact path={`${match.url}/users/invite`}>
         <InviteUsers />
+      </Route>
+      <Route exact path={`${match.url}/labs/createlabs`}>
+        <CreateLabs />
       </Route>
       <Route exact path={`${match.url}/users/retract`}>
         <RetractInvitations />
