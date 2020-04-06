@@ -20,7 +20,6 @@ function CreateItemsets() {
     image: yup.string().nullable(),
     attributes: yup
       .array()
-      .min(1, 'Choose at least one')
       .of(
         yup
           .object()
@@ -34,6 +33,8 @@ function CreateItemsets() {
           })
           .required('Required')
       )
+      .required()
+      .min(1, 'Choose at least one')
   });
 
   const onSubmit = async (values, { setSubmitting }) => {

@@ -60,7 +60,7 @@ export default function adminItemManagementCreateItemset(
     function onSuccess() {
       try {
         dispatch(
-          adminItemManagementCreateItemsetSuccess(`Item set '${title} was created successfully.'`)
+          adminItemManagementCreateItemsetSuccess(`Item set '${title}' was created successfully.'`)
         );
       } catch (err) {
         dispatch(

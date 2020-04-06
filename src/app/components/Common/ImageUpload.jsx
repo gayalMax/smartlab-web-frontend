@@ -48,16 +48,18 @@ const ImageUpload = ({ variant, color, sources, onSuccess }) => {
     }
   };
 
-  const uploadWidget = window.cloudinary.createUploadWidget(
-    {
-      cloudName: 'open-inventory-system',
-      uploadPreset: 'public',
-      sources,
-      multiple: false,
-      styles
-    },
-    onUpload
-  );
+  const uploadWidget =
+    window.cloudinary &&
+    window.cloudinary.createUploadWidget(
+      {
+        cloudName: 'open-inventory-system',
+        uploadPreset: 'public',
+        sources,
+        multiple: false,
+        styles
+      },
+      onUpload
+    );
 
   const showWidget = () => {
     uploadWidget.open();

@@ -26,6 +26,7 @@
       }
     ],
     "react/jsx-indent": ["error", 2],
+    "react/jsx-curly-newline": "off",
     "react/forbid-prop-types": 0,
     "no-param-reassign": [
       "error",
