@@ -47,12 +47,12 @@ const entries = [
     id: 'Administration',
     children: [
       {
-        id: 'Create Roles',
+        id: 'Create New Role',
         icon: <AiOutlineUnlock />,
         route: '/admin/administration/roles/create'
       },
       {
-        id: 'Delete Roles',
+        id: 'View Roles',
         icon: <AiOutlineBlock />,
         route: '/admin/administration/roles/delete'
       },

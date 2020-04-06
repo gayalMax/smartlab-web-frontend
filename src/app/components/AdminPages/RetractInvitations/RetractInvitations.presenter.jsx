@@ -11,12 +11,6 @@ import {
   IconButton,
   Tooltip,
   Button,
-  TableRow,
-  Table,
-  TableContainer,
-  TableCell,
-  TableHead,
-  TableBody,
   Chip,
   Avatar,
   Dialog,
@@ -30,6 +24,7 @@ import moment from 'moment';
 import styles from './RetractInvitations.styles';
 import ProgressOverlay from '../../Common/ProgressOverlay';
 import SuccessErrorAlert from '../../Common/SuccessErrorAlert';
+import AdvancedTable from '../../Common/AdvancedTable';
 
 function RetractInviationsPresenter({
   classes,
@@ -78,7 +73,6 @@ function RetractInviationsPresenter({
         </AppBar>
         <Grid container direction="column" alignItems="stretch" className={classes.wrapper}>
           <SuccessErrorAlert success={success} error={error} />
-
           <Grid item>
             <Box px={2} pb={2}>
               Retract Invitations by clicking the button.
@@ -89,57 +83,60 @@ function RetractInviationsPresenter({
               <b>Retracting action cannot be undone.</b>
             </Box>
           </Grid>
-
           <Grid item>
-            <TableContainer>
-              <Table className={classes.table} aria-label="invitations table" size="small">
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Email Address</TableCell>
-                    <TableCell>Role</TableCell>
-                    <TableCell>Last Updated</TableCell>
-                    <TableCell />
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {registrationTokens.map(row => (
-                    <TableRow key={row.email}>
-                      <TableCell component="th" scope="row">
-                        {row.email}
-                      </TableCell>
-                      <TableCell>
-                        <Chip
-                          variant="outlined"
-                          color="primary"
-                          avatar={<Avatar>{row.Role.name[0]}</Avatar>}
-                          label={row.Role.name}
-                        />
-                      </TableCell>
-                      <TableCell>
-                        <i>{moment(row.updatedAt).fromNow()}</i>
-                      </TableCell>
-                      <TableCell align="right">
-                        {row.valid ? (
-                          <Button
-                            color="secondary"
-                            variant="contained"
-                            onClick={handleClick(row.email)}
-                            startIcon={<AiOutlineDelete />}
-                          >
-                            Retract
-                          </Button>
-                        ) : (
-                          <Button variant="text" disabled>
-                            Invitation Accepted
-                          </Button>
-                        )}
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
+            <AdvancedTable
+              columns={[
+                { title: 'Email Address', field: 'email' },
+                {
+                  title: 'Role',
+                  field: 'Role.name',
+                  render: row => (
+                    <Chip
+                      variant="outlined"
+                      color="primary"
+                      avatar={<Avatar>{row.Role.name[0]}</Avatar>}
+                      label={row.Role.name}
+                    />
+                  )
+                },
+                {
+                  title: 'Last Updated',
+                  field: 'updatedAt',
+                  searchable: false,
+                  render: row => <i>{moment(row.updatedAt).fromNow()}</i>
+                },
+                {
+                  title: '',
+                  type: 'numeric',
+                  sorting: false,
+                  searchable: false,
+                  render: row =>
+                    row.valid ? (
+                      <Button
+                        color="secondary"
+                        variant="contained"
+                        onClick={handleClick(row.email)}
+                        startIcon={<AiOutlineDelete />}
+                      >
+                        Retract
+                      </Button>
+                    ) : (
+                      <Button variant="text" disabled>
+                        Invitation Accepted
+                      </Button>
+                    )
+                }
+              ]}
+              data={registrationTokens.map(({ email, Role, updatedAt, valid }) => ({
+                email,
+                Role,
+                updatedAt,
+                valid
+              }))}
+              title=""
+            />
           </Grid>
+          <Grid item>*Only the latest invitations are listed above.</Grid>
         </Grid>
       </Paper>
 
