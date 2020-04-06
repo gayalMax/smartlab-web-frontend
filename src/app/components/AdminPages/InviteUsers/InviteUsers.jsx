@@ -12,19 +12,23 @@ function InviteUsers() {
   // To dispatch api calls
   const dispatch = useDispatch();
   // Take token and other state slice. Token is required for api call.
-  const { roles, error, loading, token, success } = useSelector(state => {
-    return {
-      ...state.adminRegistration,
-      token: state.auth.token
-    };
-  });
+  const {
+    roles,
+    rolesSyncLoading,
+    rolesSyncError,
+    rolesSyncSuccess,
+    inviteLoading,
+    inviteError,
+    inviteSuccess,
+    token
+  } = useSelector(state => ({ ...state.adminRegistration, token: state.auth.token }));
 
   // If roles are not loaded(and the request is not already submitted) request to sync roles
   useEffect(() => {
-    if (!loading && roles.length === 0) {
+    if (!rolesSyncLoading && !rolesSyncSuccess && !rolesSyncError) {
       dispatch(adminRegistrationSyncRoles(token));
     }
-  }, [dispatch, token, loading, roles]);
+  }, [dispatch, token, rolesSyncError, rolesSyncSuccess, rolesSyncLoading]);
 
   // State management of emails and roles
   const [formState, setFormState] = useState({ emails: [], role: null });
@@ -67,10 +71,10 @@ function InviteUsers() {
 
   return (
     <InviteUsersPresenter
-      loading={loading}
+      loading={inviteLoading || rolesSyncLoading}
       roles={roles}
-      error={error}
-      success={success}
+      error={inviteError || rolesSyncError}
+      success={inviteSuccess}
       handleEvent={handleEvent}
     />
   );

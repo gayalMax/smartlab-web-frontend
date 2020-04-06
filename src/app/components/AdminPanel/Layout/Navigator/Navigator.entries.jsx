@@ -13,7 +13,8 @@ import {
   AiOutlineClockCircle,
   AiOutlineUser,
   AiOutlineLogout,
-  AiOutlineDashboard
+  AiOutlineDashboard,
+  AiOutlineBlock
 } from 'react-icons/ai';
 
 /**
@@ -46,9 +47,14 @@ const entries = [
     id: 'Administration',
     children: [
       {
-        id: 'Manage Roles',
+        id: 'Create Roles',
         icon: <AiOutlineUnlock />,
-        route: '#'
+        route: '/admin/administration/roles/create'
+      },
+      {
+        id: 'Delete Roles',
+        icon: <AiOutlineBlock />,
+        route: '/admin/administration/roles/delete'
       },
       {
         id: 'Manage Users',
@@ -98,7 +104,7 @@ const entries = [
       {
         id: 'Retract Invitations',
         icon: <AiOutlineMinusSquare />,
-        route: '#'
+        route: '/admin/users/retract'
       }
     ]
   },

@@ -79,7 +79,7 @@ function EmailTextBoxPresenter({ classes, emails, error, onChange }) {
             </Box>
           </Grid>
           <Dialog open={open} onClose={closeDialog} scroll="paper">
-            <DialogTitle id="simple-dialog-title">Processed Email Addresses</DialogTitle>
+            <DialogTitle>Processed Email Addresses</DialogTitle>
             <Divider />
             <List>
               {emails.map(email => (

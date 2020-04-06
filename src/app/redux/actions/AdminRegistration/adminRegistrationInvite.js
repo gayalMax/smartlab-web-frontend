@@ -1,12 +1,13 @@
+import axios from 'axios';
 import {
   ADMIN_REGISTRATION_INVITE_BEGIN,
   ADMIN_REGISTRATION_INVITE_SUCCESS,
   ADMIN_REGISTRATION_INVITE_FAILURE
 } from '../../actionTypes';
+import { SERVER, SERVER_POST_TOKEN } from '../serverConstants';
 
 /**
  * Action creator for beginning of inviting users
- * @param {string} invitationToken Invitation token key
  * @returns Redux action
  */
 const adminRegistrationInviteBegin = () => ({
@@ -16,14 +17,11 @@ const adminRegistrationInviteBegin = () => ({
 /**
  * Action creator for end of inviting users.
  * This is fired when API call ends in a success.
- * @param {Object} response Response data of the call
- * @param {Object[]} response.roles Roles list
- * @param {string} response.roles.id Id of the role
- * @param {string} response.roles.name Name of the role
  * @returns Redux action
  */
-const adminRegistrationInviteSuccess = () => ({
-  type: ADMIN_REGISTRATION_INVITE_SUCCESS
+const adminRegistrationInviteSuccess = success => ({
+  type: ADMIN_REGISTRATION_INVITE_SUCCESS,
+  payload: { success }
 });
 
 /**
@@ -68,20 +66,20 @@ export default function adminRegistrationInvite(token, emails, role) {
     }
 
     // Function to call if ended in success
-    function onSuccess() {
-      try {
-        dispatch(adminRegistrationInviteSuccess());
-      } catch (err) {
-        dispatch(
-          adminRegistrationInviteFailure('Server connection failed. Please check your connection.')
-        );
-      }
+    function onSuccess(success) {
+      dispatch(adminRegistrationInviteSuccess(success));
     }
 
     try {
-      // TODO: Make the request
-      if (token == null) throw Error('Not Authorized');
-      onSuccess();
+      const success = await axios.post(
+        `${SERVER}/${SERVER_POST_TOKEN}`,
+        { emails, role },
+        { headers: { token } }
+      );
+      if (success.status !== 200) {
+        throw Error('Server responded with an error');
+      }
+      onSuccess(`Invitations sent for ${emails.length} emails.`);
     } catch (error) {
       onError(error.response);
     }

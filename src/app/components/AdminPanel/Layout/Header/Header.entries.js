@@ -23,7 +23,19 @@ const entries = [
  {
    path:'/admin/labs/createlabs',
    name:'Create Labs'
- }
+ },
+  {
+    path: '/admin/users/retract',
+    name: 'Retract Invitations'
+  },
+  {
+    path: '/admin/administration/roles/create',
+    name: 'Create Roles'
+  },
+  {
+    path: '/admin/administration/roles/delete',
+    name: 'Delete Roles'
+  }
 ];
 
 export default entries;

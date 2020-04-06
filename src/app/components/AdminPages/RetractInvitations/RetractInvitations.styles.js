@@ -1,18 +1,15 @@
 const styles = () => ({
   root: {
     maxWidth: 936,
-    margin: 'auto'
-  },
-
-  wrapper: {
-    padding: 20
-  },
-  item: {
-    marginBottom: 20
+    margin: 'auto',
+    overflow: 'hidden'
   },
   title: {
     fontSize: 16,
     fontWeight: 'bold'
+  },
+  wrapper: {
+    padding: '16px'
   }
 });
 
