@@ -1,5 +1,5 @@
 import PageNotFound from './PageNotFound/PageNotFound';
-import ManageUsers from './ManageUsers/ManageUsers';
+import ViewUsers from './ViewUsers/ViewUsers';
 import Dashboard from './Dashboard/Dashboard';
 import InviteUsers from './InviteUsers/InviteUsers';
 import RetractInvitations from './RetractInvitations/RetractInvitations';
@@ -10,7 +10,7 @@ import CreateItemsets from './CreateItemsets/CreateItemsets';
 export {
   Dashboard,
   PageNotFound,
-  ManageUsers,
+  ViewUsers,
   InviteUsers,
   RetractInvitations,
   CreateRoles,

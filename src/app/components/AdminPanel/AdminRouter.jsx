@@ -3,13 +3,13 @@ import { Switch, Route, useRouteMatch } from 'react-router-dom';
 
 import {
   PageNotFound,
-  ManageUsers,
   Dashboard,
   InviteUsers,
   RetractInvitations,
   CreateRoles,
   DeleteRoles,
-  CreateItemsets
+  CreateItemsets,
+  ViewUsers
 } from '../AdminPages';
 
 export default function AdminRouter() {
@@ -18,7 +18,7 @@ export default function AdminRouter() {
   return (
     <Switch>
       <Route exact path={`${match.url}/administration/users`}>
-        <ManageUsers />
+        <ViewUsers />
       </Route>
       <Route exact path={`${match.url}/dashboard`}>
         <Dashboard />

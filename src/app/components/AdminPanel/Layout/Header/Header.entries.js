@@ -14,7 +14,7 @@ const entries = [
   },
   {
     path: '/admin/administration/users',
-    name: 'Manage Users'
+    name: 'View Users'
   },
   {
     path: '/admin/users/invite',

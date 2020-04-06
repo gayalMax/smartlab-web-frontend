@@ -4,6 +4,7 @@ export const SERVER_REQUEST_INVITATION = 'api/registration/verify';
 export const SERVER_SIGN_UP = 'api/registration/register';
 export const SERVER_GET_ROLES = 'api/registrar/roles';
 export const SERVER_GET_ROLES_ALL = 'api/roles/list';
+export const SERVER_GET_USERS_ALL = 'api/users/list';
 export const SERVER_GET_PERMISSIONS = 'api/permissions/list';
 export const SERVER_POST_TOKEN = 'api/registrar/token';
 export const SERVER_CREATE_ROLE = 'api/roles/create';
