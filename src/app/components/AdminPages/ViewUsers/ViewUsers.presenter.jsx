@@ -11,13 +11,15 @@ import {
   IconButton,
   Tooltip,
   Chip,
-  Button
+  Button,
+  Avatar
 } from '@material-ui/core';
 
 import styles from './ViewUsers.styles';
 import ProgressOverlay from '../../Common/ProgressOverlay';
 import SuccessErrorAlert from '../../Common/SuccessErrorAlert';
 import AdvancedTable from '../../Common/AdvancedTable';
+import { capitalizeFirstLetter } from '../../../helpers/helpers';
 
 function ViewUsersPresenter({ classes, users, error, loading, onRefresh }) {
   return (
@@ -63,14 +65,21 @@ function ViewUsersPresenter({ classes, users, error, loading, onRefresh }) {
                   field: 'role',
                   type: 'numeric',
                   sorting: false,
-                  render: row => <Chip size="small" label={row.role.toUpperCase()} />
+                  render: row => (
+                    <Chip
+                      variant="outlined"
+                      color="primary"
+                      avatar={<Avatar>{row.role[0]}</Avatar>}
+                      label={row.role}
+                    />
+                  )
                 }
               ]}
               data={users.map(({ id, firstName, lastName, email, Role }) => ({
                 id,
                 name: `${firstName} ${lastName}`,
                 email,
-                role: Role.name
+                role: capitalizeFirstLetter(Role.name)
               }))}
               title=""
             />
