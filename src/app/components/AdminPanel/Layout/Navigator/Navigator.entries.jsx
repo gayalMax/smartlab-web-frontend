@@ -92,9 +92,9 @@ const entries = [
         route: '/admin/lab/itemsets/create'
       },
       {
-        id: 'Delete Item Sets',
+        id: 'View Item Sets',
         icon: <AiOutlineDiff />,
-        route: '#'
+        route: '/admin/itemset/list'
       },
       {
         id: 'Create Items',
@@ -102,7 +102,7 @@ const entries = [
         route: '#'
       },
       {
-        id: 'Delete Items',
+        id: 'View Items',
         icon: <AiOutlineFileText />,
         route: '#'
       }
