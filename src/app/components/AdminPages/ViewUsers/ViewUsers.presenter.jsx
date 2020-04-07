@@ -11,7 +11,6 @@ import {
   IconButton,
   Tooltip,
   Chip,
-  Button,
   Avatar
 } from '@material-ui/core';
 
@@ -48,10 +47,6 @@ function ViewUsersPresenter({ classes, users, error, loading, onRefresh }) {
             <Box px={2} pb={2}>
               Below the list of users in the system are given. Invite Users to add users to the
               syetem.
-              <br />
-              <Button href="/admin/users/invite" variant="outlined">
-                Invite Users
-              </Button>
             </Box>
           </Grid>
 
