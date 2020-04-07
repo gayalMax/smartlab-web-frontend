@@ -26,6 +26,7 @@ import styles from './ViewItemSets.styles';
 import ProgressOverlay from '../../Common/ProgressOverlay';
 import SuccessErrorAlert from '../../Common/SuccessErrorAlert';
 import AdvancedTable from '../../Common/AdvancedTable';
+import { capitalizeFirstLetter } from '../../../helpers/helpers';
 
 const placeholder = 'https://via.placeholder.com/50';
 
@@ -103,7 +104,7 @@ function ViewItemSetsPresenter({ classes, itemSets, error, loading, onRefresh })
               ]}
               data={itemSets.map(({ id, title, image, Attributes }) => ({
                 id,
-                title,
+                title: capitalizeFirstLetter(title),
                 image,
                 Attributes
               }))}

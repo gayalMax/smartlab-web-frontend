@@ -43,6 +43,10 @@ const entries = [
   {
     path: '/admin/labs/labs',
     name: 'View Labs'
+  },
+  {
+    path: '/admin/itemset/list',
+    name: 'View Item Sets'
   }
 ];
 

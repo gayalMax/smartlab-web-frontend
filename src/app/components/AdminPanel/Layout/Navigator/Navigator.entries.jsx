@@ -25,6 +25,7 @@ import {
 const entries = [
   {
     id: 'Account',
+    permissions: null,
     children: [
       {
         id: 'Dashboard',
@@ -45,6 +46,7 @@ const entries = [
   },
   {
     id: 'Administration',
+    permissions: ['ADMINISTRATOR'],
     children: [
       {
         id: 'Create New Role',
@@ -65,6 +67,7 @@ const entries = [
   },
   {
     id: 'Lab Management',
+    permissions: ['LAB_MANAGER'],
     children: [
       {
         id: 'Create Laboratories',
@@ -85,6 +88,7 @@ const entries = [
   },
   {
     id: 'Item Management',
+    permissions: ['LAB_MANAGER', 'INVENTORY_MANAGER'],
     children: [
       {
         id: 'Create Item Sets',
@@ -110,6 +114,7 @@ const entries = [
   },
   {
     id: 'Account Registration',
+    permissions: ['REGISTRAR'],
     children: [
       {
         id: 'Invite Users',
@@ -125,6 +130,7 @@ const entries = [
   },
   {
     id: 'Inventory Management',
+    permissions: ['INVENTORY_MANAGER'],
     children: [
       {
         id: 'Search Items',

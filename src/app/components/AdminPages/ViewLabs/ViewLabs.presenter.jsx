@@ -27,6 +27,7 @@ import styles from './ViewLabs.styles';
 import ProgressOverlay from '../../Common/ProgressOverlay';
 import SuccessErrorAlert from '../../Common/SuccessErrorAlert';
 import AdvancedTable from '../../Common/AdvancedTable';
+import { capitalizeFirstLetter } from '../../../helpers/helpers';
 
 const placeholder = 'https://via.placeholder.com/50';
 
@@ -118,7 +119,7 @@ function ViewLabsPresenter({ classes, labs, error, loading, onRefresh }) {
               ]}
               data={labs.map(({ id, title, subtitle, image, createdAt, updatedAt, Users }) => ({
                 id,
-                title,
+                title: capitalizeFirstLetter(title),
                 subtitle,
                 image,
                 createdAt,
