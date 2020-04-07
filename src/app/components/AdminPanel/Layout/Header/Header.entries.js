@@ -14,16 +14,16 @@ const entries = [
   },
   {
     path: '/admin/administration/users',
-    name: 'Manage Users'
+    name: 'View Users'
   },
   {
     path: '/admin/users/invite',
     name: 'Invite Users'
   },
- {
-   path:'/admin/labs/createlabs',
-   name:'Create Labs'
- },
+  {
+    path: '/admin/labs/createlabs',
+    name: 'Create Labs'
+  },
   {
     path: '/admin/users/retract',
     name: 'Retract Invitations'
@@ -39,6 +39,14 @@ const entries = [
   {
     path: '/admin/lab/itemsets/create',
     name: 'Create Item Sets'
+  },
+  {
+    path: '/admin/labs/labs',
+    name: 'View Labs'
+  },
+  {
+    path: '/admin/itemset/list',
+    name: 'View Item Sets'
   }
 ];
 

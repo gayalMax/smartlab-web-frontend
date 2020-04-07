@@ -4,7 +4,6 @@ import { Switch, Route, useRouteMatch } from 'react-router-dom';
 // import { PageNotFound, ManageUsers, Dashboard, InviteUsers, CreateLabs } from '../AdminPages';
 import {
   PageNotFound,
-  ManageUsers,
   Dashboard,
   InviteUsers,
   CreateLabs,
@@ -12,8 +11,11 @@ import {
   CreateRoles,
   DeleteRoles,
   CreateItemsets,
+  ViewUsers,
+  ViewItemSets,
   AssignStaff
 } from '../AdminPages';
+import ViewLabs from '../AdminPages/ViewLabs/ViewLabs';
 
 export default function AdminRouter() {
   const match = useRouteMatch();
@@ -21,7 +23,7 @@ export default function AdminRouter() {
   return (
     <Switch>
       <Route exact path={`${match.url}/administration/users`}>
-        <ManageUsers />
+        <ViewUsers />
       </Route>
       <Route exact path={`${match.url}/dashboard`}>
         <Dashboard />
@@ -46,6 +48,12 @@ export default function AdminRouter() {
       </Route>
       <Route exact path={`${match.url}/lab/itemsets/create`}>
         <CreateItemsets />
+      </Route>
+      <Route exact path={`${match.url}/labs/labs`}>
+        <ViewLabs />
+      </Route>
+      <Route exact path={`${match.url}/itemset/list`}>
+        <ViewItemSets />
       </Route>
       <Route>
         <PageNotFound />

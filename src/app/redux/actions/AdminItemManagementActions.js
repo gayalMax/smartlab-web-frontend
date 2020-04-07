@@ -1,5 +1,4 @@
 import adminItemManagementCreateItemset from './AdminItemManagement/adminItemManagementCreateItemset';
+import adminItemManagementSyncItemsets from './AdminItemManagement/AdminItemManagementSyncItemsets';
 
-const ignored = null;
-
-export { adminItemManagementCreateItemset, ignored };
+export { adminItemManagementCreateItemset, adminItemManagementSyncItemsets };

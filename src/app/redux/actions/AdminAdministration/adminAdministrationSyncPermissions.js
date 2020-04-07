@@ -56,7 +56,7 @@ const responseSchema = yup.object().shape({
  * This is an action that will do the API call and fire other actions.
  * @returns Thunk for request permission API call
  */
-export default function adminAdministrationSyncPermissions() {
+export default function adminAdministrationSyncPermissions(token) {
   return async dispatch => {
     dispatch(adminAdministrationSyncPermissionsBegin());
 
@@ -82,7 +82,9 @@ export default function adminAdministrationSyncPermissions() {
 
     try {
       // Make the get request
-      const success = await axios.get(`${SERVER}/${SERVER_GET_PERMISSIONS}`);
+      const success = await axios.get(`${SERVER}/${SERVER_GET_PERMISSIONS}`, {
+        headers: { token }
+      });
       onSuccess(success);
     } catch (error) {
       onError(error.response);

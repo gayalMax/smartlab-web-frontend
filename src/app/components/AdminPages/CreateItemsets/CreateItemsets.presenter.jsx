@@ -16,7 +16,7 @@ import {
 import DeleteIcon from '@material-ui/icons/Delete';
 import { TextField, Switch } from 'formik-material-ui';
 import { Formik, Form, Field, FieldArray } from 'formik';
-import { AiOutlinePlus } from 'react-icons/ai';
+import { AiOutlinePlusSquare } from 'react-icons/ai';
 
 import styles from './CreateItemsets.styles';
 import ImageUpload from '../../Common/ImageUpload';
@@ -161,26 +161,20 @@ function CreateItemSetsPresenter({ classes, error, success, validationSchema, on
                             </GridListTile>
                           </GridList>
                         ))}
-                        <Grid item>
-                          <Box pb={2}>
-                            <Button
-                              className={classes.margin}
-                              variant="outlined"
-                              color="primary"
-                              startIcon={<AiOutlinePlus />}
-                              aria-label="add"
-                              onClick={() =>
-                                arrayHelpers.push({
-                                  key: '',
-                                  defaultValue: '',
-                                  editable: false
-                                })
-                              }
-                            >
-                              Add new attribute
-                            </Button>
-                          </Box>
-                        </Grid>
+                        <Button
+                          className={classes.margin}
+                          variant="outlined"
+                          startIcon={<AiOutlinePlusSquare />}
+                          onClick={() =>
+                            arrayHelpers.push({
+                              key: '',
+                              defaultValue: '',
+                              editable: false
+                            })
+                          }
+                        >
+                          Add new attribute
+                        </Button>
                       </div>
                     )}
                   />

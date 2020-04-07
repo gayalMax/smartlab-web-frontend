@@ -10,15 +10,17 @@ import {
   Box,
   IconButton,
   Tooltip,
-  Chip
+  Chip,
+  Avatar
 } from '@material-ui/core';
 
-import styles from './DeleteRoles.styles';
+import styles from './ViewUsers.styles';
 import ProgressOverlay from '../../Common/ProgressOverlay';
 import SuccessErrorAlert from '../../Common/SuccessErrorAlert';
 import AdvancedTable from '../../Common/AdvancedTable';
+import { capitalizeFirstLetter } from '../../../helpers/helpers';
 
-function DeleteRolesPresenter({ classes, roles, error, loading, onRefresh }) {
+function ViewUsersPresenter({ classes, users, error, loading, onRefresh }) {
   return (
     <ProgressOverlay visible={loading}>
       <Paper className={classes.root}>
@@ -26,7 +28,7 @@ function DeleteRolesPresenter({ classes, roles, error, loading, onRefresh }) {
           <Toolbar>
             <Grid container spacing={2} alignItems="center">
               <Grid item xs>
-                <p className={classes.title}>Delete Roles</p>
+                <p className={classes.title}>View Users</p>
               </Grid>
             </Grid>
             <Grid item>
@@ -43,31 +45,37 @@ function DeleteRolesPresenter({ classes, roles, error, loading, onRefresh }) {
 
           <Grid item>
             <Box px={2} pb={2}>
-              Below the list of roles in the system are given. When inviting new user, you can now
-              select the role from following list.
+              Below the list of users in the system are given. Invite Users to add users to the
+              syetem.
             </Box>
           </Grid>
 
           <Grid item>
             <AdvancedTable
               columns={[
-                { title: 'Role', field: 'name' },
+                { title: 'Name', field: 'name' },
+                { title: 'Email', field: 'email' },
                 {
-                  title: 'Permissions',
+                  title: 'Role',
+                  field: 'role',
                   type: 'numeric',
                   sorting: false,
-                  render: row =>
-                    row.RolePermissions.map(permission => (
-                      <Chip
-                        style={{ margin: '2px' }}
-                        key={permission.name}
-                        size="small"
-                        label={permission.name}
-                      />
-                    ))
+                  render: row => (
+                    <Chip
+                      variant="outlined"
+                      color="primary"
+                      avatar={<Avatar>{row.role[0]}</Avatar>}
+                      label={row.role}
+                    />
+                  )
                 }
               ]}
-              data={roles.map(({ name, RolePermissions }) => ({ name, RolePermissions }))}
+              data={users.map(({ id, firstName, lastName, email, Role }) => ({
+                id,
+                name: `${firstName} ${lastName}`,
+                email,
+                role: capitalizeFirstLetter(Role.name)
+              }))}
               title=""
             />
           </Grid>
@@ -77,16 +85,16 @@ function DeleteRolesPresenter({ classes, roles, error, loading, onRefresh }) {
   );
 }
 
-DeleteRolesPresenter.defaultProps = {
+ViewUsersPresenter.defaultProps = {
   error: null
 };
 
-DeleteRolesPresenter.propTypes = {
+ViewUsersPresenter.propTypes = {
   classes: PropTypes.object.isRequired,
-  roles: PropTypes.array.isRequired,
+  users: PropTypes.array.isRequired,
   error: PropTypes.string,
   loading: PropTypes.bool.isRequired,
   onRefresh: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(DeleteRolesPresenter);
+export default withStyles(styles)(ViewUsersPresenter);

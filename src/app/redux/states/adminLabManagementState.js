@@ -3,15 +3,15 @@
  */
 
 const initialState = {
-  //initial state for lab creation
+  labs: [],
+
   labCreationLoading: false,
   labCreationError: null,
   labCreationSuccess: null,
 
-  //initial state for lab syncing
-  labSyncLoading: false,
-  labSyncSuccess: null,
-  labSyncError: null
+  labsSyncLoading: false,
+  labsSyncError: null,
+  labsSyncSuccess: null
 };
 
 export default initialState;

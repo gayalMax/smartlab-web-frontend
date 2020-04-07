@@ -1,7 +1,7 @@
 import React from 'react';
 import { Paper, Grid, withStyles, AppBar, Toolbar } from '@material-ui/core';
+import PropTypes from 'prop-types';
 import styles from './AssignStaff.styles';
-import CardView from './CardView';
 
 const AssignStaffPresenter = ({ classes }) => {
   return (
@@ -15,9 +15,15 @@ const AssignStaffPresenter = ({ classes }) => {
           </Grid>
         </Toolbar>
       </AppBar>
-      <Grid container direction="row" wrap></Grid>
+      <Grid container direction="row">
+        sss
+      </Grid>
     </Paper>
   );
+};
+
+AssignStaffPresenter.propTypes = {
+  classes: PropTypes.object.isRequired
 };
 
 export default withStyles(styles)(AssignStaffPresenter);

@@ -25,6 +25,7 @@ import {
 const entries = [
   {
     id: 'Account',
+    permissions: null,
     children: [
       {
         id: 'Dashboard',
@@ -45,6 +46,7 @@ const entries = [
   },
   {
     id: 'Administration',
+    permissions: ['ADMINISTRATOR'],
     children: [
       {
         id: 'Create New Role',
@@ -57,7 +59,7 @@ const entries = [
         route: '/admin/administration/roles/delete'
       },
       {
-        id: 'Manage Users',
+        id: 'View Users',
         icon: <AiOutlineUsergroupAdd />,
         route: '/admin/administration/users'
       }
@@ -65,16 +67,17 @@ const entries = [
   },
   {
     id: 'Lab Management',
+    permissions: ['LAB_MANAGER'],
     children: [
-      {
-        id: 'Manage Laboratories',
-        icon: <AiOutlineLaptop />,
-        route: '#'
-      },
       {
         id: 'Create Laboratories',
         icon: <AiOutlineIdcard />,
         route: '/admin/labs/createlabs'
+      },
+      {
+        id: 'View Laboratories',
+        icon: <AiOutlineLaptop />,
+        route: '/admin/labs/labs'
       },
       {
         id: 'Assign Staff Members',
@@ -85,6 +88,7 @@ const entries = [
   },
   {
     id: 'Item Management',
+    permissions: ['LAB_MANAGER', 'INVENTORY_MANAGER'],
     children: [
       {
         id: 'Create Item Sets',
@@ -92,9 +96,9 @@ const entries = [
         route: '/admin/lab/itemsets/create'
       },
       {
-        id: 'Delete Item Sets',
+        id: 'View Item Sets',
         icon: <AiOutlineDiff />,
-        route: '#'
+        route: '/admin/itemset/list'
       },
       {
         id: 'Create Items',
@@ -102,7 +106,7 @@ const entries = [
         route: '#'
       },
       {
-        id: 'Delete Items',
+        id: 'View Items',
         icon: <AiOutlineFileText />,
         route: '#'
       }
@@ -110,6 +114,7 @@ const entries = [
   },
   {
     id: 'Account Registration',
+    permissions: ['REGISTRAR'],
     children: [
       {
         id: 'Invite Users',
@@ -125,6 +130,7 @@ const entries = [
   },
   {
     id: 'Inventory Management',
+    permissions: ['INVENTORY_MANAGER'],
     children: [
       {
         id: 'Search Items',

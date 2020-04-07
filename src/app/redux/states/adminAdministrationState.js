@@ -4,6 +4,8 @@
 const initialState = {
   permissions: [],
   roles: [],
+  users: [],
+
   permissionsSyncLoading: false,
   permissionsSyncError: null,
   permissionsSyncSuccess: false,
@@ -16,7 +18,11 @@ const initialState = {
   rolesSyncSuccess: false,
   roleDeleteError: null,
   roleDeleteLoading: false,
-  roleDeleteSuccess: null
+  roleDeleteSuccess: null,
+
+  usersSyncError: null,
+  usersSyncLoading: false,
+  usersSyncSuccess: false
 };
 
 export default initialState;

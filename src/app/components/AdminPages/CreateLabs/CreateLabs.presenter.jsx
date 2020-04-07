@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styles from './CreateLabs.styles';
 import { Paper, withStyles, Grid, Box, Button, AppBar, Toolbar } from '@material-ui/core';
 import { Formik, Form, Field } from 'formik';
 import { TextField } from 'formik-material-ui';
+import styles from './CreateLabs.styles';
 import ProgressOverlay from '../../Common/ProgressOverlay';
 import SuccessErrorAlert from '../../Common/SuccessErrorAlert';
 import ImageUpload from '../../Common/ImageUpload';
@@ -26,7 +26,7 @@ function CreateLabsPresenter({ classes, onSubmit, validationSchema, loading, suc
           <Grid item>
             <Box px={1} mb={2}>
               Create a lab with a suitable title and a subtitle. Uploading an image is &nbsp;
-              <b>not required</b>
+              <b>not required.</b>
               &nbsp;
               <br />
               <b>Lab creation action cannot be undone.</b>
@@ -41,7 +41,7 @@ function CreateLabsPresenter({ classes, onSubmit, validationSchema, loading, suc
             validationSchema={validationSchema}
             onSubmit={onSubmit}
           >
-            {({ submitForm, isSubmitting, errors, touched, setFieldValue }) => (
+            {({ submitForm, isSubmitting, setFieldValue }) => (
               <Form>
                 <Grid className={classes.item} item>
                   <Field
@@ -93,6 +93,7 @@ function CreateLabsPresenter({ classes, onSubmit, validationSchema, loading, suc
     </ProgressOverlay>
   );
 }
+
 CreateLabsPresenter.defaultProps = {
   error: null,
   success: null

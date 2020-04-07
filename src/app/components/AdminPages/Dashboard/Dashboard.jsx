@@ -1,15 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { Grid } from '@material-ui/core';
+import { Grid, Box } from '@material-ui/core';
 
 import ImageUpload from '../../Common/ImageUpload';
+import RealTimeReader from '../../Common/RealTimeReader';
 import styles from './Dashboard.styles';
 
 function Dashboard({ classes }) {
   const onUpload = publicId => {
     // eslint-disable-next-line no-console
     console.log(publicId);
+  };
+
+  const onBarcode = code => {
+    // eslint-disable-next-line no-console
+    console.log(code);
   };
 
   return (
@@ -20,6 +26,10 @@ function Dashboard({ classes }) {
         </Grid>
         <Grid item>
           <ImageUpload onSuccess={onUpload} />
+        </Grid>
+        <Box pt={2} />
+        <Grid item>
+          <RealTimeReader onSubmit={onBarcode} />
         </Grid>
       </Grid>
     </div>

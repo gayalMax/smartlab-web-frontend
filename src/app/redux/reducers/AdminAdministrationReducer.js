@@ -12,7 +12,10 @@ import {
   ADMIN_ADMINISTRATION_SYNC_ROLES_FAILURE,
   ADMIN_ADMINISTRATION_DELETE_ROLE_BEGIN,
   ADMIN_ADMINISTRATION_DELETE_ROLE_SUCCESS,
-  ADMIN_ADMINISTRATION_DELETE_ROLE_FAILURE
+  ADMIN_ADMINISTRATION_DELETE_ROLE_FAILURE,
+  ADMIN_ADMINISTRATION_SYNC_USERS_FAILURE,
+  ADMIN_ADMINISTRATION_SYNC_USERS_SUCCESS,
+  ADMIN_ADMINISTRATION_SYNC_USERS_BEGIN
 } from '../actionTypes';
 import initialState from '../states/adminAdministrationState';
 
@@ -87,6 +90,23 @@ const adminAdministrationReducer = produce((draft, { type, payload }) => {
     case ADMIN_ADMINISTRATION_DELETE_ROLE_FAILURE:
       draft.roleDeleteLoading = false;
       draft.roleDeleteError = payload.error;
+      return draft;
+
+    // Syncing users
+    case ADMIN_ADMINISTRATION_SYNC_USERS_BEGIN:
+      draft.users = [];
+      draft.usersSyncLoading = true;
+      draft.usersSyncSuccess = false;
+      draft.usersSyncError = null;
+      return draft;
+    case ADMIN_ADMINISTRATION_SYNC_USERS_SUCCESS:
+      draft.users = payload.users;
+      draft.usersSyncLoading = false;
+      draft.usersSyncSuccess = true;
+      return draft;
+    case ADMIN_ADMINISTRATION_SYNC_USERS_FAILURE:
+      draft.usersSyncLoading = false;
+      draft.usersSyncError = payload.error;
       return draft;
     default:
       return draft;
