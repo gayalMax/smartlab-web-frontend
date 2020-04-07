@@ -4,9 +4,16 @@
 const initialState = {
   attributes: [],
   itemsets: [],
+
+  syncedItemsets: [],
+
   createItemsetError: null,
   createItemsetLoading: false,
-  createItemsetSuccess: null
+  createItemsetSuccess: null,
+
+  itemSetsSyncLoading: false,
+  itemSetsSyncSuccess: null,
+  itemSetsSyncError: null
 };
 
 export default initialState;

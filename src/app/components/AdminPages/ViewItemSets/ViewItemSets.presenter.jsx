@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { AiOutlineSync, AiOutlineUser, AiOutlineUsergroupAdd } from 'react-icons/ai';
+import { AiOutlineSync, AiOutlineCode, AiOutlineEdit, AiOutlineLock } from 'react-icons/ai';
 import {
   Paper,
   Grid,
@@ -13,29 +13,28 @@ import {
   Dialog,
   DialogTitle,
   List,
-  DialogActions,
-  Button,
   ListItem,
   ListItemAvatar,
   Avatar,
-  ListItemText
+  ListItemText,
+  DialogActions,
+  Button
 } from '@material-ui/core';
 import { Image } from 'cloudinary-react';
-import moment from 'moment';
 
-import styles from './ViewLabs.styles';
+import styles from './ViewItemSets.styles';
 import ProgressOverlay from '../../Common/ProgressOverlay';
 import SuccessErrorAlert from '../../Common/SuccessErrorAlert';
 import AdvancedTable from '../../Common/AdvancedTable';
 
 const placeholder = 'https://via.placeholder.com/50';
 
-function ViewLabsPresenter({ classes, labs, error, loading, onRefresh }) {
-  const [labManagers, setLabManagers] = useState([]);
+function ViewItemSetsPresenter({ classes, itemSets, error, loading, onRefresh }) {
+  const [attributes, setAttributes] = useState([]);
 
-  const openDialog = lab => () => setLabManagers(lab.Users);
+  const openDialog = itemset => () => setAttributes(itemset.Attributes);
 
-  const closeDialog = () => setLabManagers([]);
+  const closeDialog = () => setAttributes([]);
 
   return (
     <ProgressOverlay visible={loading}>
@@ -44,7 +43,7 @@ function ViewLabsPresenter({ classes, labs, error, loading, onRefresh }) {
           <Toolbar>
             <Grid container spacing={2} alignItems="center">
               <Grid item xs>
-                <p className={classes.title}>View Labs</p>
+                <p className={classes.title}>View Item Sets</p>
               </Grid>
             </Grid>
             <Grid item>
@@ -61,7 +60,7 @@ function ViewLabsPresenter({ classes, labs, error, loading, onRefresh }) {
 
           <Grid item>
             <Box px={2} pb={2}>
-              Below the list of labs in the system are given.
+              Below the list of itemSets in the system are given.
             </Box>
           </Grid>
 
@@ -69,35 +68,21 @@ function ViewLabsPresenter({ classes, labs, error, loading, onRefresh }) {
             <AdvancedTable
               columns={[
                 {
-                  field: 'image',
+                  field: 'title',
                   sorting: false,
-                  render: row =>
-                    row.image == null ? (
-                      <img src={placeholder} className={classes.image} alt={row.id} />
-                    ) : (
-                      <Image publicId={row.image} className={classes.image} />
-                    )
-                },
-                { title: 'Title', field: 'title', render: row => <b>{row.title}</b> },
-                { title: 'Subtitle', field: 'subtitle' },
-                {
-                  title: 'Created',
-                  field: 'createdAt',
-                  searchable: false,
                   render: row => (
-                    <Tooltip title={row.createdAt.toString()}>
-                      <i>{moment(row.createdAt).fromNow()}</i>
-                    </Tooltip>
-                  )
-                },
-                {
-                  title: 'Last Updated',
-                  field: 'updatedAt',
-                  searchable: false,
-                  render: row => (
-                    <Tooltip title={row.updatedAt.toString()}>
-                      <i>{moment(row.updatedAt).fromNow()}</i>
-                    </Tooltip>
+                    <ListItem>
+                      <ListItemAvatar>
+                        <Avatar variant="rounded" alt={row.id}>
+                          {row.image == null ? (
+                            <img src={placeholder} className={classes.image} alt={row.id} />
+                          ) : (
+                            <Image publicId={row.image} className={classes.image} />
+                          )}
+                        </Avatar>
+                      </ListItemAvatar>
+                      <ListItemText primary={row.title} />
+                    </ListItem>
                   )
                 },
                 {
@@ -107,23 +92,20 @@ function ViewLabsPresenter({ classes, labs, error, loading, onRefresh }) {
                   render: row => (
                     <Button
                       variant="outlined"
-                      disabled={row.Users.length === 0}
+                      disabled={row.Attributes.length === 0}
                       onClick={openDialog(row)}
-                      startIcon={<AiOutlineUsergroupAdd />}
+                      startIcon={<AiOutlineCode />}
                     >
-                      Managers
+                      Attributes
                     </Button>
                   )
                 }
               ]}
-              data={labs.map(({ id, title, subtitle, image, createdAt, updatedAt, Users }) => ({
+              data={itemSets.map(({ id, title, image, Attributes }) => ({
                 id,
                 title,
-                subtitle,
                 image,
-                createdAt,
-                updatedAt,
-                Users
+                Attributes
               }))}
               title=""
             />
@@ -131,20 +113,17 @@ function ViewLabsPresenter({ classes, labs, error, loading, onRefresh }) {
         </Grid>
       </Paper>
 
-      <Dialog open={labManagers.length !== 0} onClose={closeDialog} scroll="paper">
-        <DialogTitle>Assigned Lab Managers</DialogTitle>
+      <Dialog open={attributes.length !== 0} onClose={closeDialog} scroll="paper">
+        <DialogTitle>Item set attributes</DialogTitle>
         <List>
-          {labManagers.map(manager => (
-            <ListItem button key={manager.email}>
+          {attributes.map(attrib => (
+            <ListItem key={attrib.key}>
               <ListItemAvatar>
                 <Avatar className={classes.avatar}>
-                  <AiOutlineUser />
+                  {attrib.editable ? <AiOutlineEdit /> : <AiOutlineLock />}
                 </Avatar>
               </ListItemAvatar>
-              <ListItemText
-                primary={`${manager.firstName} ${manager.lastName}`}
-                secondary={manager.email}
-              />
+              <ListItemText primary={attrib.key} secondary={attrib.defaultValue} />
             </ListItem>
           ))}
         </List>
@@ -158,16 +137,16 @@ function ViewLabsPresenter({ classes, labs, error, loading, onRefresh }) {
   );
 }
 
-ViewLabsPresenter.defaultProps = {
+ViewItemSetsPresenter.defaultProps = {
   error: null
 };
 
-ViewLabsPresenter.propTypes = {
+ViewItemSetsPresenter.propTypes = {
   classes: PropTypes.object.isRequired,
-  labs: PropTypes.array.isRequired,
+  itemSets: PropTypes.array.isRequired,
   error: PropTypes.string,
   loading: PropTypes.bool.isRequired,
   onRefresh: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(ViewLabsPresenter);
+export default withStyles(styles)(ViewItemSetsPresenter);

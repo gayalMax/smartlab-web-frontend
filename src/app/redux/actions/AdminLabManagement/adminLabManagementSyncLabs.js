@@ -59,7 +59,13 @@ const responseSchema = yup.object().shape({
         image: yup.string().nullable(),
         createdAt: yup.date().required(),
         updatedAt: yup.date().required(),
-        managers: yup.array().of(yup.string())
+        Users: yup.array().of(
+          yup.object().shape({
+            email: yup.string().required(),
+            firstName: yup.string().required(),
+            lastName: yup.string().required()
+          })
+        )
       })
     )
     .required()
@@ -84,11 +90,7 @@ export default function adminLabManagementSyncLabs(token) {
 
     function onSuccess(success) {
       try {
-        const values = responseSchema.validateSync(success.data);
-        const labs = values.labs.map(v => ({
-          managers: [],
-          ...v
-        }));
+        const { labs } = responseSchema.validateSync(success.data);
         dispatch(adminLabManagementSyncLabsSuccess({ labs }));
       } catch (err) {
         dispatch(

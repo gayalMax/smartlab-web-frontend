@@ -14,5 +14,6 @@ export const SERVER_DELETE_TOKENS = 'api/registrar/token';
 export const SERVER_DELETE_ROLE = 'api/roles';
 export const SERVER_CREATE_LAB = 'api/labs/create';
 export const SERVER_CREATE_ITEMSET = 'api/itemsets/create';
+export const SERVER_GET_ITEMSETS_ALL = 'api/itemsets/list';
 
 export const ROLE_STUDENT = 'Student';

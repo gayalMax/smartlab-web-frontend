@@ -11,7 +11,8 @@ import {
   CreateRoles,
   DeleteRoles,
   CreateItemsets,
-  ViewUsers
+  ViewUsers,
+  ViewItemSets
 } from '../AdminPages';
 import ViewLabs from '../AdminPages/ViewLabs/ViewLabs';
 
@@ -46,6 +47,9 @@ export default function AdminRouter() {
       </Route>
       <Route exact path={`${match.url}/labs/labs`}>
         <ViewLabs />
+      </Route>
+      <Route exact path={`${match.url}/itemset/list`}>
+        <ViewItemSets />
       </Route>
       <Route>
         <PageNotFound />

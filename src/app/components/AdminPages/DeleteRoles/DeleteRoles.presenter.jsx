@@ -58,7 +58,12 @@ function DeleteRolesPresenter({ classes, roles, error, loading, onRefresh }) {
                   sorting: false,
                   render: row =>
                     row.RolePermissions.map(permission => (
-                      <Chip key={permission.name} size="small" label={permission.name} />
+                      <Chip
+                        style={{ margin: '2px' }}
+                        key={permission.name}
+                        size="small"
+                        label={permission.name}
+                      />
                     ))
                 }
               ]}

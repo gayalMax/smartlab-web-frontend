@@ -7,6 +7,7 @@ import RetractInvitations from './RetractInvitations/RetractInvitations';
 import CreateRoles from './CreateRoles/CreateRoles';
 import DeleteRoles from './DeleteRoles/DeleteRoles';
 import CreateItemsets from './CreateItemsets/CreateItemsets';
+import ViewItemSets from './ViewItemSets/ViewItemSets';
 
 export {
   Dashboard,
@@ -17,5 +18,6 @@ export {
   RetractInvitations,
   CreateRoles,
   DeleteRoles,
-  CreateItemsets
+  CreateItemsets,
+  ViewItemSets
 };
