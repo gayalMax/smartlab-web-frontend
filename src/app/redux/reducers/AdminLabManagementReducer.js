@@ -2,7 +2,10 @@ import produce from 'immer';
 import {
   ADMIN_LABMANAGEMENT_CREATE_LAB_BEGIN,
   ADMIN_LABMANAGEMENT_CREATE_LAB_SUCCESS,
-  ADMIN_LABMANAGEMENT_CREATE_LAB_FAILURE
+  ADMIN_LABMANAGEMENT_CREATE_LAB_FAILURE,
+  ADMIN_LABMANAGEMENT_SYNC_LAB_BEGIN,
+  ADMIN_LABMANAGEMENT_SYNC_LAB_SUCCESS,
+  ADMIN_LABMANAGEMENT_SYNC_LAB_FAILURE
 } from '../actionTypes';
 import initialState from '../states/adminLabManagementState';
 
@@ -31,6 +34,16 @@ const adminLabManagementReducer = produce((draft, { type, payload }) => {
       draft.labCreationLoading = false;
       draft.labCreationError = payload.error;
       return draft;
+    case ADMIN_LABMANAGEMENT_SYNC_LAB_BEGIN:
+      draft.labSyncLoading = true;
+      draft.labSyncSuccess = null;
+      draft.labSyncError = null;
+    case ADMIN_LABMANAGEMENT_SYNC_LAB_SUCCESS:
+      draft.labSyncLoading = false;
+      draft.labSyncSuccess = payload.success;
+    case ADMIN_LABMANAGEMENT_SYNC_LAB_FAILURE:
+      draft.labSyncLoading = false;
+      draft.labSyncError = payload.error;
     default:
       return draft;
   }

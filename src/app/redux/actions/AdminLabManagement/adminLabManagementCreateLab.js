@@ -50,12 +50,12 @@ export default function adminLabManagementCreateLab(token, title, subTitle, imag
       let message;
       if (error) message = error.data.message;
       if (!message) message = 'Server connection failed';
-      console.log("error detected",message)
+      // console.log("error detected",message)
       dispatch(adminAdministrationCreateLabFailure(message));
     }
 
     function onSuccess(success) {
-      console.log("success detected",success)
+      // console.log("success detected",success)
       dispatch(adminAdministrationCreateLabSuccess(success));
     }
     try {

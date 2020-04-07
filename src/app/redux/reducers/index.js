@@ -10,6 +10,6 @@ export default combineReducers({
   auth: authReducer,
   adminRegistration: adminRegistrationReducer,
   adminAdministration: adminAdministrationReducer,
-  adminLabManagement: adminLabManagementReducer
+  adminLabManagement: adminLabManagementReducer,
   adminItemManagement: adminItemManagementReducer
 });

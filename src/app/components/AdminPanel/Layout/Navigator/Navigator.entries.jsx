@@ -79,7 +79,7 @@ const entries = [
       {
         id: 'Assign Staff Members',
         icon: <AiOutlineIdcard />,
-        route: '#'
+        route: '/admin/labs/assignstaff'
       }
     ]
   },

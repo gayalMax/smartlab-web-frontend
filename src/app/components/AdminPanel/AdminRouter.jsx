@@ -11,7 +11,8 @@ import {
   RetractInvitations,
   CreateRoles,
   DeleteRoles,
-  CreateItemsets
+  CreateItemsets,
+  AssignStaff
 } from '../AdminPages';
 
 export default function AdminRouter() {
@@ -30,6 +31,9 @@ export default function AdminRouter() {
       </Route>
       <Route exact path={`${match.url}/labs/createlabs`}>
         <CreateLabs />
+      </Route>
+      <Route exact path={`${match.url}/labs/assignstaff`}>
+        <AssignStaff />
       </Route>
       <Route exact path={`${match.url}/users/retract`}>
         <RetractInvitations />

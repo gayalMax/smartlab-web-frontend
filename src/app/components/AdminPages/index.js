@@ -7,6 +7,7 @@ import RetractInvitations from './RetractInvitations/RetractInvitations';
 import CreateRoles from './CreateRoles/CreateRoles';
 import DeleteRoles from './DeleteRoles/DeleteRoles';
 import CreateItemsets from './CreateItemsets/CreateItemsets';
+import AssignStaff from './AssignStaff/AssignStaff';
 
 export {
   Dashboard,
@@ -14,6 +15,7 @@ export {
   ManageUsers,
   InviteUsers,
   CreateLabs,
+  AssignStaff,
   RetractInvitations,
   CreateRoles,
   DeleteRoles,
