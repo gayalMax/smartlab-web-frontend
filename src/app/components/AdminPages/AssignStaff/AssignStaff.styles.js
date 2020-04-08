@@ -1,7 +1,7 @@
 export default theme => ({
   root: {
     maxWidth: 936,
-    margin: 'auto',
+    margin: 'auto'
     // overFlow: 'scroll'
   },
   title: {
