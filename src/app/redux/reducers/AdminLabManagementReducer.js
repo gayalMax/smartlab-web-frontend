@@ -5,7 +5,13 @@ import {
   ADMIN_LABMANAGEMENT_CREATE_LAB_FAILURE,
   ADMIN_LAB_MANAGEMENT_SYNC_LABS_BEGIN,
   ADMIN_LAB_MANAGEMENT_SYNC_LABS_SUCCESS,
-  ADMIN_LAB_MANAGEMENT_SYNC_LABS_FAILURE
+  ADMIN_LAB_MANAGEMENT_SYNC_LABS_FAILURE,
+  ADMIN_LAB_MANAGEMENT_ASSIGN_STAFF_FAILURE,
+  ADMIN_LAB_MANAGEMENT_ASSIGN_STAFF_SUCCESS,
+  ADMIN_LAB_MANAGEMENT_ASSIGN_STAFF_BEGIN,
+  ADMIN_LAB_MANAGEMENT_SYNC_MANAGERS_BEGIN,
+  ADMIN_LAB_MANAGEMENT_SYNC_MANAGERS_SUCCESS,
+  ADMIN_LAB_MANAGEMENT_SYNC_MANAGERS_FAILURE
 } from '../actionTypes';
 import initialState from '../states/adminLabManagementState';
 
@@ -21,6 +27,7 @@ const adminLabManagementReducer = produce((draft, { type, payload }) => {
     return initialState;
   }
   switch (type) {
+    // creating labs
     case ADMIN_LABMANAGEMENT_CREATE_LAB_BEGIN:
       draft.labCreationLoading = true;
       draft.labCreationError = null;
@@ -51,6 +58,40 @@ const adminLabManagementReducer = produce((draft, { type, payload }) => {
       draft.labsSyncLoading = false;
       draft.labsSyncError = payload.error;
       return draft;
+
+    // Syncing managers
+    case ADMIN_LAB_MANAGEMENT_SYNC_MANAGERS_BEGIN:
+      draft.managers = [];
+      draft.managersSyncLoading = true;
+      draft.managersSyncSuccess = false;
+      draft.managersSyncError = null;
+      return draft;
+    case ADMIN_LAB_MANAGEMENT_SYNC_MANAGERS_SUCCESS:
+      draft.managers = payload.managers;
+      draft.managersSyncLoading = false;
+      draft.managersSyncSuccess = true;
+      return draft;
+    case ADMIN_LAB_MANAGEMENT_SYNC_MANAGERS_FAILURE:
+      draft.managersSyncLoading = false;
+      draft.managersSyncError = payload.error;
+      return draft;
+
+    // Assigning labs
+    case ADMIN_LAB_MANAGEMENT_ASSIGN_STAFF_BEGIN:
+      draft.labAssignLoading = false;
+      draft.labAssignError = null;
+      draft.labAssignSuccess = null;
+      return draft;
+    case ADMIN_LAB_MANAGEMENT_ASSIGN_STAFF_SUCCESS:
+      draft.labs = payload.labs;
+      draft.labsSyncLoading = false;
+      draft.labAssignSuccess = payload.success;
+      return draft;
+    case ADMIN_LAB_MANAGEMENT_ASSIGN_STAFF_FAILURE:
+      draft.labsSyncLoading = false;
+      draft.labAssignError = payload.error;
+      return draft;
+
     default:
       return draft;
   }

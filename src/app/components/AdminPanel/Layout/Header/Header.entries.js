@@ -47,6 +47,10 @@ const entries = [
   {
     path: '/admin/itemset/list',
     name: 'View Item Sets'
+  },
+  {
+    path: '/admin/labs/assignstaff',
+    name: 'Assign Staff Managers'
   }
 ];
 
