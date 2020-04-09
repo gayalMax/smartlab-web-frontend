@@ -95,7 +95,7 @@ export default function adminRegistrationSyncRoles(token) {
 
     try {
       // Make the get request
-      const success = await axios.get(`${SERVER}/${SERVER_GET_ROLES}`, { headers: { token } });
+      const success = await axios.get(`${SERVER}${SERVER_GET_ROLES}`, { headers: { token } });
       onSuccess(success);
     } catch (error) {
       onError(error.response);

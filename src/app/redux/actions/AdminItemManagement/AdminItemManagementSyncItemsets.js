@@ -102,7 +102,7 @@ export default function AdminItemManagementSyncItemSets(token) {
     }
 
     try {
-      const success = await axios.get(`${SERVER}/${SERVER_GET_ITEMSETS_ALL}`, {
+      const success = await axios.get(`${SERVER}${SERVER_GET_ITEMSETS_ALL}`, {
         headers: { token }
       });
       onSuccess(success);
