@@ -3,7 +3,7 @@ import { PropTypes } from 'prop-types';
 import { useSelector } from 'react-redux';
 import { Switch, Route, Redirect, BrowserRouter } from 'react-router-dom';
 
-import { PageNotFound, AdminPanel, SignInScreen, SignUpScreen } from './components';
+import { PageNotFound, AdminPanel, SignInScreen, SignUpScreen, HomePage } from './components';
 
 function App() {
   return (
@@ -18,6 +18,9 @@ function App() {
         <PrivateRoute path="/admin">
           <AdminPanel />
         </PrivateRoute>
+        <Route exact path="/">
+          <HomePage />
+        </Route>
         <Route>
           <PageNotFound />
         </Route>

@@ -104,7 +104,7 @@ export default function adminAdministrationSyncUsers(token) {
     }
 
     try {
-      const success = await axios.get(`${SERVER}/${SERVER_GET_USERS_ALL}`, { headers: { token } });
+      const success = await axios.get(`${SERVER}${SERVER_GET_USERS_ALL}`, { headers: { token } });
       onSuccess(success);
     } catch (error) {
       onError(error.response);

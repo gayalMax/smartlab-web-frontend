@@ -58,7 +58,7 @@ export default function adminAdministrationCreateRole(token, roleName, permissio
 
     try {
       const success = await axios.post(
-        `${SERVER}/${SERVER_CREATE_ROLE}`,
+        `${SERVER}${SERVER_CREATE_ROLE}`,
         { name: roleName, permissions },
         { headers: { token } }
       );

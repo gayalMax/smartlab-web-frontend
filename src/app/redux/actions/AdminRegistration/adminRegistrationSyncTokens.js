@@ -109,7 +109,7 @@ export default function adminRegistrationSyncTokens(token) {
 
     try {
       // Make the get request
-      const success = await axios.get(`${SERVER}/${SERVER_GET_TOKENS}`, { headers: { token } });
+      const success = await axios.get(`${SERVER}${SERVER_GET_TOKENS}`, { headers: { token } });
       onSuccess(success);
     } catch (error) {
       onError(error.response);

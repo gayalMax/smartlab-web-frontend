@@ -92,7 +92,7 @@ export default function authSignIn({ email, password }, complete) {
 
     try {
       // Make the post request
-      const success = await axios.post(`${SERVER}/${SERVER_SIGN_IN}`, { email, password });
+      const success = await axios.post(`${SERVER}${SERVER_SIGN_IN}`, { email, password });
       complete();
       onSuccess(success);
     } catch (error) {

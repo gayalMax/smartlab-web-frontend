@@ -59,7 +59,7 @@ export default function adminAdministrationDeleteRole(token, { id, name }) {
     }
 
     try {
-      const success = await axios.delete(`${SERVER}/${SERVER_DELETE_ROLE}/${id}`, {
+      const success = await axios.delete(`${SERVER}${SERVER_DELETE_ROLE}/${id}`, {
         headers: { token }
       });
       if (success.status !== 200) {

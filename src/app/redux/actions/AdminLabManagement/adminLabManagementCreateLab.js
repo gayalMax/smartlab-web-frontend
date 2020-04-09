@@ -58,7 +58,7 @@ export default function adminLabManagementCreateLab(token, title, subTitle, imag
     }
     try {
       const success = await axios.post(
-        `${SERVER}/${SERVER_CREATE_LAB}`,
+        `${SERVER}${SERVER_CREATE_LAB}`,
         { title, subtitle: subTitle, image },
         { headers: { token } }
       );

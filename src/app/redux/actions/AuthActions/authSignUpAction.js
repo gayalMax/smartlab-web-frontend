@@ -63,7 +63,7 @@ export default function authSignUp({ token, email, firstName, lastName, password
 
     try {
       // Make the post request
-      await axios.post(`${SERVER}/${SERVER_SIGN_UP}`, {
+      await axios.post(`${SERVER}${SERVER_SIGN_UP}`, {
         token,
         email,
         firstName,

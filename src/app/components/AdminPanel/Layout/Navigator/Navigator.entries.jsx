@@ -54,7 +54,7 @@ const entries = [
         route: '/admin/administration/roles/create'
       },
       {
-        id: 'View Roles',
+        id: 'Manage Roles',
         icon: <AiOutlineBlock />,
         route: '/admin/administration/roles/delete'
       },
@@ -82,7 +82,7 @@ const entries = [
       {
         id: 'Assign Staff Members',
         icon: <AiOutlineIdcard />,
-        route: '#'
+        route: '/admin/labs/assignstaff'
       }
     ]
   },

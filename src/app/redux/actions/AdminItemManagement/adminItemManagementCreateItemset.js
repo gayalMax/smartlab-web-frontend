@@ -73,7 +73,7 @@ export default function adminItemManagementCreateItemset(
 
     try {
       const success = await axios.post(
-        `${SERVER}/${SERVER_CREATE_ITEMSET}`,
+        `${SERVER}${SERVER_CREATE_ITEMSET}`,
         { title, image, attributes },
         { headers: { token } }
       );
