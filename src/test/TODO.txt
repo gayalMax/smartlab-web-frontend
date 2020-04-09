@@ -1,0 +1,133 @@
+[] Actions
+    [] Admin Administration Actions Test
+        [x] create role action creator 
+            [x] creates BEGIN and SUCCESS when role created
+            [x] fails when invalid token
+        [] delete role action creator
+            [] creates BEGIN and SUCCESS when role deleted
+            [] fails when invalid token
+        [x] role syncing action creators
+            [x] creates BEGIN and SUCCESS when fetching roles has been done
+            [x] fails when invalid token
+        [] permissions syncing action creators
+            [] creates BEGIN and SUCCESS when fetching permissions has been done
+            [] fails when invalid token
+        [] users syncing action creators
+            [] creates BEGIN and SUCCESS when fetching users has been done
+            [] fails when invalid token
+            
+    [] Admin Item Management Actions Test
+        [] create item set action creators
+            [] creates BEGIN and SUCCESS when item set created
+            [] fails when invalid token
+        [] item set syncing action creators
+            [] creates BEGIN and SUCCESS when fetching item sets has been done
+            [] fails when invalid token
+            
+    [] Admin Lab Management Actions Test
+        [] create labs action creators
+            [] creates BEGIN and SUCCESS when lab created
+            [] fails when invalid token
+        [] labs syncing action creators
+            [] creates BEGIN and SUCCESS when labs has been done
+            [] fails when invalid token
+            
+    [] Admin Registration Actions Test
+        [] registration invite action creators
+            [] creates BEGIN and SUCCESS when invited
+            [] fails when invalid token
+        [] registration retract action creators
+            [] creates BEGIN and SUCCESS when retracted
+            [] fails when invalid token
+        [] role syncing action creators
+            [] creates BEGIN and SUCCESS when fetching roles has been done
+            [] fails when invalid token
+        [] registration token syncing action creators
+            [] creates BEGIN and SUCCESS when fetching registration tokens has been done
+            [] fails when invalid token
+            
+    [] Auth Actions Test
+        [] redirect user action creators
+            [] should emit redirection action
+        [x] sign out action creators
+            [x] should emit sign out action 
+        [] sign up action creators
+            [] creates BEGIN and SUCCESS when sign up done
+            [] fails when invalid invitation token
+        [] sign in action creators
+            [] creates BEGIN and SUCCESS when signed in
+            [] fails when invalid email
+            [] fails when invalid password
+        [] request invitation action creators
+            [] creates BEGIN and SUCCESS when fetching invitations requested
+            [] fails when invalid invitation token
+
+[] Reducer
+    [] Admin Administration Reducer
+        [x] should return the initial state
+        [] should handle ADMIN_ADMINISTRATION_SYNC_PERMISSIONS_BEGIN
+        [] should handle ADMIN_ADMINISTRATION_SYNC_PERMISSIONS_SUCCESS
+        [] should handle ADMIN_ADMINISTRATION_SYNC_PERMISSIONS_FAILURE
+        [x] should handle ADMIN_ADMINISTRATION_CREATE_ROLE_BEGIN
+        [x] should handle ADMIN_ADMINISTRATION_CREATE_ROLE_SUCCESS
+        [] should handle ADMIN_ADMINISTRATION_CREATE_ROLE_FAILURE
+        [] should handle ADMIN_ADMINISTRATION_SYNC_ROLES_BEGIN
+        [] should handle ADMIN_ADMINISTRATION_SYNC_ROLES_SUCCESS
+        [] should handle ADMIN_ADMINISTRATION_SYNC_ROLES_FAILURE
+        [] should handle ADMIN_ADMINISTRATION_DELETE_ROLE_BEGIN
+        [] should handle ADMIN_ADMINISTRATION_DELETE_ROLE_SUCCESS
+        [] should handle ADMIN_ADMINISTRATION_DELETE_ROLE_FAILURE
+        [] should handle ADMIN_ADMINISTRATION_SYNC_USERS_BEGIN
+        [] should handle ADMIN_ADMINISTRATION_SYNC_USERS_SUCCESS
+        [] should handle ADMIN_ADMINISTRATION_SYNC_USERS_FAILURE
+    [] Admin Item Management Reducer
+        [] should return the initial state
+        [] should handle ADMIN_ITEM_MANAGEMENT_CREATE_ITEMSET_BEGIN
+        [] should handle ADMIN_ITEM_MANAGEMENT_CREATE_ITEMSET_SUCCESS
+        [] should handle ADMIN_ITEM_MANAGEMENT_CREATE_ITEMSET_FAILURE
+        [] should handle ADMIN_ITEM_MANAGEMENT_SYNC_ITEMSETS_BEGIN
+        [] should handle ADMIN_ITEM_MANAGEMENT_SYNC_ITEMSETS_SUCCESS
+        [] should handle ADMIN_ITEM_MANAGEMENT_SYNC_ITEMSETS_FAILURE
+        [] should handle ADMIN_ITEM_MANAGEMENT_SYNC_ITEMSETS_BEGIN
+        [] should handle ADMIN_ITEM_MANAGEMENT_SYNC_ITEMSETS_SUCCESS
+        [] should handle ADMIN_ITEM_MANAGEMENT_SYNC_ITEMSETS_FAILURE
+    [] Admin Lab Management Reducer
+        [] should return the initial state
+        [] should handle ADMIN_LABMANAGEMENT_CREATE_LAB_BEGIN
+        [] should handle ADMIN_LABMANAGEMENT_CREATE_LAB_SUCCESS
+        [] should handle ADMIN_LABMANAGEMENT_CREATE_LAB_FAILURE
+        [] should handle ADMIN_LAB_MANAGEMENT_SYNC_LABS_BEGIN
+        [] should handle ADMIN_LAB_MANAGEMENT_SYNC_LABS_SUCCESS
+        [] should handle ADMIN_LAB_MANAGEMENT_SYNC_LABS_FAILURE
+    [] Admin Registration Reducer
+        [] should return the initial state
+        [] should handle ADMIN_REGISTRATION_SYNC_ROLES_BEGIN
+        [] should handle ADMIN_REGISTRATION_SYNC_ROLES_SUCCESS
+        [] should handle ADMIN_REGISTRATION_SYNC_ROLES_FAILURE
+        [] should handle ADMIN_REGISTRATION_INVITE_BEGIN
+        [] should handle ADMIN_REGISTRATION_INVITE_SUCCESS
+        [] should handle ADMIN_REGISTRATION_INVITE_FAILURE
+        [] should handle ADMIN_REGISTRATION_SYNC_TOKENS_BEGIN
+        [] should handle ADMIN_REGISTRATION_SYNC_TOKENS_SUCCESS
+        [] should handle ADMIN_REGISTRATION_SYNC_TOKENS_FAILURE
+        [] should handle ADMIN_REGISTRATION_RETRACTION_BEGIN
+        [] should handle ADMIN_REGISTRATION_RETRACTION_SUCCESS
+        [] should handle ADMIN_REGISTRATION_RETRACTION_FAILURE
+    [] Auth Reducer
+        [] should return the initial state
+        [] should handle AUTH_SIGN_IN_BEGIN
+        [] should handle AUTH_SIGN_IN_FAILURE
+        [] should handle AUTH_SIGN_IN_SUCCESS
+        [] should handle AUTH_SIGN_OUT
+        [] should handle AUTH_REQUEST_INVITATION_BEGIN
+        [] should handle AUTH_REQUEST_INVITATION_FAILURE
+        [] should handle AUTH_REQUEST_INVITATION_SUCCESS
+        [] should handle AUTH_SIGN_UP_BEGIN
+        [] should handle AUTH_SIGN_UP_FAILURE
+        [] should handle AUTH_SIGN_UP_SUCCESS
+    [] Socket Reducer
+        [] should return the initial state
+        [] should handle SOCKET_START_BEGIN
+        [] should handle SOCKET_START_ON_CONNECT
+        [] should handle SOCKET_START_ON_DISCONNECT
+        [] should handle SOCKET_START_ON_DEVICE_MESSAGE
