@@ -86,29 +86,27 @@ const adminLabManagementReducer = produce((draft, { type, payload }) => {
       draft.labAssignSuccess = null;
       return draft;
     case ADMIN_LAB_MANAGEMENT_ASSIGN_STAFF_SUCCESS:
-      draft.labs = payload.labs;
-      draft.labsSyncLoading = false;
+      draft.labAssignLoading = false;
       draft.labAssignSuccess = payload.success;
       return draft;
     case ADMIN_LAB_MANAGEMENT_ASSIGN_STAFF_FAILURE:
-      draft.labsSyncLoading = false;
+      draft.labAssignLoading = false;
       draft.labAssignError = payload.error;
       return draft;
 
     // UnAssigning labs
     case ADMIN_LAB_MANAGEMENT_UNASSIGN_STAFF_BEGIN:
-      draft.labAssignLoading = true;
-      draft.labAssignError = null;
-      draft.labAssignSuccess = null;
+      draft.labUnAssignLoading = true;
+      draft.labUnAssignError = null;
+      draft.labUnAssignSuccess = null;
       return draft;
     case ADMIN_LAB_MANAGEMENT_UNASSIGN_STAFF_SUCCESS:
-      draft.labs = payload.labs;
-      draft.labsSyncLoading = false;
-      draft.labAssignSuccess = payload.success;
+      draft.labUnAssignLoading = false;
+      draft.labUnAssignSuccess = payload.success;
       return draft;
     case ADMIN_LAB_MANAGEMENT_UNASSIGN_STAFF_FAILURE:
-      draft.labsSyncLoading = false;
-      draft.labAssignError = payload.error;
+      draft.labUnAssignLoading = false;
+      draft.labUnAssignError = payload.error;
       return draft;
 
     default:

@@ -93,7 +93,7 @@ export default function adminLabManagementSyncManagers(token) {
     }
 
     try {
-      const success = await axios.get(`${SERVER}/${SERVER_GET_MANAGERS_ALL}`, {
+      const success = await axios.get(`${SERVER}${SERVER_GET_MANAGERS_ALL}`, {
         headers: { token }
       });
       onSuccess(success);

@@ -66,10 +66,12 @@ function AssignStaffPresenter({
 
   const onClickAssign = Id => () => {
     onAssigned(selectedLab.id, Id);
+    handleDialogClose();
   };
 
   const onClickUnassign = Id => () => {
     onUnassigned(selectedLab.id, Id);
+    handleDialogClose();
   };
 
   const selectedLabManagers = {};

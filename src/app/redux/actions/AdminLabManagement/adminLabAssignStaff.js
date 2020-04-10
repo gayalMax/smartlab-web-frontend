@@ -59,7 +59,7 @@ export default function adminLabManagementAssignStaff(token, labId, userId) {
     }
     try {
       const success = await axios.post(
-        `${SERVER}/${SERVERE_ASSIGN_STAFF}`,
+        `${SERVER}${SERVERE_ASSIGN_STAFF}`,
         { labId, userId },
         { headers: { token } }
       );

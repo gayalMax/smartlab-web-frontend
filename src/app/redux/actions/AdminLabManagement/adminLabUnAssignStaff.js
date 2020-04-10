@@ -59,7 +59,7 @@ export default function adminLabManagementUnassignStaff(token, labId, userId) {
     }
     try {
       const success = await axios.post(
-        `${SERVER}/${SERVERE_UNASSIGN_STAFF}`,
+        `${SERVER}${SERVERE_UNASSIGN_STAFF}`,
         { labId, userId },
         { headers: { token } }
       );

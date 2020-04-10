@@ -49,13 +49,11 @@ const AssignStaff = () => {
   ]);
 
   const onAssigned = (labId, managerId) => {
-    dispatch(adminLabAssignStaff(labId, managerId));
-    console.log('gasdduygfusdgfui', labId, managerId);
+    dispatch(adminLabAssignStaff(token, labId, managerId));
   };
 
   const onUnassigned = (labId, userId) => {
-    dispatch(adminLabManagementUnassignStaff(labId, userId));
-    console.log({ labId, userId });
+    dispatch(adminLabManagementUnassignStaff(token, labId, userId));
   };
 
   const onRefresh = () => {
