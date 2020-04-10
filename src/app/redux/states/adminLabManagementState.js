@@ -4,6 +4,7 @@
 
 const initialState = {
   labs: [],
+  managers: [],
 
   labCreationLoading: false,
   labCreationError: null,
@@ -11,7 +12,19 @@ const initialState = {
 
   labsSyncLoading: false,
   labsSyncError: null,
-  labsSyncSuccess: null
+  labsSyncSuccess: null,
+
+  managersSyncLoading: false,
+  managersSyncError: null,
+  managersSyncSuccess: null,
+
+  labAssignLoading: false,
+  labAssignError: null,
+  labAssignSuccess: null,
+
+  labUnAssignLoading: false,
+  labUnAssignError: null,
+  labUnAssignSuccess: null
 };
 
 export default initialState;

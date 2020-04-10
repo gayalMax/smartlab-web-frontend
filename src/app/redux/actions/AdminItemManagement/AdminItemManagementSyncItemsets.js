@@ -49,26 +49,20 @@ const AdminItemManagementSyncItemSetsFailure = error => ({
  * Response schema used to validate response sent by the API
  */
 const responseSchema = yup.object().shape({
-  Itemsets: yup
-    .array()
-    .of(
-      yup.object().shape({
-        id: yup.string().required(),
-        title: yup.string().required(),
-        image: yup.string().nullable(),
-        Attributes: yup
-          .array()
-          .of(
-            yup.object().shape({
-              key: yup.string().required(),
-              defaultValue: yup.string().required(),
-              editable: yup.boolean().required()
-            })
-          )
-          .required()
-      })
-    )
-    .required()
+  Itemsets: yup.array().of(
+    yup.object().shape({
+      id: yup.string().required(),
+      title: yup.string().required(),
+      image: yup.string().nullable(),
+      Attributes: yup.array().of(
+        yup.object().shape({
+          key: yup.string().required(),
+          defaultValue: yup.string().required(),
+          editable: yup.boolean().required()
+        })
+      )
+    })
+  )
 });
 
 /**

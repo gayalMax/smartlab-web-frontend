@@ -49,26 +49,23 @@ const adminLabManagementSyncLabsFailure = error => ({
  * User schema used to validate response sent by the API
  */
 const responseSchema = yup.object().shape({
-  labs: yup
-    .array()
-    .of(
-      yup.object().shape({
-        id: yup.string().required(),
-        title: yup.string().required(),
-        subtitle: yup.string().required(),
-        image: yup.string().nullable(),
-        createdAt: yup.date().required(),
-        updatedAt: yup.date().required(),
-        Users: yup.array().of(
-          yup.object().shape({
-            email: yup.string().required(),
-            firstName: yup.string().required(),
-            lastName: yup.string().required()
-          })
-        )
-      })
-    )
-    .required()
+  labs: yup.array().of(
+    yup.object().shape({
+      id: yup.string().required(),
+      title: yup.string().required(),
+      subtitle: yup.string().required(),
+      image: yup.string().nullable(),
+      createdAt: yup.date().required(),
+      updatedAt: yup.date().required(),
+      Users: yup.array().of(
+        yup.object().shape({
+          email: yup.string().required(),
+          firstName: yup.string().required(),
+          lastName: yup.string().required()
+        })
+      )
+    })
+  )
 });
 
 /**
@@ -89,6 +86,7 @@ export default function adminLabManagementSyncLabs(token) {
     }
 
     function onSuccess(success) {
+      console.log(success.data);
       try {
         const { labs } = responseSchema.validateSync(success.data);
         dispatch(adminLabManagementSyncLabsSuccess({ labs }));
