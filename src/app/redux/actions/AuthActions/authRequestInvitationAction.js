@@ -91,7 +91,7 @@ export default function authRequestInvitation(invitationToken) {
 
     try {
       // Make the get request
-      const success = await axios.get(`${SERVER}/${SERVER_REQUEST_INVITATION}/${invitationToken}`);
+      const success = await axios.get(`${SERVER}${SERVER_REQUEST_INVITATION}/${invitationToken}`);
       onSuccess(success);
     } catch (error) {
       onError(error.response);

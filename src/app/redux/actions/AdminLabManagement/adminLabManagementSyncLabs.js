@@ -100,7 +100,7 @@ export default function adminLabManagementSyncLabs(token) {
     }
 
     try {
-      const success = await axios.get(`${SERVER}/${SERVER_GET_LABS_ALL}`, { headers: { token } });
+      const success = await axios.get(`${SERVER}${SERVER_GET_LABS_ALL}`, { headers: { token } });
       onSuccess(success);
     } catch (error) {
       onError(error.response);

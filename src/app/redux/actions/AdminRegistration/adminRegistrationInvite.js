@@ -72,7 +72,7 @@ export default function adminRegistrationInvite(token, emails, role) {
 
     try {
       const success = await axios.post(
-        `${SERVER}/${SERVER_POST_TOKEN}`,
+        `${SERVER}${SERVER_POST_TOKEN}`,
         { emails, role },
         { headers: { token } }
       );

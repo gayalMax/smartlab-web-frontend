@@ -2,16 +2,26 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import DeleteRolesPresenter from './DeleteRoles.presenter';
-import { adminAdministrationSyncRoles } from '../../../redux/actions/AdminAdministrationActions';
+import {
+  adminAdministrationSyncRoles,
+  adminAdministrationDeleteRole
+} from '../../../redux/actions/AdminAdministrationActions';
 
 function DeleteRoles() {
   const dispatch = useDispatch();
-  const { roles, rolesSyncLoading, rolesSyncSuccess, rolesSyncError, token } = useSelector(
-    state => ({
-      ...state.adminAdministration,
-      token: state.auth.token
-    })
-  );
+  const {
+    roles,
+    rolesSyncLoading,
+    rolesSyncSuccess,
+    rolesSyncError,
+    roleDeleteError,
+    roleDeleteSuccess,
+    roleDeleteLoading,
+    token
+  } = useSelector(state => ({
+    ...state.adminAdministration,
+    token: state.auth.token
+  }));
 
   useEffect(() => {
     if (!rolesSyncLoading && !rolesSyncSuccess && !rolesSyncError) {
@@ -23,12 +33,18 @@ function DeleteRoles() {
     dispatch(adminAdministrationSyncRoles(token));
   };
 
+  const onDelete = role => {
+    dispatch(adminAdministrationDeleteRole(token, role));
+  };
+
   return (
     <DeleteRolesPresenter
-      loading={rolesSyncLoading}
+      loading={rolesSyncLoading || roleDeleteLoading}
       roles={roles}
-      error={rolesSyncError}
+      error={roleDeleteError || rolesSyncError}
+      success={roleDeleteSuccess}
       onRefresh={onRefresh}
+      onDelete={onDelete}
     />
   );
 }

@@ -82,7 +82,7 @@ export default function adminAdministrationSyncPermissions(token) {
 
     try {
       // Make the get request
-      const success = await axios.get(`${SERVER}/${SERVER_GET_PERMISSIONS}`, {
+      const success = await axios.get(`${SERVER}${SERVER_GET_PERMISSIONS}`, {
         headers: { token }
       });
       onSuccess(success);

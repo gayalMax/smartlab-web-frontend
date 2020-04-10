@@ -64,7 +64,7 @@ export default function adminRegistrationRetract(token, email) {
     }
 
     try {
-      const success = await axios.delete(`${SERVER}/${SERVER_DELETE_TOKENS}`, {
+      const success = await axios.delete(`${SERVER}${SERVER_DELETE_TOKENS}`, {
         data: { email },
         headers: { token }
       });
