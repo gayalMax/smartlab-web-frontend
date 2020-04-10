@@ -15,6 +15,7 @@ export const SERVER_DELETE_ROLE = 'api/roles';
 export const SERVER_CREATE_LAB = 'api/labs/create';
 export const SERVER_SYNC_LAB = 'api/labs/list';
 export const SERVERE_ASSIGN_STAFF = 'api/labs/assign';
+export const SERVERE_UNASSIGN_STAFF = '/api/labs/unassign';
 export const SERVER_CREATE_ITEMSET = 'api/itemsets/create';
 export const SERVER_GET_ITEMSETS_ALL = 'api/itemsets/list';
 export const SERVER_GET_MANAGERS_ALL = 'api/users/list/inventorymanagers';

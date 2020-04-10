@@ -20,7 +20,11 @@ const initialState = {
 
   labAssignLoading: false,
   labAssignError: null,
-  labAssignSuccess: null
+  labAssignSuccess: null,
+
+  labUnAssignLoading: false,
+  labUnAssignError: null,
+  labUnAssignSuccess: null
 };
 
 export default initialState;

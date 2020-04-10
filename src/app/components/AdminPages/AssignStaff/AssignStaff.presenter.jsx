@@ -33,14 +33,24 @@ import AdvancedTable from '../../Common/AdvancedTable';
 
 const placeholder = 'https://via.placeholder.com/50';
 
-function AssignStaffPresenter({ classes, labs, onRefresh, loading, error, managers }) {
-  const [openUnassigned, setOpenUnUnassigned] = useState(false);
+function AssignStaffPresenter({
+  classes,
+  labs,
+  onRefresh,
+  loading,
+  error,
+  successAssign,
+  onAssigned,
+  onUnassigned,
+  managers
+}) {
+  const [openUnassigned, setOpenUnassigned] = useState(false);
   const [openAssigned, setopenAssigned] = useState(false);
-  const [selectedLab, setSelectedLab] = useState({ Users: [] });
+  const [selectedLab, setSelectedLab] = useState({ Users: [], id: null });
 
   const handleSelectedLabUnassigned = lab => {
     setSelectedLab(lab);
-    setOpenUnUnassigned(true);
+    setOpenUnassigned(true);
   };
 
   const handleSelectedLabAssigned = lab => {
@@ -49,9 +59,17 @@ function AssignStaffPresenter({ classes, labs, onRefresh, loading, error, manage
   };
 
   const handleDialogClose = () => {
-    setOpenUnUnassigned(false);
+    setOpenUnassigned(false);
     setopenAssigned(false);
-    setSelectedLab({ Users: [] });
+    setSelectedLab({ Users: [], id: null });
+  };
+
+  const onClickAssign = Id => () => {
+    onAssigned(selectedLab.id, Id);
+  };
+
+  const onClickUnassign = Id => () => {
+    onUnassigned(selectedLab.id, Id);
   };
 
   const selectedLabManagers = {};
@@ -86,10 +104,8 @@ function AssignStaffPresenter({ classes, labs, onRefresh, loading, error, manage
           </Toolbar>
         </AppBar>
 
-        {/* Labs with Unassigned staff */}
         <Grid container direction="column" alignItems="stretch">
-          <SuccessErrorAlert success={null} error={error} />
-
+          <SuccessErrorAlert success={successAssign || null} error={error} />
           <Grid item>
             <AdvancedTable
               columns={[
@@ -156,21 +172,26 @@ function AssignStaffPresenter({ classes, labs, onRefresh, loading, error, manage
       >
         <DialogTitle id="unassigned-dialog-title">Unassign Staff Members</DialogTitle>
         <List>
-          {Object.values(selectedLabManagers).map(user => (
-            <ListItem key={user.id}>
-              <ListItemAvatar>
-                <Avatar>
-                  <AiOutlineUser />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary={`${user.firstName} ${user.lastName}`} secondary={user.email} />
-              <ListItemSecondaryAction>
-                <Button color="secondary" variant="contained">
-                  Unassign
-                </Button>
-              </ListItemSecondaryAction>
-            </ListItem>
-          ))}
+          {Object.values(selectedLabManagers).map(user => {
+            return (
+              <ListItem key={user.id}>
+                <ListItemAvatar>
+                  <Avatar>
+                    <AiOutlineUser />
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText
+                  primary={`${user.firstName} ${user.lastName}`}
+                  secondary={user.email}
+                />
+                <ListItemSecondaryAction>
+                  <Button color="secondary" variant="contained" onClick={onClickUnassign(user.id)}>
+                    Unassign
+                  </Button>
+                </ListItemSecondaryAction>
+              </ListItem>
+            );
+          })}
         </List>
       </Dialog>
 
@@ -182,28 +203,34 @@ function AssignStaffPresenter({ classes, labs, onRefresh, loading, error, manage
       >
         <DialogTitle id="assigned-dialog-title">Assign Staff Members</DialogTitle>
         <List>
-          {Object.values(availableManagers).map(user => (
-            <ListItem key={user.id}>
-              <ListItemAvatar>
-                <Avatar>
-                  <AiOutlineUser />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary={`${user.firstName} ${user.lastName}`} secondary={user.email} />
-              <ListItemSecondaryAction>
-                <Button color="secondary" variant="contained">
-                  Assign
-                </Button>
-              </ListItemSecondaryAction>
-            </ListItem>
-          ))}
+          {Object.values(availableManagers).map(user => {
+            return (
+              <ListItem key={user.id}>
+                <ListItemAvatar>
+                  <Avatar>
+                    <AiOutlineUser />
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText
+                  primary={`${user.firstName} ${user.lastName}`}
+                  secondary={user.email}
+                />
+                <ListItemSecondaryAction>
+                  <Button color="secondary" variant="contained" onClick={onClickAssign(user.id)}>
+                    Assign
+                  </Button>
+                </ListItemSecondaryAction>
+              </ListItem>
+            );
+          })}
         </List>
       </Dialog>
     </ProgressOverlay>
   );
 }
 AssignStaffPresenter.defaultProps = {
-  error: null
+  error: null,
+  successAssign: null
 };
 
 AssignStaffPresenter.propTypes = {
@@ -216,7 +243,8 @@ AssignStaffPresenter.propTypes = {
   // eslint-disable-next-line react/no-unused-prop-types
   onAssigned: PropTypes.func.isRequired,
   // eslint-disable-next-line react/no-unused-prop-types
-  onUnassigned: PropTypes.func.isRequired
+  onUnassigned: PropTypes.func.isRequired,
+  successAssign: PropTypes.string
 };
 
 export default withStyles(styles)(AssignStaffPresenter);

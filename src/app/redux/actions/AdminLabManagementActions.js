@@ -2,10 +2,12 @@ import adminLabManagementCreateLab from './AdminLabManagement/adminLabManagement
 import adminLabManagementSyncLabs from './AdminLabManagement/adminLabManagementSyncLabs';
 import adminLabAssignStaff from './AdminLabManagement/adminLabAssignStaff';
 import adminLabManagementSyncInventoryUsers from './AdminLabManagement/adminLabManagementSyncInventoryUsers';
+import adminLabManagementUnassignStaff from './AdminLabManagement/adminLabUnAssignStaff';
 
 export {
   adminLabManagementCreateLab,
   adminLabManagementSyncLabs,
   adminLabManagementSyncInventoryUsers,
-  adminLabAssignStaff
+  adminLabAssignStaff,
+  adminLabManagementUnassignStaff
 };

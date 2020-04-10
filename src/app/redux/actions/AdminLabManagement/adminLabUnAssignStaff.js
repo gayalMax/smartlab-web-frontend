@@ -1,17 +1,17 @@
 import axios from 'axios';
 import {
-  ADMIN_LAB_MANAGEMENT_ASSIGN_STAFF_BEGIN,
-  ADMIN_LAB_MANAGEMENT_ASSIGN_STAFF_SUCCESS,
-  ADMIN_LAB_MANAGEMENT_ASSIGN_STAFF_FAILURE
+  ADMIN_LAB_MANAGEMENT_UNASSIGN_STAFF_BEGIN,
+  ADMIN_LAB_MANAGEMENT_UNASSIGN_STAFF_SUCCESS,
+  ADMIN_LAB_MANAGEMENT_UNASSIGN_STAFF_FAILURE
 } from '../../actionTypes';
-import { SERVER, SERVERE_ASSIGN_STAFF } from '../serverConstants';
+import { SERVER, SERVERE_UNASSIGN_STAFF } from '../serverConstants';
 import adminLabManagementSyncLabs from './adminLabManagementSyncLabs';
 /**
  * Action creator for beginning of creating labs
  * @returns Redux action
  */
-const adminLabManagementAssignStaffBegin = () => ({
-  type: ADMIN_LAB_MANAGEMENT_ASSIGN_STAFF_BEGIN
+const adminLabManagementUnassignStaffBegin = () => ({
+  type: ADMIN_LAB_MANAGEMENT_UNASSIGN_STAFF_BEGIN
 });
 
 /**
@@ -19,8 +19,8 @@ const adminLabManagementAssignStaffBegin = () => ({
  * This is fired when API call ends in a success.
  * @returns Redux action
  */
-const adminLabManagementAssignStaffSuccess = success => ({
-  type: ADMIN_LAB_MANAGEMENT_ASSIGN_STAFF_SUCCESS,
+const adminLabManagementUnassignStaffSuccess = success => ({
+  type: ADMIN_LAB_MANAGEMENT_UNASSIGN_STAFF_SUCCESS,
   payload: { success }
 });
 
@@ -30,8 +30,8 @@ const adminLabManagementAssignStaffSuccess = success => ({
  * @param {string} error Error message
  * @returns Redux action
  */
-const adminLabManagementAssignStaffFailure = error => ({
-  type: ADMIN_LAB_MANAGEMENT_ASSIGN_STAFF_FAILURE,
+const adminLabManagementUnassignStaffFailure = error => ({
+  type: ADMIN_LAB_MANAGEMENT_UNASSIGN_STAFF_FAILURE,
   payload: { error }
 });
 
@@ -42,31 +42,31 @@ const adminLabManagementAssignStaffFailure = error => ({
  * @returns Thunk for user sign in API call
  */
 
-export default function adminLabManagementAssignStaff(token, labId, userId) {
+export default function adminLabManagementUnassignStaff(token, labId, userId) {
   return async dispatch => {
-    dispatch(adminLabManagementAssignStaffBegin());
+    dispatch(adminLabManagementUnassignStaffBegin());
 
     function onError(error) {
       let message;
       if (error) message = error.data.message;
       if (!message) message = 'Server connection failed';
-      dispatch(adminLabManagementAssignStaffFailure(message));
+      dispatch(adminLabManagementUnassignStaffFailure(message));
     }
 
     function onSuccess(success) {
-      dispatch(adminLabManagementAssignStaffSuccess(success));
+      dispatch(adminLabManagementUnassignStaffSuccess(success));
       dispatch(adminLabManagementSyncLabs(token));
     }
     try {
       const success = await axios.post(
-        `${SERVER}/${SERVERE_ASSIGN_STAFF}`,
+        `${SERVER}/${SERVERE_UNASSIGN_STAFF}`,
         { labId, userId },
         { headers: { token } }
       );
       if (success.status !== 200) {
         throw Error('Server responded with an error');
       }
-      onSuccess(`Lab Assigned successfully!`);
+      onSuccess(`Lab Unassigned successfully!`);
     } catch (error) {
       onError(error.response);
     }

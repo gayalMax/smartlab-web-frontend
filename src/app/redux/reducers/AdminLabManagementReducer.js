@@ -11,7 +11,10 @@ import {
   ADMIN_LAB_MANAGEMENT_ASSIGN_STAFF_BEGIN,
   ADMIN_LAB_MANAGEMENT_SYNC_MANAGERS_BEGIN,
   ADMIN_LAB_MANAGEMENT_SYNC_MANAGERS_SUCCESS,
-  ADMIN_LAB_MANAGEMENT_SYNC_MANAGERS_FAILURE
+  ADMIN_LAB_MANAGEMENT_SYNC_MANAGERS_FAILURE,
+  ADMIN_LAB_MANAGEMENT_UNASSIGN_STAFF_FAILURE,
+  ADMIN_LAB_MANAGEMENT_UNASSIGN_STAFF_SUCCESS,
+  ADMIN_LAB_MANAGEMENT_UNASSIGN_STAFF_BEGIN
 } from '../actionTypes';
 import initialState from '../states/adminLabManagementState';
 
@@ -78,7 +81,7 @@ const adminLabManagementReducer = produce((draft, { type, payload }) => {
 
     // Assigning labs
     case ADMIN_LAB_MANAGEMENT_ASSIGN_STAFF_BEGIN:
-      draft.labAssignLoading = false;
+      draft.labAssignLoading = true;
       draft.labAssignError = null;
       draft.labAssignSuccess = null;
       return draft;
@@ -88,6 +91,22 @@ const adminLabManagementReducer = produce((draft, { type, payload }) => {
       draft.labAssignSuccess = payload.success;
       return draft;
     case ADMIN_LAB_MANAGEMENT_ASSIGN_STAFF_FAILURE:
+      draft.labsSyncLoading = false;
+      draft.labAssignError = payload.error;
+      return draft;
+
+    // UnAssigning labs
+    case ADMIN_LAB_MANAGEMENT_UNASSIGN_STAFF_BEGIN:
+      draft.labAssignLoading = true;
+      draft.labAssignError = null;
+      draft.labAssignSuccess = null;
+      return draft;
+    case ADMIN_LAB_MANAGEMENT_UNASSIGN_STAFF_SUCCESS:
+      draft.labs = payload.labs;
+      draft.labsSyncLoading = false;
+      draft.labAssignSuccess = payload.success;
+      return draft;
+    case ADMIN_LAB_MANAGEMENT_UNASSIGN_STAFF_FAILURE:
       draft.labsSyncLoading = false;
       draft.labAssignError = payload.error;
       return draft;

@@ -4,7 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import AssignStaffPresenter from './AssignStaff.presenter';
 import {
   adminLabManagementSyncLabs,
-  adminLabManagementSyncInventoryUsers
+  adminLabManagementSyncInventoryUsers,
+  adminLabAssignStaff,
+  adminLabManagementUnassignStaff
 } from '../../../redux/actions/AdminLabManagementActions';
 
 const AssignStaff = () => {
@@ -18,6 +20,9 @@ const AssignStaff = () => {
     managersSyncLoading,
     managersSyncSuccess,
     managersSyncError,
+    labAssignLoading,
+    labAssignError,
+    labAssignSuccess,
     token
   } = useSelector(state => ({
     ...state.adminLabManagement,
@@ -43,11 +48,13 @@ const AssignStaff = () => {
     managersSyncError
   ]);
 
-  const onAssigned = (labId, userId) => {
-    console.log({ labId, userId });
+  const onAssigned = (labId, managerId) => {
+    dispatch(adminLabAssignStaff(labId, managerId));
+    console.log('gasdduygfusdgfui', labId, managerId);
   };
 
   const onUnassigned = (labId, userId) => {
+    dispatch(adminLabManagementUnassignStaff(labId, userId));
     console.log({ labId, userId });
   };
 
@@ -61,8 +68,9 @@ const AssignStaff = () => {
       labs={labs}
       managers={managers}
       onRefresh={onRefresh}
-      loading={labsSyncLoading || managersSyncLoading}
-      error={labsSyncError || managersSyncError}
+      loading={labsSyncLoading || managersSyncLoading || labAssignLoading}
+      error={labsSyncError || managersSyncError || labAssignError}
+      successAssign={labAssignSuccess}
       onAssigned={onAssigned}
       onUnassigned={onUnassigned}
     />
