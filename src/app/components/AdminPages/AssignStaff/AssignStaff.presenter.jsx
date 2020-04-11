@@ -17,7 +17,8 @@ import {
   Avatar,
   ListItemText,
   ListItemSecondaryAction,
-  Button
+  Button,
+  Box
 } from '@material-ui/core';
 import {
   AiOutlineSync,
@@ -48,6 +49,14 @@ function AssignStaffPresenter({
   const [openAssigned, setopenAssigned] = useState(false);
   const [selectedLab, setSelectedLab] = useState({ Users: [], id: null });
 
+  const handleUnassignedDialogClose = () => {
+    setOpenUnassigned(false);
+  };
+
+  const handleAssignedDialogClose = () => {
+    setopenAssigned(false);
+  };
+
   const handleSelectedLabUnassigned = lab => {
     setSelectedLab(lab);
     setOpenUnassigned(true);
@@ -59,8 +68,8 @@ function AssignStaffPresenter({
   };
 
   const handleDialogClose = () => {
-    setOpenUnassigned(false);
     setopenAssigned(false);
+    setOpenUnassigned(false);
     setSelectedLab({ Users: [], id: null });
   };
 
@@ -167,13 +176,17 @@ function AssignStaffPresenter({
       </Paper>
 
       <Dialog
-        onClose={handleDialogClose}
+        onClose={handleUnassignedDialogClose}
+        onExited={handleDialogClose}
         aria-labelledby="unassigned-dialog-title"
         open={openUnassigned}
         fullWidth
       >
         <DialogTitle id="unassigned-dialog-title">Unassign Staff Members</DialogTitle>
         <List>
+          {Object.values(selectedLabManagers).length === 0 && (
+            <Box p={3}>No managers to display</Box>
+          )}
           {Object.values(selectedLabManagers).map(user => {
             return (
               <ListItem key={user.id}>
@@ -198,13 +211,15 @@ function AssignStaffPresenter({
       </Dialog>
 
       <Dialog
-        onClose={handleDialogClose}
+        onClose={handleAssignedDialogClose}
+        onExited={handleDialogClose}
         aria-labelledby="assigned-dialog-title"
         open={openAssigned}
         fullWidth
       >
         <DialogTitle id="assigned-dialog-title">Assign Staff Members</DialogTitle>
         <List>
+          {Object.values(availableManagers).length === 0 && <Box p={3}>No managers to display</Box>}
           {Object.values(availableManagers).map(user => {
             return (
               <ListItem key={user.id}>

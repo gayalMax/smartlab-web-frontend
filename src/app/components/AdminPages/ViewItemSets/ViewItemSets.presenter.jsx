@@ -31,11 +31,20 @@ import { capitalizeFirstLetter } from '../../../helpers/helpers';
 const placeholder = 'https://via.placeholder.com/50';
 
 function ViewItemSetsPresenter({ classes, itemSets, error, loading, onRefresh }) {
+  const [open, setOpen] = useState(false);
   const [attributes, setAttributes] = useState([]);
 
-  const openDialog = itemset => () => setAttributes(itemset.Attributes);
+  const openDialog = itemset => () => {
+    setAttributes(itemset.Attributes);
+    setOpen(true);
+  };
 
-  const closeDialog = () => setAttributes([]);
+  const closeDialog = () => setOpen(false);
+
+  const dialogExited = () => {
+    setOpen(false);
+    setAttributes([]);
+  };
 
   return (
     <ProgressOverlay visible={loading}>
@@ -114,7 +123,7 @@ function ViewItemSetsPresenter({ classes, itemSets, error, loading, onRefresh })
         </Grid>
       </Paper>
 
-      <Dialog open={attributes.length !== 0} onClose={closeDialog} scroll="paper">
+      <Dialog open={open} onClose={closeDialog} onExited={dialogExited} scroll="paper" fullWidth>
         <DialogTitle>Item set attributes</DialogTitle>
         <List>
           {attributes.map(attrib => (
@@ -129,7 +138,7 @@ function ViewItemSetsPresenter({ classes, itemSets, error, loading, onRefresh })
           ))}
         </List>
         <DialogActions>
-          <Button onClick={closeDialog} color="primary">
+          <Button onClick={dialogExited} color="primary">
             Close
           </Button>
         </DialogActions>
