@@ -23,6 +23,9 @@ const AssignStaff = () => {
     labAssignLoading,
     labAssignError,
     labAssignSuccess,
+    labUnAssignLoading,
+    labUnAssignError,
+    labUnAssignSuccess,
     token
   } = useSelector(state => ({
     ...state.adminLabManagement,
@@ -66,9 +69,9 @@ const AssignStaff = () => {
       labs={labs}
       managers={managers}
       onRefresh={onRefresh}
-      loading={labsSyncLoading || managersSyncLoading || labAssignLoading}
-      error={labsSyncError || managersSyncError || labAssignError}
-      successAssign={labAssignSuccess}
+      loading={labsSyncLoading || managersSyncLoading || labAssignLoading || labUnAssignLoading}
+      error={labsSyncError || managersSyncError || labAssignError || labUnAssignError}
+      successAssign={labAssignSuccess || labUnAssignSuccess}
       onAssigned={onAssigned}
       onUnassigned={onUnassigned}
     />

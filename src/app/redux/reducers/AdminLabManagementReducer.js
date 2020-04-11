@@ -82,6 +82,8 @@ const adminLabManagementReducer = produce((draft, { type, payload }) => {
     // Assigning labs
     case ADMIN_LAB_MANAGEMENT_ASSIGN_STAFF_BEGIN:
       draft.labAssignLoading = true;
+      draft.labUnAssignError = null;
+      draft.labUnAssignSuccess = null;
       draft.labAssignError = null;
       draft.labAssignSuccess = null;
       return draft;
@@ -99,6 +101,8 @@ const adminLabManagementReducer = produce((draft, { type, payload }) => {
       draft.labUnAssignLoading = true;
       draft.labUnAssignError = null;
       draft.labUnAssignSuccess = null;
+      draft.labAssignError = null;
+      draft.labAssignSuccess = null;
       return draft;
     case ADMIN_LAB_MANAGEMENT_UNASSIGN_STAFF_SUCCESS:
       draft.labUnAssignLoading = false;
