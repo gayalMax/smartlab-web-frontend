@@ -159,7 +159,7 @@ function ViewLabsPresenter({ classes, labs, error, loading, onRefresh }) {
           ))}
         </List>
         <DialogActions>
-          <Button onClick={dialogExited} color="primary">
+          <Button onClick={closeDialog} color="primary">
             Close
           </Button>
         </DialogActions>

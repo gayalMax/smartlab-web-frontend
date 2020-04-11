@@ -138,7 +138,7 @@ function ViewItemSetsPresenter({ classes, itemSets, error, loading, onRefresh })
           ))}
         </List>
         <DialogActions>
-          <Button onClick={dialogExited} color="primary">
+          <Button onClick={closeDialog} color="primary">
             Close
           </Button>
         </DialogActions>
