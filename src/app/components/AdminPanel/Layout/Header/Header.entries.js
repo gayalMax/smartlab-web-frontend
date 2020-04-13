@@ -47,7 +47,15 @@ const entries = [
   {
     path: '/admin/itemset/list',
     name: 'View Item Sets'
-  }
+  },
+  {
+    path: '/admin/items/create',
+    name: 'Create Items'
+  },
+  {
+    path: '/admin/items/list',
+    name: 'View Items'
+  },
 ];
 
 export default entries;

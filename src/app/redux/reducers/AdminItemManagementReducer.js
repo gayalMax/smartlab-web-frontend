@@ -6,7 +6,13 @@ import {
   ADMIN_ITEM_MANAGEMENT_CREATE_ITEMSET_SUCCESS,
   ADMIN_ITEM_MANAGEMENT_SYNC_ITEMSETS_BEGIN,
   ADMIN_ITEM_MANAGEMENT_SYNC_ITEMSETS_SUCCESS,
-  ADMIN_ITEM_MANAGEMENT_SYNC_ITEMSETS_FAILURE
+  ADMIN_ITEM_MANAGEMENT_SYNC_ITEMSETS_FAILURE,
+  ADMIN_ITEM_MANAGEMENT_CREATE_ITEM_BEGIN,
+  ADMIN_ITEM_MANAGEMENT_CREATE_ITEM_FAILURE,
+  ADMIN_ITEM_MANAGEMENT_CREATE_ITEM_SUCCESS,
+  ADMIN_ITEM_MANAGEMENT_SYNC_ITEMS_BEGIN,
+  ADMIN_ITEM_MANAGEMENT_SYNC_ITEMS_FAILURE,
+  ADMIN_ITEM_MANAGEMENT_SYNC_ITEMS_SUCCESS
 } from '../actionTypes';
 import initialState from '../states/adminItemManagementState';
 
@@ -22,6 +28,7 @@ const adminItemManagementReducer = produce((draft, { type, payload }) => {
   }
 
   switch (type) {
+    // create itemset
     case ADMIN_ITEM_MANAGEMENT_CREATE_ITEMSET_BEGIN:
       draft.createItemsetSuccess = null;
       draft.createItemsetError = null;
@@ -52,6 +59,39 @@ const adminItemManagementReducer = produce((draft, { type, payload }) => {
       draft.itemSetsSyncLoading = false;
       draft.itemSetsSyncError = payload.error;
       return draft;
+
+    // create item
+    case ADMIN_ITEM_MANAGEMENT_CREATE_ITEM_BEGIN:
+      draft.createItemSuccess = null;
+      draft.createItemError = null;
+      draft.createItemLoading = true;
+      return draft;
+    case ADMIN_ITEM_MANAGEMENT_CREATE_ITEM_SUCCESS:
+      draft.createItemLoading = false;
+      draft.createItemSuccess = payload.success;
+      return draft;
+    case ADMIN_ITEM_MANAGEMENT_CREATE_ITEM_FAILURE:
+      draft.createItemLoading = false;
+      draft.createItemError = payload.error;
+      return draft;
+
+    // Syncing items
+    case ADMIN_ITEM_MANAGEMENT_SYNC_ITEMS_BEGIN:
+      draft.syncedItems = [];
+      draft.itemsSyncLoading = true;
+      draft.itemsSyncSuccess = false;
+      draft.itemsSyncError = null;
+      return draft;
+    case ADMIN_ITEM_MANAGEMENT_SYNC_ITEMS_SUCCESS:
+      draft.syncedItems = payload.items;
+      draft.itemsSyncLoading = false;
+      draft.itemsSyncSuccess = true;
+      return draft;
+    case ADMIN_ITEM_MANAGEMENT_SYNC_ITEMS_FAILURE:
+      draft.itemsSyncLoading = false;
+      draft.itemsSyncError = payload.error;
+      return draft;
+
     default:
       return draft;
   }

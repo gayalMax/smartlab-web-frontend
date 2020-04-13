@@ -16,5 +16,7 @@ export const SERVER_CREATE_LAB = '/api/labs/create';
 export const SERVER_SYNC_LAB = '/api/labs/list';
 export const SERVER_CREATE_ITEMSET = '/api/itemsets/create';
 export const SERVER_GET_ITEMSETS_ALL = '/api/itemsets/list';
+export const SERVER_CREATE_ITEM = '/api/items/create';
+export const SERVER_GET_ITEMS_ALL = '/api/items/list';
 
 export const ROLE_STUDENT = 'Student';

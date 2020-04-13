@@ -8,7 +8,9 @@ import CreateRoles from './CreateRoles/CreateRoles';
 import DeleteRoles from './DeleteRoles/DeleteRoles';
 import CreateItemsets from './CreateItemsets/CreateItemsets';
 import ViewItemSets from './ViewItemSets/ViewItemSets';
+import ViewItems from './ViewItems/ViewItems';
 import AssignStaff from './AssignStaff/AssignStaff';
+import CreateItems from './CreateItems/CreateItems';
 
 export {
   Dashboard,
@@ -21,5 +23,7 @@ export {
   CreateRoles,
   DeleteRoles,
   CreateItemsets,
-  ViewItemSets
+  ViewItemSets,
+  CreateItems,
+  ViewItems
 };
