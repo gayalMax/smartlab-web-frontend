@@ -8,8 +8,6 @@ import {
   AppBar,
   Box,
   Button,
-  GridList,
-  GridListTile,
   IconButton,
   FormControl,
   InputLabel,
@@ -68,7 +66,7 @@ function CreateItemsPresenter({
               validationSchema={validationSchema}
               onSubmit={onSubmit}
             >
-              {({ submitForm, isSubmitting, values, setFieldValue }) => {
+              {({ submitForm, isSubmitting, values, setFieldValue, errors }) => {
                 const changeItemset = event => {
                   itemsets.forEach(itemset => {
                     if (itemset.id === event.target.value) {
@@ -90,72 +88,87 @@ function CreateItemsPresenter({
 
                 return (
                   <Form>
+                    {JSON.stringify(errors)}
+
                     <Grid container direction="column" alignContent="stretch">
-                      <GridList key="serialNumber" cols={12} cellHeight="auto">
-                        <GridListTile cols={9}>
-                          <Field
-                            className={classes.margin}
-                            component={TextField}
-                            required
-                            name="serialNumber"
-                            label="Serial Number"
-                            variant="outlined"
-                            type="text"
-                            placeholder="Serial Number"
-                            fullWidth
-                          />
-                        </GridListTile>
-                        <GridListTile cols={3}>
-                          <Box pt={2} textAlign="right">
+                      <Grid item style={{ marginBottom: '10px' }}>
+                        <Field
+                          className={classes.margin}
+                          component={TextField}
+                          required
+                          name="serialNumber"
+                          label="Serial Number"
+                          variant="outlined"
+                          type="text"
+                          placeholder="Serial Number"
+                          fullWidth
+                        />
+                      </Grid>
+                      <Grid item container direction="row" alignItems="center">
+                        <Grid item sm={3}>
+                          <Box px={1}>
                             <RealTimeReader onSubmit={onBarcode} />
                           </Box>
-                        </GridListTile>
-                      </GridList>
-                      <Box px={2} pt={1}>
+                        </Grid>
+                        <Grid item sm={9}>
+                          <span>Click on this button and scan from the mobile device</span>
+                        </Grid>
+                      </Grid>
+                      <Box px={2} pt={1} pb={2}>
                         {itemsets.length === 0 || labs.length === 0 ? (
                           <p>
-                            No itemsets or labs. Cannot create an item without an itemset or a lab
+                            No itemsets or labs. Cannot create an item without an itemset or a lab.
                           </p>
                         ) : (
                           ''
                         )}
                       </Box>
-                      <GridList key="itemdetails" cols={2} cellHeight="auto">
-                        <GridListTile cols={1}>
-                          <FormControl variant="outlined" className={classes.margin} fullWidth>
-                            <InputLabel htmlFor="itemset">Itemset</InputLabel>
-                            <Select
-                              className={classes.select}
-                              name="itemset"
-                              onChange={changeItemset}
-                              defaultValue=""
-                            >
-                              {itemsets.map(itemset => (
-                                <MenuItem key={itemset.id} value={itemset.id}>
-                                  {itemset.title}
-                                </MenuItem>
-                              ))}
-                            </Select>
-                          </FormControl>
-                        </GridListTile>
-                        <GridListTile cols={1}>
-                          <FormControl variant="outlined" className={classes.margin} fullWidth>
-                            <InputLabel htmlFor="lab">Lab</InputLabel>
-                            <Field
-                              className={classes.margin}
-                              component={SelectFormik}
-                              name="lab"
-                              defaultValue=""
-                            >
-                              {labs.map(lab => (
-                                <MenuItem key={lab.id} value={lab.id}>
-                                  {lab.title}
-                                </MenuItem>
-                              ))}
-                            </Field>
-                          </FormControl>
-                        </GridListTile>
-                      </GridList>
+
+                      <Grid item>
+                        <Box px={2} pb={2}>
+                          Select the item set and lab from below list.
+                          <b>
+                            You can only set items to the labs that you are in charge of managing,
+                          </b>
+                        </Box>
+                      </Grid>
+
+                      <Grid item className={classes.margin} style={{ marginBottom: '10px' }}>
+                        <FormControl variant="outlined" fullWidth>
+                          <InputLabel id="itemset-select-label">Itemset</InputLabel>
+                          <Select
+                            labelId="itemset-select-label"
+                            name="itemset"
+                            onChange={changeItemset}
+                            defaultValue=""
+                          >
+                            {itemsets.map(itemset => (
+                              <MenuItem key={itemset.id} value={itemset.id}>
+                                {itemset.title}
+                              </MenuItem>
+                            ))}
+                          </Select>
+                        </FormControl>
+                      </Grid>
+
+                      <Grid item className={classes.margin}>
+                        <FormControl variant="outlined" fullWidth>
+                          <InputLabel id="lab-select-label">Lab</InputLabel>
+                          <Field
+                            labelId="lab-select-label"
+                            component={SelectFormik}
+                            name="lab"
+                            defaultValue=""
+                          >
+                            {labs.map(lab => (
+                              <MenuItem key={lab.id} value={lab.id}>
+                                {lab.title}
+                              </MenuItem>
+                            ))}
+                          </Field>
+                        </FormControl>
+                      </Grid>
+
                       <Grid item>
                         <Box px={2} py={1}>
                           Key should be unique. If the key is duplicated, the later field will be
@@ -169,8 +182,13 @@ function CreateItemsPresenter({
                         render={arrayHelpers => (
                           <div>
                             {values.attributes.map((attribute, index) => (
-                              <GridList key={index.toString()} cols={11} cellHeight="auto">
-                                <GridListTile cols={5}>
+                              <Grid
+                                container
+                                direction="row"
+                                key={index.toString()}
+                                style={{ marginBottom: '8px' }}
+                              >
+                                <Grid item sm={5}>
                                   <Field
                                     className={classes.margin}
                                     component={TextField}
@@ -182,9 +200,9 @@ function CreateItemsPresenter({
                                     fullWidth
                                     disabled={attribute.itemsetAttribute}
                                   />
-                                </GridListTile>
+                                </Grid>
 
-                                <GridListTile cols={5}>
+                                <Grid item sm={6}>
                                   <Field
                                     className={classes.margin}
                                     component={TextField}
@@ -196,8 +214,8 @@ function CreateItemsPresenter({
                                     fullWidth
                                     disabled={!attribute.editable}
                                   />
-                                </GridListTile>
-                                <GridListTile cols={1}>
+                                </Grid>
+                                <Grid item sm={1}>
                                   {!attribute.itemsetAttribute ? (
                                     <Box py={1} textAlign="right">
                                       <IconButton
@@ -211,8 +229,8 @@ function CreateItemsPresenter({
                                   ) : (
                                     ''
                                   )}
-                                </GridListTile>
-                              </GridList>
+                                </Grid>
+                              </Grid>
                             ))}
                             <Button
                               className={classes.margin}

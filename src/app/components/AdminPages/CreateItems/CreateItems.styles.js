@@ -5,8 +5,6 @@ const styles = theme => ({
     overflow: 'hidden'
   },
   margin: {
-    marginBottom: theme.spacing(1),
-    marginTop: theme.spacing(1),
     marginLeft: theme.spacing(1),
     paddingRight: theme.spacing(1)
   },

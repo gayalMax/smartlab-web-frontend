@@ -53,7 +53,7 @@ function CreateItems() {
     .object()
     .shape({
       serialNumber: yup.string().required('Required'),
-      itemSet: yup.string().required('Required'),
+      itemset: yup.string().required('Required'),
       lab: yup.string().required('Required'),
       attributes: yup
         .array()
@@ -85,7 +85,7 @@ function CreateItems() {
         value: attribute.value
       }))
     };
-    console.log(itemValues);
+
     dispatch(
       adminItemManagementCreateItem(
         token,

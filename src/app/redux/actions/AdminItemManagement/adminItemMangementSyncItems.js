@@ -47,41 +47,35 @@ const AdminItemManagementSyncItemsFailure = error => ({
  * Response schema used to validate response sent by the API
  */
 const responseSchema = yup.object().shape({
-  items: yup
-    .array()
-    .of(
-      yup.object().shape({
-        id: yup.string().required(),
-        serialNumber: yup.string().required(),
-        ItemSet: yup
-          .object()
-          .shape({
-            id: yup.string().required(),
-            title: yup.string().required(),
-            image: yup.string().nullable()
-          })
-          .required(),
-        Lab: yup
-          .object()
-          .shape({
-            id: yup.string().required(),
-            title: yup.string().required(),
-            subtitle: yup.string().required(),
-            image: yup.string().nullable()
-          })
-          .required(),
-        ItemAttributes: yup
-          .array()
-          .of(
-            yup.object().shape({
-              key: yup.string().required(),
-              value: yup.string().required()
-            })
-          )
-          .required()
-      })
-    )
-    .required()
+  items: yup.array().of(
+    yup.object().shape({
+      id: yup.string().required(),
+      serialNumber: yup.string().required(),
+      ItemSet: yup
+        .object()
+        .shape({
+          id: yup.string().required(),
+          title: yup.string().required(),
+          image: yup.string().nullable()
+        })
+        .required(),
+      Lab: yup
+        .object()
+        .shape({
+          id: yup.string().required(),
+          title: yup.string().required(),
+          subtitle: yup.string().required(),
+          image: yup.string().nullable()
+        })
+        .required(),
+      ItemAttributes: yup.array().of(
+        yup.object().shape({
+          key: yup.string().required(),
+          value: yup.string().required()
+        })
+      )
+    })
+  )
 });
 
 /**
@@ -103,7 +97,6 @@ export default function AdminItemManagementSyncItems(token) {
 
     function onSuccess(success) {
       try {
-        // console.log(success.data);
         const { items } = responseSchema.validateSync(success.data);
         dispatch(AdminItemManagementSyncItemsSuccess({ items }));
       } catch (err) {
