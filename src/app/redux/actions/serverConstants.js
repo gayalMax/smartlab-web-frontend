@@ -18,5 +18,8 @@ export const SERVER_CREATE_ITEMSET = '/api/itemsets/create';
 export const SERVER_GET_ITEMSETS_ALL = '/api/itemsets/list';
 export const SERVER_CREATE_ITEM = '/api/items/create';
 export const SERVER_GET_ITEMS_ALL = '/api/items/list';
+export const SERVERE_ASSIGN_STAFF = '/api/labs/assign';
+export const SERVERE_UNASSIGN_STAFF = '/api/labs/unassign';
+export const SERVER_GET_MANAGERS_ALL = '/api/users/list/inventorymanagers';
 
 export const ROLE_STUDENT = 'Student';
