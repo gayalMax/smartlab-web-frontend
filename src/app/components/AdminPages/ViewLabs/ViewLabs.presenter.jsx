@@ -32,11 +32,20 @@ import { capitalizeFirstLetter } from '../../../helpers/helpers';
 const placeholder = 'https://via.placeholder.com/50';
 
 function ViewLabsPresenter({ classes, labs, error, loading, onRefresh }) {
+  const [open, setOpen] = useState(false);
   const [labManagers, setLabManagers] = useState([]);
 
-  const openDialog = lab => () => setLabManagers(lab.Users);
+  const openDialog = lab => () => {
+    setLabManagers(lab.Users);
+    setOpen(true);
+  };
 
-  const closeDialog = () => setLabManagers([]);
+  const closeDialog = () => setOpen(false);
+
+  const dialogExited = () => {
+    setOpen(false);
+    setLabManagers([]);
+  };
 
   return (
     <ProgressOverlay visible={loading}>
@@ -132,7 +141,7 @@ function ViewLabsPresenter({ classes, labs, error, loading, onRefresh }) {
         </Grid>
       </Paper>
 
-      <Dialog open={labManagers.length !== 0} onClose={closeDialog} scroll="paper">
+      <Dialog open={open} onClose={closeDialog} onExited={dialogExited} scroll="paper">
         <DialogTitle>Assigned Lab Managers</DialogTitle>
         <List>
           {labManagers.map(manager => (

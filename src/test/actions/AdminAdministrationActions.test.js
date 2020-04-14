@@ -3,9 +3,9 @@ import axios from 'axios';
 import thunk from 'redux-thunk';
 import nock from 'nock';
 
-import * as actions from './AdminAdministrationActions';
-import * as types from '../actionTypes';
-import * as server from './serverConstants';
+import * as actions from '../../app/redux/actions/AdminAdministrationActions';
+import * as types from '../../app/redux/actionTypes';
+import * as server from '../../app/redux/actions/serverConstants';
 
 axios.defaults.adapter = require('axios/lib/adapters/http');
 
@@ -49,7 +49,7 @@ nock(server.SERVER, { reqheaders: { token: TOKEN } })
 /* Tests */
 
 // adminAdministrationSyncRoles
-describe('role syncing action creator', () => {
+describe('role syncing action creators', () => {
   it('creates BEGIN and SUCCESS when fetching roles has been done', async () => {
     const store = mockStore({});
     await store.dispatch(actions.adminAdministrationSyncRoles(TOKEN));

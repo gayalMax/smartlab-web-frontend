@@ -55,7 +55,7 @@ export default function adminAdministrationDeleteRole(token, { id, name }) {
 
     function onSuccess(success) {
       dispatch(adminAdministrationDeleteRoleSuccess(success));
-      dispatch(adminAdministrationSyncRoles());
+      dispatch(adminAdministrationSyncRoles(token));
     }
 
     try {
