@@ -49,9 +49,17 @@ const entries = [
     name: 'View Item Sets'
   },
   {
+    path: '/admin/items/create',
+    name: 'Create Items'
+  },
+  {
+    path: '/admin/items/list',
+    name: 'View Items'
+  },
+  {
     path: '/admin/labs/assignstaff',
     name: 'Assign Staff Managers'
-  }
+  },
 ];
 
 export default entries;

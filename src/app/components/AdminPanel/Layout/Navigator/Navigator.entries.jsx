@@ -103,12 +103,12 @@ const entries = [
       {
         id: 'Create Items',
         icon: <AiOutlineFileText />,
-        route: '#'
+        route: '/admin/items/create'
       },
       {
         id: 'View Items',
         icon: <AiOutlineFileText />,
-        route: '#'
+        route: '/admin/items/list'
       }
     ]
   },

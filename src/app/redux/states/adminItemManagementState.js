@@ -13,7 +13,19 @@ const initialState = {
 
   itemSetsSyncLoading: false,
   itemSetsSyncSuccess: null,
-  itemSetsSyncError: null
+  itemSetsSyncError: null,
+
+  items: [],
+
+  syncedItems: [],
+
+  createItemError: null,
+  createItemLoading: false,
+  createItemSuccess: null,
+
+  itemsSyncLoading: false,
+  itemsSyncSuccess: null,
+  itemsSyncError: null
 };
 
 export default initialState;
