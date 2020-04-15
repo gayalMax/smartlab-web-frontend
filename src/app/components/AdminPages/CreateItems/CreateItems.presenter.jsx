@@ -66,7 +66,7 @@ function CreateItemsPresenter({
               validationSchema={validationSchema}
               onSubmit={onSubmit}
             >
-              {({ submitForm, isSubmitting, values, setFieldValue, errors }) => {
+              {({ submitForm, isSubmitting, values, setFieldValue }) => {
                 const changeItemset = event => {
                   itemsets.forEach(itemset => {
                     if (itemset.id === event.target.value) {
@@ -88,8 +88,6 @@ function CreateItemsPresenter({
 
                 return (
                   <Form>
-                    {JSON.stringify(errors)}
-
                     <Grid container direction="column" alignContent="stretch">
                       <Grid item style={{ marginBottom: '10px' }}>
                         <Field
