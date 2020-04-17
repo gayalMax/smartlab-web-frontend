@@ -25,9 +25,9 @@
             [] fails when invalid token
             
     [] Admin Lab Management Actions Test
-        [] create labs action creators
-            [] creates BEGIN and SUCCESS when lab created
-            [] fails when invalid token
+        [x] create labs action creators
+            [x] creates BEGIN and SUCCESS when lab created
+            [x] fails when invalid token
         [] labs syncing action creators
             [] creates BEGIN and SUCCESS when labs has been done
             [] fails when invalid token
