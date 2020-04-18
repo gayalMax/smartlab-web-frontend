@@ -92,8 +92,8 @@ const responseSyncLabs = {
   labs: [
     {
       Users: [],
-      updatedAt: '2020-04-15 00:49:48.149Z',
-      createdAt: '2020-04-15T00:49:48.149Z',
+      updatedAt: '2020-04-15 00:49:48.149+05:30',
+      createdAt: '2020-04-15 00:49:48.149+05:30',
       image: 'public/moyggcpsejjf66pynjxt',
       subtitle: '2nd year',
       title: 'lab2',
@@ -104,12 +104,36 @@ const responseSyncLabs = {
       title: 'lab_B',
       subtitle: 'second year',
       image: 'public/mf66nojjyxggsejtcp',
-      updatedAt:  '2020-04-15 00:49:48.149z',
-      createdAt: '2020-04-15 00:49:48.149z',
+      updatedAt: '2020-04-15 00:49:48.149+05:30',
+      createdAt: '2020-04-15 00:49:48.149+05:30',
       Users: []
     }
   ]
 };
+
+const resultSyncLabs = {
+  labs: [
+    {
+      Users: [],
+      updatedAt: new Date('2020-04-15 00:49:48.149+05:30'),
+      createdAt: new Date('2020-04-15 00:49:48.149+05:30'),
+      image: 'public/moyggcpsejjf66pynjxt',
+      subtitle: '2nd year',
+      title: 'lab2',
+      id: '90e8b4bb-10ba-4b1b-9fe0-0371971a1b24'
+    },
+    {
+      id: '8b287de7-906c-49e7-9c4f-a91287fde749',
+      title: 'lab_B',
+      subtitle: 'second year',
+      image: 'public/mf66nojjyxggsejtcp',
+      updatedAt: new Date('2020-04-15 00:49:48.149+05:30'),
+      createdAt: new Date('2020-04-15 00:49:48.149+05:30'),
+      Users: []
+    }
+  ]
+};
+
 /* Mock API Configurations */
 
 nock(server.SERVER, { reqheaders: { token: TOKEN } })
@@ -157,7 +181,7 @@ describe('labs syncing action creators', () => {
     expect(storeActions).toHaveLength(2);
     expect(storeActions[0]).toHaveProperty('type', types.ADMIN_LAB_MANAGEMENT_SYNC_LABS_BEGIN);
     expect(storeActions[1]).toHaveProperty('type', types.ADMIN_LAB_MANAGEMENT_SYNC_LABS_SUCCESS);
-    expect(storeActions[1]).toHaveProperty('payload', { responseSyncLabs });
+    expect(storeActions[1]).toHaveProperty('payload', { resultSyncLabs });
   });
   it('fails when invalid token', async () => {
     const store = mockStore({});
