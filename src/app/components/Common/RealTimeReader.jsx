@@ -24,7 +24,7 @@ const RealTimeReader = ({ onSubmit, variant, color }) => {
   const handleClose = () => dispatch(socketEnd(token));
 
   const copy = () => {
-    onSubmit(lastEvent.data);
+    onSubmit(lastEvent && lastEvent.data && lastEvent.data.barcode);
     handleClose();
   };
 
@@ -59,7 +59,9 @@ const RealTimeReader = ({ onSubmit, variant, color }) => {
             )}
             {lastEvent && (
               <Box pt={2} pb={1}>
-                <Typography variant="h4">{lastEvent && lastEvent.data}</Typography>
+                <Typography variant="h4">
+                  {lastEvent && lastEvent.data && lastEvent.data.barcode}
+                </Typography>
               </Box>
             )}
           </Box>
