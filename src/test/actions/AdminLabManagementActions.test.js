@@ -91,22 +91,45 @@ const responseLabCreate = {
 const responseSyncLabs = {
   labs: [
     {
-      id: '15db28e7-996c-49e7-9c4f-af774e9128d9',
-      title: 'lab_A',
-      subtitle: 'final year',
-      image: 'public/moyggcpsejjf66pynjxt',
-      updatedAt: ' 2020-04-15 00:49:48.149+05:30',
+      Users: [],
+      updatedAt: '2020-04-15 00:49:48.149+05:30',
       createdAt: '2020-04-15 00:49:48.149+05:30',
-      Users: [{ email: 'admin@admin.com', firstName: 'admin', lastName: 'admin' }]
+      image: 'public/moyggcpsejjf66pynjxt',
+      subtitle: '2nd year',
+      title: 'lab2',
+      id: '90e8b4bb-10ba-4b1b-9fe0-0371971a1b24'
     },
     {
       id: '8b287de7-906c-49e7-9c4f-a91287fde749',
       title: 'lab_B',
       subtitle: 'second year',
       image: 'public/mf66nojjyxggsejtcp',
-      updatedAt: ' 2020-04-15 00:49:48.149+05:30',
+      updatedAt: '2020-04-15 00:49:48.149+05:30',
       createdAt: '2020-04-15 00:49:48.149+05:30',
-      Users: [{ email: 'admin@admin.com', fisrtName: 'admin', lastName: 'admin' }]
+      Users: []
+    }
+  ]
+};
+
+const resultSyncLabs = {
+  labs: [
+    {
+      Users: [],
+      updatedAt: new Date('2020-04-15 00:49:48.149+05:30'),
+      createdAt: new Date('2020-04-15 00:49:48.149+05:30'),
+      image: 'public/moyggcpsejjf66pynjxt',
+      subtitle: '2nd year',
+      title: 'lab2',
+      id: '90e8b4bb-10ba-4b1b-9fe0-0371971a1b24'
+    },
+    {
+      id: '8b287de7-906c-49e7-9c4f-a91287fde749',
+      title: 'lab_B',
+      subtitle: 'second year',
+      image: 'public/mf66nojjyxggsejtcp',
+      updatedAt: new Date('2020-04-15 00:49:48.149+05:30'),
+      createdAt: new Date('2020-04-15 00:49:48.149+05:30'),
+      Users: []
     }
   ]
 };
@@ -117,7 +140,7 @@ nock(server.SERVER, { reqheaders: { token: TOKEN } })
   .persist()
   .post(server.SERVER_CREATE_LAB)
   .reply(200, responseLabCreate)
-  .get(server.SERVER_SYNC_LAB)
+  .get(server.SERVER_GET_LABS_ALL)
   .reply(200, responseSyncLabs);
 
 /* Tests */
@@ -157,8 +180,8 @@ describe('labs syncing action creators', () => {
     const storeActions = store.getActions();
     expect(storeActions).toHaveLength(2);
     expect(storeActions[0]).toHaveProperty('type', types.ADMIN_LAB_MANAGEMENT_SYNC_LABS_BEGIN);
-    expect(storeActions[1]).toHaveProperty('type', types.ADMIN_LAB_MANAGEMENT_SYNC_LABS_FAILURE);
-    expect(storeActions[1]).toHaveProperty('payload', { responseSyncLabs });
+    expect(storeActions[1]).toHaveProperty('type', types.ADMIN_LAB_MANAGEMENT_SYNC_LABS_SUCCESS);
+    expect(storeActions[1]).toHaveProperty('payload', { resultSyncLabs });
   });
   it('fails when invalid token', async () => {
     const store = mockStore({});
