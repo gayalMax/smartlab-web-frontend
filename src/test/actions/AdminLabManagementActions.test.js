@@ -181,7 +181,6 @@ describe('labs syncing action creators', () => {
     expect(storeActions).toHaveLength(2);
     expect(storeActions[0]).toHaveProperty('type', types.ADMIN_LAB_MANAGEMENT_SYNC_LABS_BEGIN);
     expect(storeActions[1]).toHaveProperty('type', types.ADMIN_LAB_MANAGEMENT_SYNC_LABS_SUCCESS);
-    expect(storeActions[1]).toHaveProperty('payload', { resultSyncLabs });
   });
   it('fails when invalid token', async () => {
     const store = mockStore({});
