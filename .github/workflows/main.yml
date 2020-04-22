@@ -1,4 +1,4 @@
-name: React app
+name: Open inventory system web app
 
 on:
   push:
