@@ -4,6 +4,7 @@
   "description": "Inventory Management System Frontend",
   "main": "index.js",
   "repository": "https://github.com/openinventoryorg/web-frontend",
+  "homepage": "https://openinventoryorg.github.io/web-frontend/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
