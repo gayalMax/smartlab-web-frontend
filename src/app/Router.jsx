@@ -1,13 +1,13 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import { useSelector } from 'react-redux';
-import { Switch, Route, Redirect, BrowserRouter } from 'react-router-dom';
+import { Switch, Route, Redirect, HashRouter } from 'react-router-dom';
 
 import { PageNotFound, AdminPanel, SignInScreen, SignUpScreen, HomePage } from './components';
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Switch>
         <Route exact path="/login">
           <SignInScreen />
@@ -25,7 +25,7 @@ function App() {
           <PageNotFound />
         </Route>
       </Switch>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

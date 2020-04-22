@@ -22,7 +22,11 @@ function Dashboard({ classes }) {
     <div className={classes.center}>
       <Grid container direction="column" alignContent="center">
         <Grid item>
-          <img className={classes.image} src="/images/full_logo.png" alt="Open Inventory Logo" />
+          <img
+            className={classes.image}
+            src={`${process.env.PUBLIC_URL}/images/full_logo.png`}
+            alt="Open Inventory Logo"
+          />
         </Grid>
         <Grid item>
           <ImageUpload onSuccess={onUpload} />

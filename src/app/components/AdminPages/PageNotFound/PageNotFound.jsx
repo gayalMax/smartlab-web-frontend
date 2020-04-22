@@ -7,7 +7,7 @@ import styles from './PageNotFound.styles';
 function PageNotFound({ classes }) {
   return (
     <div className={classes.center}>
-      <img className={classes.image} src="/images/404.png" alt="404" />
+      <img className={classes.image} src={`${process.env.PUBLIC_URL}/images/404.png`} alt="404" />
     </div>
   );
 }

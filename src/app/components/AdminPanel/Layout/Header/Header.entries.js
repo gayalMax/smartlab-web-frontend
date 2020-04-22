@@ -59,7 +59,7 @@ const entries = [
   {
     path: '/admin/labs/assignstaff',
     name: 'Assign Staff Managers'
-  },
+  }
 ];
 
 export default entries;

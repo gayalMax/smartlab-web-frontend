@@ -42,13 +42,13 @@ function AppAppBar(props) {
   const user = useSelector(state => state.auth.user);
   let linkData = {
     text: 'Sign In',
-    url: '/login'
+    url: '#/login'
   };
 
   if (user) {
     linkData = {
       text: 'Admin Console',
-      url: '/admin/dashboard'
+      url: '#/admin/dashboard'
     };
   }
 

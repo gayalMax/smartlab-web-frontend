@@ -19,7 +19,7 @@ const styles = theme => ({
   main: {
     flex: 1,
     padding: theme.spacing(6, 4),
-    background: 'url("/images/admin_wallpaper.png")',
+    background: `url("${process.env.PUBLIC_URL}/images/admin_wallpaper.png")`,
     backgroundRepeat: 'no-repeat',
     backgroundAttachment: 'fixed',
     backgroundPosition: 'center',

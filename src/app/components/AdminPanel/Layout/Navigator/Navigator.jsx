@@ -45,7 +45,11 @@ function Navigator(props) {
     <Drawer variant="permanent" {...other}>
       <List disablePadding>
         <ListItem className={clsx(classes.firebase, classes.itemCategory)}>
-          <img src="/images/header.jpg" alt="Open Inventory Logo" className={classes.image} />
+          <img
+            src={`${process.env.PUBLIC_URL}/images/header.jpg`}
+            alt="Open Inventory Logo"
+            className={classes.image}
+          />
         </ListItem>
         {entries.map(
           ({ id, children, permissions }) =>

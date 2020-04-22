@@ -1,6 +1,6 @@
 const style = theme => ({
   root: {
-    background: 'url("/images/admin_wallpaper.png")',
+    background: `url("${process.env.PUBLIC_URL}/images/admin_wallpaper.png")`,
     backgroundRepeat: 'no-repeat',
     backgroundAttachment: 'fixed',
     backgroundPosition: 'center',

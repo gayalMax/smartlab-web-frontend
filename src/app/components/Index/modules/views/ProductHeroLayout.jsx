@@ -46,7 +46,12 @@ function ProductHeroLayout(props) {
   return (
     <section className={classes.root}>
       <Container className={classes.container}>
-        <img src="/images/whitedots.png" alt="wonder" width="147" height="80" />
+        <img
+          src={`${process.env.PUBLIC_URL}/images/whitedots.png`}
+          alt="wonder"
+          width="147"
+          height="80"
+        />
         {children}
         <div className={clsx(classes.background, backgroundClassName)} />
         <AiOutlineArrowDown className={classes.arrowDown} size={16} />

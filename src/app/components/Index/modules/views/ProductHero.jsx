@@ -37,20 +37,24 @@ function ProductHero(props) {
   const user = useSelector(state => state.auth.user);
   let linkData = {
     text: 'Sign In',
-    url: '/login'
+    url: '#/login'
   };
 
   if (user) {
     linkData = {
       text: 'Admin Console',
-      url: '/admin/dashboard'
+      url: '#/admin/dashboard'
     };
   }
 
   return (
     <ProductHeroLayout backgroundClassName={classes.background}>
       {/* Increase the network loading priority of the background image. */}
-      <img style={{ display: 'none' }} src={backgroundImage} alt="increase priority" />
+      <img
+        style={{ display: 'none' }}
+        src={`${process.env.PUBLIC_URL}/${backgroundImage}`}
+        alt="increase priority"
+      />
       <Typography color="inherit" align="center" variant="h2" marked="center">
         Digitalize Lab Management
       </Typography>
