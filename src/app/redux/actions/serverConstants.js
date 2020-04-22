@@ -1,4 +1,10 @@
-export const SERVER = 'http://localhost:8000';
+const developmentMode = process.env.NODE_ENV === 'development';
+
+// Change server path depending on the mode (dev/prod)
+let server = 'https://open-inventory-system.herokuapp.com';
+if (developmentMode) server = 'http://localhost:8000';
+
+export const SERVER = server;
 export const SERVER_SIGN_IN = '/api/login';
 export const SERVER_REQUEST_INVITATION = '/api/registration/verify';
 export const SERVER_SIGN_UP = '/api/registration/register';
