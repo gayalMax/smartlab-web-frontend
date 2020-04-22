@@ -1,20 +1,21 @@
-name: React CI
+name: React app
 
 on:
   push:
-    branches: [master]
-  pull_request:
-    branches: [master]
+    branches:
+      - master
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [12.x]
-
+  deploy:
+    runs-on: ubuntu-18.04
     steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+
       - name: Cache dependencies
         uses: actions/cache@v1
         with:
@@ -23,10 +24,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
+      - run: npm ci
       - run: npm run build
-      - run: npm test
-        env:
-          CI: true
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
