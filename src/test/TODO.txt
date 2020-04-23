@@ -24,13 +24,13 @@
             [] creates BEGIN and SUCCESS when fetching item sets has been done
             [] fails when invalid token
             
-    [] Admin Lab Management Actions Test
-        [] create labs action creators
-            [] creates BEGIN and SUCCESS when lab created
-            [] fails when invalid token
-        [] labs syncing action creators
-            [] creates BEGIN and SUCCESS when labs has been done
-            [] fails when invalid token
+    [x] Admin Lab Management Actions Test
+        [x] create labs action creators
+            [x] creates BEGIN and SUCCESS when lab created
+            [x] fails when invalid token
+        [x] labs syncing action creators
+            [x] creates BEGIN and SUCCESS when labs has been done
+            [x] fails when invalid token
             
     [] Admin Registration Actions Test
         [] registration invite action creators
@@ -46,21 +46,21 @@
             [] creates BEGIN and SUCCESS when fetching registration tokens has been done
             [] fails when invalid token
             
-    [] Auth Actions Test
-        [] redirect user action creators
-            [] should emit redirection action
+    [x] Auth Actions Test
+        [x] redirect user action creators
+            [x] should emit redirection action
         [x] sign out action creators
             [x] should emit sign out action 
-        [] sign up action creators
-            [] creates BEGIN and SUCCESS when sign up done
-            [] fails when invalid invitation token
-        [] sign in action creators
-            [] creates BEGIN and SUCCESS when signed in
-            [] fails when invalid email
-            [] fails when invalid password
-        [] request invitation action creators
-            [] creates BEGIN and SUCCESS when fetching invitations requested
-            [] fails when invalid invitation token
+        [x] sign up action creators
+            [x] creates BEGIN and SUCCESS when sign up done
+            [x] fails when invalid invitation token
+        [x] sign in action creators
+            [x] creates BEGIN and SUCCESS when signed in
+            [x] fails when invalid email
+            [x] fails when invalid password
+        [x] request invitation action creators
+            [x] creates BEGIN and SUCCESS when fetching invitations requested
+            [x] fails when invalid invitation token
 
 [] Reducer
     [] Admin Administration Reducer
