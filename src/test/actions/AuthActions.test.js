@@ -70,7 +70,6 @@ describe('sign up action creators', () => {
     const storeActions = store.getActions();
     expect(storeActions).toHaveLength(2);
     expect(storeActions[0]).toHaveProperty('type', types.AUTH_SIGN_UP_BEGIN);
-    // expect(storeActions[1]).toHaveProperty('type', types.AUTH_SIGN_UP_SUCCESS);
   });
   it('fails when invalid invitation token', async () => {
     const store = mockStore({});
@@ -109,8 +108,6 @@ describe('sign in action creators', () => {
     );
     const storeActions = store.getActions();
     expect(storeActions).toHaveLength(2);
-    // expect(storeActions[0]).toHaveProperty('type', types.AUTH_SIGN_IN_BEGIN);
-    // expect(storeActions[1]).toHaveProperty('type', types.AUTH_SIGN_IN_SUCCESS);
   });
   it('fails when invalid email', async () => {
     const store = mockStore({});
@@ -125,8 +122,6 @@ describe('sign in action creators', () => {
     );
     const storeActions = store.getActions();
     expect(storeActions).toHaveLength(2);
-    // expect(storeActions[0]).toHaveProperty('type', types.AUTH_SIGN_UP_BEGIN);
-    // expect(storeActions[1]).toHaveProperty('type', types.AUTH_SIGN_UP_FAILURE);
   });
   it('fails when invalid password', async () => {
     const store = mockStore({});
@@ -141,8 +136,6 @@ describe('sign in action creators', () => {
     );
     const storeActions = store.getActions();
     expect(storeActions).toHaveLength(2);
-    // expect(storeActions[0]).toHaveProperty('type', types.AUTH_SIGN_UP_BEGIN);
-    // expect(storeActions[1]).toHaveProperty('type', types.AUTH_SIGN_UP_FAILURE);
   });
 });
 
@@ -154,8 +147,6 @@ describe('request invitation action creators', () => {
     const storeActions = store.getActions();
     expect(storeActions).toHaveLength(2);
     expect(storeActions[0]).toHaveProperty('type', types.AUTH_REQUEST_INVITATION_BEGIN);
-    // expect(storeActions[1]).toHaveProperty('type', types.AUTH_REQUEST_INVITATION_SUCCESS);
-    // expect(storeActions[1]).toHaveProperty('payload', responseAuthRequestInvitation);
   });
   it('fails when invalid invitation token', async () => {
     const store = mockStore({});
