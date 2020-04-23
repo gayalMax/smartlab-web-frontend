@@ -223,7 +223,7 @@ describe('admin administration reducer', () => {
   it('should handle ADMIN_ADMINISTRATION_SYNC_USERS_SUCCESS', () => {
     const action = {
       type: types.ADMIN_ADMINISTRATION_SYNC_USERS_SUCCESS,
-      payload: { users:[] }
+      payload: { users: [] }
     };
     const stateA = reducer(
       {
@@ -236,8 +236,8 @@ describe('admin administration reducer', () => {
     );
     expect(stateA).toEqual({
       users: [],
-      usersSyncLoading: true,
-      usersSyncSuccess: false,
+      usersSyncLoading: false,
+      usersSyncSuccess: true,
       usersSyncError: null
     });
   });
