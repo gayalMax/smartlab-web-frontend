@@ -18,6 +18,8 @@ import {
   ViewItems
 } from '../AdminPages';
 import ViewLabs from '../AdminPages/ViewLabs/ViewLabs';
+import CreateSupervisors from '../AdminPages/CreateSupervisors/CreateSupervisors';
+import ViewSupervisors from '../AdminPages/ViewSupervisors/ViewSupervisors';
 
 export default function AdminRouter() {
   const match = useRouteMatch();
@@ -62,6 +64,12 @@ export default function AdminRouter() {
       </Route>
       <Route exact path={`${match.url}/items/list`}>
         <ViewItems />
+      </Route>
+      <Route exact path={`${match.url}/administration/supervisor/add`}>
+        <CreateSupervisors />
+      </Route>
+      <Route exact path={`${match.url}/administration/supervisor/list`}>
+        <ViewSupervisors />
       </Route>
       <Route>
         <PageNotFound />

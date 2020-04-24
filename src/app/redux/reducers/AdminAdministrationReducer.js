@@ -15,7 +15,16 @@ import {
   ADMIN_ADMINISTRATION_DELETE_ROLE_FAILURE,
   ADMIN_ADMINISTRATION_SYNC_USERS_FAILURE,
   ADMIN_ADMINISTRATION_SYNC_USERS_SUCCESS,
-  ADMIN_ADMINISTRATION_SYNC_USERS_BEGIN
+  ADMIN_ADMINISTRATION_SYNC_USERS_BEGIN,
+  ADMIN_ADMINISTRATION_CREATE_SUPERVISOR_BEGIN,
+  ADMIN_ADMINISTRATION_CREATE_SUPERVISOR_FAILURE,
+  ADMIN_ADMINISTRATION_CREATE_SUPERVISOR_SUCCESS,
+  ADMIN_ADMINISTRATION_SYNC_SUPERVISORS_BEGIN,
+  ADMIN_ADMINISTRATION_SYNC_SUPERVISORS_FAILURE,
+  ADMIN_ADMINISTRATION_SYNC_SUPERVISORS_SUCCESS,
+  ADMIN_ADMINISTRATION_DELETE_SUPERVISOR_BEGIN,
+  ADMIN_ADMINISTRATION_DELETE_SUPERVISOR_SUCCESS,
+  ADMIN_ADMINISTRATION_DELETE_SUPERVISOR_FAILURE
 } from '../actionTypes';
 import initialState from '../states/adminAdministrationState';
 
@@ -59,6 +68,50 @@ const adminAdministrationReducer = produce((draft, { type, payload }) => {
     case ADMIN_ADMINISTRATION_CREATE_ROLE_FAILURE:
       draft.roleCreateLoading = false;
       draft.roleCreateError = payload.error;
+      return draft;
+    // Creating supervisors
+    case ADMIN_ADMINISTRATION_CREATE_SUPERVISOR_BEGIN:
+      draft.supervisorCreateLoading = true;
+      draft.supervisorCreateSuccess = null;
+      draft.supervisorCreateError = null;
+      return draft;
+    case ADMIN_ADMINISTRATION_CREATE_SUPERVISOR_SUCCESS:
+      draft.supervisorCreateLoading = false;
+      draft.supervisorCreateSuccess = payload.success;
+      return draft;
+    case ADMIN_ADMINISTRATION_CREATE_SUPERVISOR_FAILURE:
+      draft.supervisorCreateLoading = false;
+      draft.supervisorCreateError = payload.error;
+      return draft;
+    // Syncing supervisors
+    case ADMIN_ADMINISTRATION_SYNC_SUPERVISORS_BEGIN:
+      draft.supervisors = [];
+      draft.supervisorsSyncLoading = true;
+      draft.supervisorsSyncSuccess = false;
+      draft.supervisorsSyncError = null;
+      return draft;
+    case ADMIN_ADMINISTRATION_SYNC_SUPERVISORS_SUCCESS:
+      draft.supervisors = payload.supervisors;
+      draft.supervisorsSyncLoading = false;
+      draft.supervisorsSyncSuccess = true;
+      return draft;
+    case ADMIN_ADMINISTRATION_SYNC_SUPERVISORS_FAILURE:
+      draft.supervisorsSyncLoading = false;
+      draft.supervisorsSyncError = payload.error;
+      return draft;
+    // Delete Supervisor
+    case ADMIN_ADMINISTRATION_DELETE_SUPERVISOR_BEGIN:
+      draft.supervisorDeleteLoading = true;
+      draft.supervisorDeleteSuccess = null;
+      draft.supervisorDeleteError = null;
+      return draft;
+    case ADMIN_ADMINISTRATION_DELETE_SUPERVISOR_SUCCESS:
+      draft.supervisorDeleteLoading = false;
+      draft.supervisorDeleteSuccess = payload.success;
+      return draft;
+    case ADMIN_ADMINISTRATION_DELETE_SUPERVISOR_FAILURE:
+      draft.supervisorDeleteLoading = false;
+      draft.supervisorDeleteError = payload.error;
       return draft;
 
     // Syncing roles

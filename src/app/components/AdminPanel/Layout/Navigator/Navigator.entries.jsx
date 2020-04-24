@@ -62,6 +62,16 @@ const entries = [
         id: 'View Users',
         icon: <AiOutlineUsergroupAdd />,
         route: '/admin/administration/users'
+      },
+      {
+        id: 'Add Supervisors',
+        icon: <AiOutlineUsergroupAdd />,
+        route: '/admin/administration/supervisor/add'
+      },
+      {
+        id: 'Views Supervisors',
+        icon: <AiOutlineUsergroupAdd />,
+        route: '/admin/administration/supervisor/list'
       }
     ]
   },

@@ -27,5 +27,8 @@ export const SERVER_GET_ITEMS_ALL = '/api/items/list';
 export const SERVERE_ASSIGN_STAFF = '/api/labs/assign';
 export const SERVERE_UNASSIGN_STAFF = '/api/labs/unassign';
 export const SERVER_GET_MANAGERS_ALL = '/api/users/list/inventorymanagers';
+export const SERVER_CREATE_SUPERVISOR = '/api/supervisors';
+export const SERVER_GET_SUPERVISORS = '/api/supervisors';
+export const SERVER_DELETE_SUPERVISOR = '/api/supervisors';
 
 export const ROLE_STUDENT = 'Student';

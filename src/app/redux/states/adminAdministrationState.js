@@ -5,6 +5,7 @@ const initialState = {
   permissions: [],
   roles: [],
   users: [],
+  supervisors: [],
 
   permissionsSyncLoading: false,
   permissionsSyncError: null,
@@ -19,6 +20,16 @@ const initialState = {
   roleDeleteError: null,
   roleDeleteLoading: false,
   roleDeleteSuccess: null,
+
+  supervisorCreateLoading: false,
+  supervisorCreateError: null,
+  supervisorCreateSuccess: null,
+  supervisorsSyncError: null,
+  supervisorsSyncLoading: false,
+  supervisorsSyncSuccess: false,
+  supervisorDeleteError: null,
+  supervisorDeleteLoading: false,
+  supervisorDeleteSuccess: null,
 
   usersSyncError: null,
   usersSyncLoading: false,
