@@ -11,6 +11,7 @@ import ViewItemSets from './ViewItemSets/ViewItemSets';
 import ViewItems from './ViewItems/ViewItems';
 import AssignStaff from './AssignStaff/AssignStaff';
 import CreateItems from './CreateItems/CreateItems';
+import ViewLentItems from './ViewLentItems/ViewLentItems';
 
 export {
   Dashboard,
@@ -25,5 +26,6 @@ export {
   CreateItemsets,
   ViewItemSets,
   CreateItems,
-  ViewItems
+  ViewItems,
+  ViewLentItems
 };

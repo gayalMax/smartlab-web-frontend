@@ -58,7 +58,7 @@ function ViewLabsPresenter({ classes, labs, error, loading, onRefresh }) {
               </Grid>
             </Grid>
             <Grid item>
-              <Tooltip title="Refresh Tokens List">
+              <Tooltip title="Refresh Labs List">
                 <IconButton onClick={onRefresh}>
                   <AiOutlineSync />
                 </IconButton>

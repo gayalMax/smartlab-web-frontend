@@ -57,6 +57,10 @@ const entries = [
     name: 'View Items'
   },
   {
+    path: '/admin/lentitems/list',
+    name: 'View Lent Items'
+  },
+  {
     path: '/admin/labs/assignstaff',
     name: 'Assign Staff Managers'
   }

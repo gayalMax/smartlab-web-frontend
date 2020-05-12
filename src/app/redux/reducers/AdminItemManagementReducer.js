@@ -12,7 +12,10 @@ import {
   ADMIN_ITEM_MANAGEMENT_CREATE_ITEM_SUCCESS,
   ADMIN_ITEM_MANAGEMENT_SYNC_ITEMS_BEGIN,
   ADMIN_ITEM_MANAGEMENT_SYNC_ITEMS_FAILURE,
-  ADMIN_ITEM_MANAGEMENT_SYNC_ITEMS_SUCCESS
+  ADMIN_ITEM_MANAGEMENT_SYNC_ITEMS_SUCCESS,
+  ADMIN_ITEM_MANAGEMENT_SYNC_LENT_ITEMS_BEGIN,
+  ADMIN_ITEM_MANAGEMENT_SYNC_LENT_ITEMS_FAILURE,
+  ADMIN_ITEM_MANAGEMENT_SYNC_LENT_ITEMS_SUCCESS
 } from '../actionTypes';
 import initialState from '../states/adminItemManagementState';
 
@@ -90,6 +93,24 @@ const adminItemManagementReducer = produce((draft, { type, payload }) => {
     case ADMIN_ITEM_MANAGEMENT_SYNC_ITEMS_FAILURE:
       draft.itemsSyncLoading = false;
       draft.itemsSyncError = payload.error;
+      return draft;
+
+    // syncing lent items
+    case ADMIN_ITEM_MANAGEMENT_SYNC_LENT_ITEMS_BEGIN:
+      draft.lentItemsSyncLoading = true;
+      draft.lentItemsSyncSuccess = false;
+      draft.lentItemsSyncError = null;
+      return draft;
+
+    case ADMIN_ITEM_MANAGEMENT_SYNC_LENT_ITEMS_SUCCESS:
+      draft.syncedLentItems = payload.lentItems;
+      draft.lentItemsSyncLoading = false;
+      draft.lentItemsSyncSuccess = true;
+      return draft;
+
+    case ADMIN_ITEM_MANAGEMENT_SYNC_LENT_ITEMS_FAILURE:
+      draft.lentItemsSyncLoading = false;
+      draft.lentItemsSyncError = payload.error;
       return draft;
 
     default:
