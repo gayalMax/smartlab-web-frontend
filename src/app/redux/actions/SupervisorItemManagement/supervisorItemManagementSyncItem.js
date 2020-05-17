@@ -1,5 +1,5 @@
 import axios from 'axios';
-import * as yup from 'yup';
+//import * as yup from 'yup';
 
 import {
   SUPERVISOR_ITEM_MANAGEMENT_SYNC_ITEM_BEGIN,
@@ -43,7 +43,7 @@ const SupervisorItemManagementSyncItemFailure = error => ({
 //   )
 // });
 
-export default function SupervisorItemManagementSyncItem(token) {
+export default function SupervisorItemManagementSyncItem(requestToken) {
   return async dispatch => {
     dispatch(SupervisorItemManagementSyncItemBegin());
 
@@ -68,9 +68,8 @@ export default function SupervisorItemManagementSyncItem(token) {
     }
 
     try {
-      const success = await axios.get(`${SERVER}${SERVER_GET_REQUEST_ITEM}`, {
-        headers: { token }
-      });
+      const success = await axios.get(`${SERVER}${SERVER_GET_REQUEST_ITEM}/${requestToken}`, {});
+
       onSuccess(success);
     } catch (error) {
       onError(error.response);
