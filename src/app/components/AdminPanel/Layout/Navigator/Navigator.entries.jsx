@@ -158,6 +158,17 @@ const entries = [
         route: '#'
       }
     ]
+  },
+  {
+    id: 'Supervisor Permission',
+    permissions: ['INVENTORY_MANAGER'],
+    children: [
+      {
+        id: 'Request Items',
+        icon: <AiOutlineSearch />,
+        route: '/admin/supervisor/request/item'
+      }
+    ]
   }
 ];
 

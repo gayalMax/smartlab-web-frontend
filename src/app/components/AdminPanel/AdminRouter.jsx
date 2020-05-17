@@ -15,7 +15,8 @@ import {
   ViewItemSets,
   AssignStaff,
   CreateItems,
-  ViewItems
+  ViewItems,
+  RequestItem
 } from '../AdminPages';
 import ViewLabs from '../AdminPages/ViewLabs/ViewLabs';
 import CreateSupervisors from '../AdminPages/CreateSupervisors/CreateSupervisors';
@@ -70,6 +71,9 @@ export default function AdminRouter() {
       </Route>
       <Route exact path={`${match.url}/administration/supervisor/list`}>
         <ViewSupervisors />
+      </Route>
+      <Route exact path={`${match.url}/supervisor/request/item`}>
+        <RequestItem />
       </Route>
       <Route>
         <PageNotFound />

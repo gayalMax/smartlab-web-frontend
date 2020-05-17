@@ -30,5 +30,6 @@ export const SERVER_GET_MANAGERS_ALL = '/api/users/list/inventorymanagers';
 export const SERVER_CREATE_SUPERVISOR = '/api/supervisors';
 export const SERVER_GET_SUPERVISORS = '/api/supervisors';
 export const SERVER_DELETE_SUPERVISOR = '/api/supervisors';
+export const SERVER_GET_REQUEST_ITEM = '/api/requestitems';
 
 export const ROLE_STUDENT = 'Student';
