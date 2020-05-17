@@ -69,7 +69,7 @@ export default function SupervisorItemManagementSyncItem(requestToken) {
 
     try {
       const success = await axios.get(`${SERVER}${SERVER_GET_REQUEST_ITEM}/${requestToken}`, {});
-
+      console.log(success);
       onSuccess(success);
     } catch (error) {
       onError(error.response);

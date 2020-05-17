@@ -7,11 +7,9 @@ import supervisorItemManagementSyncItem from '../../../redux/actions/SupervisorI
 
 function RequestItem() {
   const dispatch = useDispatch();
-  const { syncedItems, itemsSyncLoading, itemsSyncSuccess, itemsSyncError } = useSelector(
-    state => ({
-      ...state.adminItemManagement
-    })
-  );
+  const { syncedItem, itemsSyncLoading, itemsSyncSuccess, itemsSyncError } = useSelector(state => ({
+    ...state.supervisorItemManagementSyncItem
+  }));
 
   const { requestToken } = useParams();
 
@@ -19,7 +17,7 @@ function RequestItem() {
     if (!itemsSyncLoading && !itemsSyncSuccess && !itemsSyncError) {
       dispatch(supervisorItemManagementSyncItem(requestToken));
     }
-  }, [dispatch, requestToken, itemsSyncLoading, itemsSyncSuccess, itemsSyncError]);
+  }, [dispatch, requestToken, itemsSyncLoading, itemsSyncSuccess, itemsSyncError, syncedItem]);
 
   const onRefresh = () => {
     dispatch(supervisorItemManagementSyncItem(requestToken));
@@ -28,7 +26,7 @@ function RequestItem() {
   return (
     <RequestItemPresenter
       loading={itemsSyncLoading}
-      items={syncedItems}
+      items={syncedItem}
       error={itemsSyncError}
       onRefresh={onRefresh}
     />

@@ -136,13 +136,16 @@ function RequestItemPresenter({ classes, items, error, loading, onRefresh }) {
                   )
                 }
               ]}
-              data={items.map(({ id, serialNumber, ItemSet, Lab, ItemAttributes }) => ({
-                id,
-                serialNumber,
-                ItemSet,
-                Lab,
-                ItemAttributes
-              }))}
+              data={
+                items &&
+                items.map(({ id, serialNumber, ItemSet, Lab, ItemAttributes }) => ({
+                  id,
+                  serialNumber,
+                  ItemSet,
+                  Lab,
+                  ItemAttributes
+                }))
+              }
               title=""
             />
           </Grid>
