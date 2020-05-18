@@ -31,5 +31,6 @@ export const SERVER_CREATE_SUPERVISOR = '/api/supervisors';
 export const SERVER_GET_SUPERVISORS = '/api/supervisors';
 export const SERVER_DELETE_SUPERVISOR = '/api/supervisors';
 export const SERVER_GET_REQUEST_ITEM = '/api/requestitems';
+export const SERVER_ACCEPT_REQUEST_ITEM = '/api/requestitems/review';
 
 export const ROLE_STUDENT = 'Student';

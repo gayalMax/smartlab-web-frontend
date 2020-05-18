@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { AiOutlineSync, AiOutlineCode } from 'react-icons/ai';
+import { AiOutlineSync } from 'react-icons/ai';
 import {
   Paper,
   Grid,
@@ -12,17 +12,18 @@ import {
   Tooltip,
   Dialog,
   DialogTitle,
-  List,
+  DialogContent,
+  DialogContentText,
   ListItem,
   ListItemAvatar,
   Avatar,
   ListItemText,
-  DialogActions,
-  Button
+  Button,
+  TextField
 } from '@material-ui/core';
-import AssignmentIcon from '@material-ui/icons/Assignment';
+// import AssignmentIcon from '@material-ui/icons/Assignment';
 import { Image } from 'cloudinary-react';
-
+import { Formik, Form, Field } from 'formik';
 import styles from './RequestItem.styles';
 import ProgressOverlay from '../../Common/ProgressOverlay';
 import SuccessErrorAlert from '../../Common/SuccessErrorAlert';
@@ -30,12 +31,21 @@ import AdvancedTable from '../../Common/AdvancedTable';
 
 const placeholder = 'https://via.placeholder.com/50';
 
-function RequestItemPresenter({ classes, items, error, loading, onRefresh }) {
-  const [attributes, setAttributes] = useState([]);
+function RequestItemPresenter({
+  classes,
+  items,
+  error,
+  loading,
+  onRefresh,
+  onAccept,
+  validationSchema,
+  onSubmit
+}) {
+  const [open, setOpen] = useState(false);
 
-  const openDialog = item => () => setAttributes(item.ItemAttributes);
+  const openDialog = () => setOpen(true);
 
-  const closeDialog = () => setAttributes([]);
+  const closeDialog = () => setOpen(false);
 
   return (
     <ProgressOverlay visible={loading}>
@@ -123,17 +133,7 @@ function RequestItemPresenter({ classes, items, error, loading, onRefresh }) {
                   title: 'Attributes',
                   type: 'numeric',
                   cellStyle: { paddingLeft: '0px' },
-                  sorting: false,
-                  render: row => (
-                    <Button
-                      variant="outlined"
-                      disabled={row.ItemAttributes.length === 0}
-                      onClick={openDialog(row)}
-                      startIcon={<AiOutlineCode />}
-                    >
-                      Attributes
-                    </Button>
-                  )
+                  sorting: false
                 }
               ]}
               data={
@@ -149,28 +149,73 @@ function RequestItemPresenter({ classes, items, error, loading, onRefresh }) {
               title=""
             />
           </Grid>
+          <Grid item container direction="row" alignItems="center">
+            <Grid item>
+              <Box>
+                <Tooltip title="Accept the requested items">
+                  <Button
+                    className={classes.margin}
+                    variant="contained"
+                    color="primary"
+                    onClick={onAccept}
+                  >
+                    Accept
+                  </Button>
+                </Tooltip>
+                <Tooltip title="Reject the requested items">
+                  <Button
+                    className={classes.margin}
+                    variant="contained"
+                    color="primary"
+                    onClick={openDialog}
+                  >
+                    Reject
+                  </Button>
+                </Tooltip>
+              </Box>
+            </Grid>
+          </Grid>
         </Grid>
       </Paper>
 
-      <Dialog open={attributes.length !== 0} onClose={closeDialog} scroll="paper">
-        <DialogTitle>Item attributes</DialogTitle>
-        <List>
-          {attributes.map(attrib => (
-            <ListItem key={attrib.key}>
-              <ListItemAvatar>
-                <Avatar className={classes.avatar}>
-                  <AssignmentIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary={attrib.key} secondary={attrib.value} />
-            </ListItem>
-          ))}
-        </List>
-        <DialogActions>
-          <Button onClick={closeDialog} color="primary">
-            Close
-          </Button>
-        </DialogActions>
+      <Dialog open={open} onClose={closeDialog} scroll="paper">
+        <DialogTitle>Are you sure to reject the request</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Please mention the reason to reject the request
+            <br />
+            <Formik
+              initialValues={{
+                reason: ''
+              }}
+              validationSchema={validationSchema}
+              onSubmit={onSubmit}
+            >
+              {({ submitForm, isSubmitting }) => (
+                <Form>
+                  <Grid className={classes.item} item>
+                    <Field
+                      component={TextField}
+                      required
+                      label="Enter The Reason"
+                      name="reason"
+                      variant="outlined"
+                      type="text"
+                      placeholder="Need it for next practical"
+                      fullWidth
+                    />
+                    <Button disabled={isSubmitting} onClick={submitForm} color="primary" autoFocus>
+                      Reject
+                    </Button>
+                    <Button onClick={closeDialog} color="primary">
+                      Cancel
+                    </Button>
+                  </Grid>
+                </Form>
+              )}
+            </Formik>
+          </DialogContentText>
+        </DialogContent>
       </Dialog>
     </ProgressOverlay>
   );
@@ -185,7 +230,10 @@ RequestItemPresenter.propTypes = {
   items: PropTypes.array.isRequired,
   error: PropTypes.string,
   loading: PropTypes.bool.isRequired,
-  onRefresh: PropTypes.func.isRequired
+  onRefresh: PropTypes.func.isRequired,
+  onAccept: PropTypes.func.isRequired,
+  validationSchema: PropTypes.object.isRequired,
+  onSubmit: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(RequestItemPresenter);
