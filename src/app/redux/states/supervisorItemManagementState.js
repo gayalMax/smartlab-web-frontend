@@ -3,15 +3,7 @@ const initialState = {
 
   itemsSyncLoading: false,
   itemsSyncSuccess: null,
-  itemsSyncError: null,
-
-  acceptRequestLoading: false,
-  acceptRequestSuccess: null,
-  acceptRequestError: null,
-
-  rejectRequestLoading: false,
-  rejectRequestSuccess: null,
-  rejectRequestError: null
+  itemsSyncError: null
 };
 
 export default initialState;

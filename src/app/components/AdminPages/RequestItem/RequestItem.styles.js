@@ -1,12 +1,8 @@
-const styles = theme => ({
+const styles = () => ({
   root: {
     maxWidth: 936,
     margin: 'auto',
     overflow: 'hidden'
-  },
-  margin: {
-    marginLeft: theme.spacing(1),
-    paddingRight: theme.spacing(1)
   },
   title: {
     fontSize: 16,
