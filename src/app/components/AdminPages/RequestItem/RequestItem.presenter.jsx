@@ -204,7 +204,12 @@ function RequestItemPresenter({
                       placeholder="Need it for next practical"
                       fullWidth
                     />
-                    <Button disabled={isSubmitting} onClick={submitForm} color="primary" autoFocus>
+                    <Button
+                      disabled={isSubmitting}
+                      onClick={(submitForm, closeDialog)}
+                      color="primary"
+                      autoFocus
+                    >
                       Reject
                     </Button>
                     <Button onClick={closeDialog} color="primary">
