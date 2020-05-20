@@ -1,5 +1,5 @@
 import axios from 'axios';
-// import * as yup from 'yup';
+import * as yup from 'yup';
 
 import {
   SUPERVISOR_ITEM_MANAGEMENT_SYNC_ITEM_BEGIN,
@@ -16,9 +16,9 @@ const SupervisorItemManagementSyncItemBegin = () => ({
   type: SUPERVISOR_ITEM_MANAGEMENT_SYNC_ITEM_BEGIN
 });
 
-const SupervisorItemManagementSyncItemSuccess = ({ itemsets }) => ({
+const SupervisorItemManagementSyncItemSuccess = items => ({
   type: SUPERVISOR_ITEM_MANAGEMENT_SYNC_ITEM_SUCCESS,
-  payload: { itemsets }
+  payload: { items }
 });
 
 const SupervisorItemManagementSyncItemFailure = error => ({
@@ -26,22 +26,22 @@ const SupervisorItemManagementSyncItemFailure = error => ({
   payload: { error }
 });
 
-// const responseSchema = yup.object().shape({
-//   Itemsets: yup.array().of(
-//     yup.object().shape({
-//       id: yup.string().required(),
-//       title: yup.string().required(),
-//       image: yup.string().nullable(),
-//       Attributes: yup.array().of(
-//         yup.object().shape({
-//           key: yup.string().required(),
-//           defaultValue: yup.string().required(),
-//           editable: yup.boolean().required()
-//         })
-//       )
-//     })
-//   )
-// });
+const responseSchema = yup.object().shape({
+  id: yup.string().required(),
+  reason: yup.string().required(),
+  User: yup
+    .object()
+    .shape({
+      email: yup.string().required()
+    })
+    .required(),
+  Lab: yup
+    .object()
+    .shape({
+      title: yup.string().required()
+    })
+    .required()
+});
 
 export default function SupervisorItemManagementSyncItem(requestToken) {
   return async dispatch => {
@@ -56,8 +56,8 @@ export default function SupervisorItemManagementSyncItem(requestToken) {
 
     function onSuccess(success) {
       try {
-        const { Itemsets } = success.data;
-        dispatch(SupervisorItemManagementSyncItemSuccess({ itemsets: Itemsets }));
+        const items = responseSchema.validateSync(success.data);
+        dispatch(SupervisorItemManagementSyncItemSuccess(items));
       } catch (err) {
         dispatch(
           SupervisorItemManagementSyncItemFailure(
@@ -69,7 +69,7 @@ export default function SupervisorItemManagementSyncItem(requestToken) {
 
     try {
       const success = await axios.get(`${SERVER}${SERVER_GET_REQUEST_ITEM}/${requestToken}`, {});
-      console.log(success);
+
       onSuccess(success);
     } catch (error) {
       onError(error.response);

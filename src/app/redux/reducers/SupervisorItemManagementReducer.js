@@ -21,15 +21,15 @@ const supervisorItemManagementReducer = produce((draft, { type, payload }) => {
   switch (type) {
     // sync item set
     case SUPERVISOR_ITEM_MANAGEMENT_SYNC_ITEM_BEGIN:
-      draft.syncedItem = [];
+      draft.syncedItem = {};
       draft.itemsSyncSuccess = null;
       draft.itemsSyncError = null;
       draft.itemsSyncLoading = true;
       return draft;
     case SUPERVISOR_ITEM_MANAGEMENT_SYNC_ITEM_SUCCESS:
-      draft.syncedItem = payload.itemsets;
+      draft.syncedItem = payload.items;
       draft.itemsSyncLoading = false;
-      draft.itemsSyncSuccess = payload.success;
+      draft.itemsSyncSuccess = true;
       return draft;
     case SUPERVISOR_ITEM_MANAGEMENT_SYNC_ITEM_FAILURE:
       draft.itemsSyncLoading = false;
@@ -62,6 +62,7 @@ const supervisorItemManagementReducer = produce((draft, { type, payload }) => {
     case SUPERVISOR_ITEM_MANAGEMENT_REJECT_REQUEST_SUCCESS:
       draft.rejectRequestLoading = false;
       draft.rejectRequestSuccess = payload.success;
+
       return draft;
 
     case SUPERVISOR_ITEM_MANAGEMENT_REJECT_REQUEST_FAILURE:

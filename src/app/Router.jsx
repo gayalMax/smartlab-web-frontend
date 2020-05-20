@@ -3,7 +3,14 @@ import { PropTypes } from 'prop-types';
 import { useSelector } from 'react-redux';
 import { Switch, Route, Redirect, HashRouter } from 'react-router-dom';
 
-import { PageNotFound, AdminPanel, SignInScreen, SignUpScreen, HomePage } from './components';
+import {
+  PageNotFound,
+  AdminPanel,
+  SignInScreen,
+  SignUpScreen,
+  HomePage,
+  RequestItem
+} from './components';
 
 function App() {
   return (
@@ -20,6 +27,9 @@ function App() {
         </PrivateRoute>
         <Route exact path="/">
           <HomePage />
+        </Route>
+        <Route exact path="/supervisor/request/item/:requestToken">
+          <RequestItem />
         </Route>
         <Route>
           <PageNotFound />

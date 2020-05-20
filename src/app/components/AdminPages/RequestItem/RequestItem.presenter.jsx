@@ -14,27 +14,27 @@ import {
   DialogTitle,
   DialogContent,
   DialogContentText,
-  ListItem,
-  ListItemAvatar,
-  Avatar,
-  ListItemText,
+  // ListItem,
+  // ListItemText,
   Button,
   TextField
 } from '@material-ui/core';
 // import AssignmentIcon from '@material-ui/icons/Assignment';
-import { Image } from 'cloudinary-react';
+// import { Image } from 'cloudinary-react';
+
 import { Formik, Form, Field } from 'formik';
 import styles from './RequestItem.styles';
 import ProgressOverlay from '../../Common/ProgressOverlay';
 import SuccessErrorAlert from '../../Common/SuccessErrorAlert';
 import AdvancedTable from '../../Common/AdvancedTable';
 
-const placeholder = 'https://via.placeholder.com/50';
+// const placeholder = 'https://via.placeholder.com/50';
 
 function RequestItemPresenter({
   classes,
   items,
   error,
+  success,
   loading,
   onRefresh,
   onAccept,
@@ -67,7 +67,7 @@ function RequestItemPresenter({
           </Toolbar>
         </AppBar>
         <Grid container direction="column" alignItems="stretch" className={classes.wrapper}>
-          <SuccessErrorAlert success={null} error={error} />
+          <SuccessErrorAlert success={success} error={error} />
 
           <Grid item>
             <Box px={2} pb={2}>
@@ -79,76 +79,42 @@ function RequestItemPresenter({
             <AdvancedTable
               columns={[
                 {
-                  title: 'Serial Number',
-                  field: 'serialNumber',
+                  title: 'Item Id',
+                  field: 'id',
                   cellStyle: { paddingLeft: '0px' },
-                  sorting: false,
-                  render: row => (
-                    <ListItem>
-                      <ListItemText primary={row.serialNumber} />
-                    </ListItem>
-                  )
-                },
-                {
-                  title: 'Itemset',
-                  field: 'Itemset',
-                  cellStyle: { paddingLeft: '0px' },
-                  sorting: false,
-                  render: row => (
-                    <ListItem>
-                      <ListItemAvatar>
-                        <Avatar variant="rounded" alt={row.ItemSet.id}>
-                          {row.ItemSet.image == null ? (
-                            <img src={placeholder} className={classes.image} alt={row.id} />
-                          ) : (
-                            <Image publicId={row.ItemSet.image} className={classes.image} />
-                          )}
-                        </Avatar>
-                      </ListItemAvatar>
-                      <ListItemText primary={row.ItemSet.title} />
-                    </ListItem>
-                  )
+                  sorting: false
                 },
                 {
                   title: 'Lab',
-                  field: 'Lab',
+                  field: 'lab',
                   cellStyle: { paddingLeft: '0px' },
-                  sorting: false,
-                  render: row => (
-                    <ListItem>
-                      <ListItemAvatar>
-                        <Avatar variant="rounded" alt={row.Lab.id}>
-                          {row.Lab.image == null ? (
-                            <img src={placeholder} className={classes.image} alt={row.id} />
-                          ) : (
-                            <Image publicId={row.Lab.image} className={classes.image} />
-                          )}
-                        </Avatar>
-                      </ListItemAvatar>
-                      <ListItemText primary={row.Lab.title} />
-                    </ListItem>
-                  )
+                  sorting: false
                 },
                 {
-                  title: 'Attributes',
-                  type: 'numeric',
+                  title: 'Reason',
+                  field: 'reason',
+                  cellStyle: { paddingLeft: '0px' },
+                  sorting: false
+                },
+                {
+                  title: 'Email Address',
+                  field: 'user',
                   cellStyle: { paddingLeft: '0px' },
                   sorting: false
                 }
               ]}
-              data={
-                items &&
-                items.map(({ id, serialNumber, ItemSet, Lab, ItemAttributes }) => ({
-                  id,
-                  serialNumber,
-                  ItemSet,
-                  Lab,
-                  ItemAttributes
-                }))
-              }
+              data={[
+                {
+                  id: items.id,
+                  reason: items.reason,
+                  lab: items.Lab && items.Lab.title,
+                  user: items.User && items.User.email
+                }
+              ]}
               title=""
             />
           </Grid>
+
           <Grid item container direction="row" alignItems="center">
             <Grid item>
               <Box>
@@ -179,7 +145,7 @@ function RequestItemPresenter({
       </Paper>
 
       <Dialog open={open} onClose={closeDialog} scroll="paper">
-        <DialogTitle>Are you sure to reject the request</DialogTitle>
+        <DialogTitle id="alert-dialog-title">Are you sure to reject the request</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             Please mention the reason to reject the request
@@ -204,17 +170,20 @@ function RequestItemPresenter({
                       placeholder="Need it for next practical"
                       fullWidth
                     />
-                    <Button
-                      disabled={isSubmitting}
-                      onClick={(submitForm, closeDialog)}
-                      color="primary"
-                      autoFocus
-                    >
-                      Reject
-                    </Button>
-                    <Button onClick={closeDialog} color="primary">
-                      Cancel
-                    </Button>
+                  </Grid>
+                  <Grid item>
+                    <Box textAlign="right">
+                      <Button
+                        color="primary"
+                        disabled={isSubmitting}
+                        onClick={(submitForm, closeDialog)}
+                      >
+                        Confirm
+                      </Button>
+                      <Button onClick={closeDialog} color="primary">
+                        Cancel
+                      </Button>
+                    </Box>
                   </Grid>
                 </Form>
               )}
@@ -227,13 +196,15 @@ function RequestItemPresenter({
 }
 
 RequestItemPresenter.defaultProps = {
-  error: null
+  error: null,
+  success: null
 };
 
 RequestItemPresenter.propTypes = {
   classes: PropTypes.object.isRequired,
-  items: PropTypes.array.isRequired,
+  items: PropTypes.object.isRequired,
   error: PropTypes.string,
+  success: PropTypes.string,
   loading: PropTypes.bool.isRequired,
   onRefresh: PropTypes.func.isRequired,
   onAccept: PropTypes.func.isRequired,

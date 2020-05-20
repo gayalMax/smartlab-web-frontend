@@ -1,5 +1,5 @@
 const initialState = {
-  syncedItem: [],
+  syncedItem: {},
 
   itemsSyncLoading: false,
   itemsSyncSuccess: null,

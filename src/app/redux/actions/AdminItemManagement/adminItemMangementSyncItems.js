@@ -98,6 +98,7 @@ export default function AdminItemManagementSyncItems(token) {
     function onSuccess(success) {
       try {
         const { items } = responseSchema.validateSync(success.data);
+
         dispatch(AdminItemManagementSyncItemsSuccess({ items }));
       } catch (err) {
         dispatch(
@@ -112,6 +113,7 @@ export default function AdminItemManagementSyncItems(token) {
       const success = await axios.get(`${SERVER}${SERVER_GET_ITEMS_ALL}`, {
         headers: { token }
       });
+      console.log(success);
       onSuccess(success);
     } catch (error) {
       onError(error.response);

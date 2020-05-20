@@ -53,16 +53,22 @@ export default function SupervisorItemManagementAcceptRequest(
     }
 
     try {
+      console.log(requestToken);
+      console.log(acceptValue);
+      console.log(acceptDeclineReason);
       const success = await axios.post(`${SERVER}${SERVER_ACCEPT_REQUEST_ITEM}`, {
-        requestToken,
-        acceptValue,
-        acceptDeclineReason
+        token: requestToken,
+        value: acceptValue,
+        declineReason: acceptDeclineReason
       });
+
       if (success.status !== 200) {
         throw Error('Server responded with an error');
       }
       onSuccess();
     } catch (error) {
+      console.log(error.response);
+
       onError(error.response);
     }
   };

@@ -25,7 +25,7 @@ const SupervisorItemManagementRejectRequestFailure = error => ({
   payload: { error }
 });
 
-export default function SupervisorItemManagementAcceptRequest(
+export default function SupervisorItemManagementRejectRequest(
   requestToken,
   rejectValue,
   reason,
@@ -33,7 +33,7 @@ export default function SupervisorItemManagementAcceptRequest(
 ) {
   return async dispatch => {
     dispatch(SupervisorItemManagementRejectRequestBegin());
-
+    console.log(requestToken);
     function onError(error) {
       let message;
       if (error) message = error.data.message;
@@ -55,13 +55,14 @@ export default function SupervisorItemManagementAcceptRequest(
 
     try {
       const success = await axios.post(`${SERVER}${SERVER_ACCEPT_REQUEST_ITEM}`, {
-        requestToken,
-        rejectValue,
-        reason
+        token: requestToken,
+        value: rejectValue,
+        declineReason: reason
       });
       if (success.status !== 200) {
         throw Error('Server responded with an error');
       }
+      console.log(success.status);
       onSuccess();
       complete();
     } catch (error) {
