@@ -1,8 +1,10 @@
 const styles = theme => ({
   root: {
-    maxWidth: 936,
-    margin: 'auto',
-    overflow: 'hidden'
+    background: `url("${process.env.PUBLIC_URL}/images/admin_wallpaper.png")`,
+    backgroundRepeat: 'no-repeat',
+    backgroundAttachment: 'fixed',
+    backgroundPosition: 'center',
+    backgroundSize: 'stretch'
   },
   margin: {
     marginLeft: theme.spacing(1),
@@ -13,11 +15,7 @@ const styles = theme => ({
     fontWeight: 'bold'
   },
   wrapper: {
-    padding: '16px'
-  },
-  image: {
-    borderRadius: 8,
-    width: '50px'
+    padding: '50px'
   }
 });
 

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { AiOutlineSync } from 'react-icons/ai';
 import {
-  Paper,
   Grid,
   withStyles,
   Toolbar,
@@ -16,12 +15,11 @@ import {
   DialogContentText,
   // ListItem,
   // ListItemText,
-  Button,
-  TextField
+  Button
 } from '@material-ui/core';
 // import AssignmentIcon from '@material-ui/icons/Assignment';
 // import { Image } from 'cloudinary-react';
-
+import { TextField } from 'formik-material-ui';
 import { Formik, Form, Field } from 'formik';
 import styles from './RequestItem.styles';
 import ProgressOverlay from '../../Common/ProgressOverlay';
@@ -49,29 +47,36 @@ function RequestItemPresenter({
 
   return (
     <ProgressOverlay visible={loading}>
-      <Paper className={classes.root}>
-        <AppBar position="static" color="inherit" elevation={0}>
-          <Toolbar>
-            <Grid container spacing={2} alignItems="center">
-              <Grid item xs>
-                <p className={classes.title}>View Requested items</p>
-              </Grid>
-            </Grid>
-            <Grid item>
-              <Tooltip title="Refresh Item List">
-                <IconButton onClick={onRefresh}>
-                  <AiOutlineSync />
-                </IconButton>
-              </Tooltip>
-            </Grid>
-          </Toolbar>
-        </AppBar>
-        <Grid container direction="column" alignItems="stretch" className={classes.wrapper}>
+      <Grid
+        className={classes.root}
+        container
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        justify="center"
+        style={{ minHeight: '100vh' }}
+      >
+        <Grid container direction="column" alignItems="center" className={classes.wrapper}>
           <SuccessErrorAlert success={success} error={error} />
 
           <Grid item>
-            <Box px={2} pb={2}>
-              Below the list of items are needed to get permission.
+            <Box px={4} pb={2}>
+              <AppBar position="static" color="transparent" elevation={0}>
+                <Toolbar>
+                  <Grid container spacing={2} alignItems="center">
+                    <Grid item xs>
+                      <p className={classes.title}> Requested Items</p>
+                    </Grid>
+                  </Grid>
+                  <Grid item>
+                    <Tooltip title="Refresh Item List">
+                      <IconButton onClick={onRefresh}>
+                        <AiOutlineSync />
+                      </IconButton>
+                    </Tooltip>
+                  </Grid>
+                </Toolbar>
+              </AppBar>
             </Box>
           </Grid>
 
@@ -115,7 +120,7 @@ function RequestItemPresenter({
             />
           </Grid>
 
-          <Grid item container direction="row" alignItems="center">
+          <Grid item container direction="column" alignItems="center">
             <Grid item>
               <Box>
                 <Tooltip title="Accept the requested items">
@@ -142,55 +147,58 @@ function RequestItemPresenter({
             </Grid>
           </Grid>
         </Grid>
-      </Paper>
 
-      <Dialog open={open} onClose={closeDialog} scroll="paper">
-        <DialogTitle id="alert-dialog-title">Are you sure to reject the request</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Please mention the reason to reject the request
-            <br />
-            <Formik
-              initialValues={{
-                reason: ''
-              }}
-              validationSchema={validationSchema}
-              onSubmit={onSubmit}
-            >
-              {({ submitForm, isSubmitting }) => (
-                <Form>
-                  <Grid className={classes.item} item>
-                    <Field
-                      component={TextField}
-                      required
-                      label="Enter The Reason"
-                      name="reason"
-                      variant="outlined"
-                      type="text"
-                      placeholder="Need it for next practical"
-                      fullWidth
-                    />
-                  </Grid>
-                  <Grid item>
-                    <Box textAlign="right">
-                      <Button
-                        color="primary"
-                        disabled={isSubmitting}
-                        onClick={(submitForm, closeDialog)}
-                      >
-                        Confirm
-                      </Button>
-                      <Button onClick={closeDialog} color="primary">
-                        Cancel
-                      </Button>
-                    </Box>
-                  </Grid>
-                </Form>
-              )}
-            </Formik>
-          </DialogContentText>
-        </DialogContent>
-      </Dialog>
+        <Dialog open={open} onClose={closeDialog} scroll="paper">
+          <DialogTitle id="alert-dialog-title">Are you sure to reject the request</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Please mention the reason to reject the request
+              <br />
+              <Formik
+                initialValues={{
+                  reason: ''
+                }}
+                validationSchema={validationSchema}
+                onSubmit={onSubmit}
+              >
+                {({ submitForm, isSubmitting }) => (
+                  <Form>
+                    <Grid className={classes.item} item>
+                      <Field
+                        component={TextField}
+                        required
+                        label="Enter The Reason"
+                        name="reason"
+                        variant="outlined"
+                        type="text"
+                        placeholder="Need it for next practical"
+                        fullWidth
+                      />
+                    </Grid>
+                    <Grid item>
+                      <Box textAlign="right">
+                        <Button
+                          color="primary"
+                          disabled={isSubmitting}
+                          onClick={() => {
+                            submitForm();
+                            closeDialog();
+                          }}
+                        >
+                          Confirm
+                        </Button>
+                        <Button onClick={closeDialog} color="primary">
+                          Cancel
+                        </Button>
+                      </Box>
+                    </Grid>
+                  </Form>
+                )}
+              </Formik>
+            </DialogContentText>
+          </DialogContent>
+        </Dialog>
+      </Grid>
     </ProgressOverlay>
   );
 }
