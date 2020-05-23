@@ -3,11 +3,15 @@ import adminItemManagementSyncItemsets from './AdminItemManagement/AdminItemMana
 import adminItemManagementCreateItem from './AdminItemManagement/adminItemManagementCreateItem';
 import adminItemManagementSyncItems from './AdminItemManagement/adminItemMangementSyncItems';
 import AdminItemManagementSyncLentItems from './AdminItemManagement/adminItemManagementSyncLentItems';
+import AdminItemManagementSyncItemRequests from './AdminItemManagement/adminItemManagementSyncItemRequests';
+import AdminItemManagementBorrowItem from './AdminItemManagement/adminAdministrationBorrowItem';
 
 export {
   adminItemManagementCreateItemset,
   adminItemManagementSyncItemsets,
   adminItemManagementCreateItem,
   adminItemManagementSyncItems,
-  AdminItemManagementSyncLentItems
+  AdminItemManagementSyncLentItems,
+  AdminItemManagementSyncItemRequests,
+  AdminItemManagementBorrowItem
 };

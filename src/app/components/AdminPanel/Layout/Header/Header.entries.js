@@ -63,6 +63,10 @@ const entries = [
   {
     path: '/admin/labs/assignstaff',
     name: 'Assign Staff Managers'
+  },
+  {
+    path: '/admin/lenditems/lend',
+    name: 'Lend Items'
   }
 ];
 

@@ -15,7 +15,13 @@ import {
   ADMIN_ITEM_MANAGEMENT_SYNC_ITEMS_SUCCESS,
   ADMIN_ITEM_MANAGEMENT_SYNC_LENT_ITEMS_BEGIN,
   ADMIN_ITEM_MANAGEMENT_SYNC_LENT_ITEMS_FAILURE,
-  ADMIN_ITEM_MANAGEMENT_SYNC_LENT_ITEMS_SUCCESS
+  ADMIN_ITEM_MANAGEMENT_SYNC_LENT_ITEMS_SUCCESS,
+  ADMIN_ITEM_MANAGEMENT_SYNC_ITEM_REQUESTS_BEGIN,
+  ADMIN_ITEM_MANAGEMENT_SYNC_ITEM_REQUESTS_FAILURE,
+  ADMIN_ITEM_MANAGEMENT_SYNC_ITEM_REQUESTS_SUCCESS,
+  ADMIN_ITEM_MANAGEMENT_BORROW_ITEM_BEGIN,
+  ADMIN_ITEM_MANAGEMENT_BORROW_ITEM_FAILURE,
+  ADMIN_ITEM_MANAGEMENT_BORROW_ITEM_SUCCESS
 } from '../actionTypes';
 import initialState from '../states/adminItemManagementState';
 
@@ -111,6 +117,40 @@ const adminItemManagementReducer = produce((draft, { type, payload }) => {
     case ADMIN_ITEM_MANAGEMENT_SYNC_LENT_ITEMS_FAILURE:
       draft.lentItemsSyncLoading = false;
       draft.lentItemsSyncError = payload.error;
+      return draft;
+
+    // syncing item requests
+    case ADMIN_ITEM_MANAGEMENT_SYNC_ITEM_REQUESTS_BEGIN:
+      draft.itemRequestsSyncloading = true;
+      draft.itemRequestsSyncSuccess = false;
+      draft.itemRequestsSyncError = null;
+      return draft;
+
+    case ADMIN_ITEM_MANAGEMENT_SYNC_ITEM_REQUESTS_SUCCESS:
+      draft.syncedLentItems = payload.itemRequests;
+      draft.itemRequestsSyncloading = false;
+      draft.itemRequestsSyncSuccess = true;
+      return draft;
+
+    case ADMIN_ITEM_MANAGEMENT_SYNC_ITEM_REQUESTS_FAILURE:
+      draft.itemRequestsSyncloading = false;
+      draft.itemRequestsSyncError = payload.error;
+      return draft;
+
+    // borrow items
+    case ADMIN_ITEM_MANAGEMENT_BORROW_ITEM_BEGIN:
+      draft.itemBorrowLoading = true;
+      draft.itemBorrowSuccess = false;
+      return draft;
+
+    case ADMIN_ITEM_MANAGEMENT_BORROW_ITEM_SUCCESS:
+      draft.itemBorrowLoading = false;
+      draft.itemBorrowSuccess = payload.success;
+      return draft;
+
+    case ADMIN_ITEM_MANAGEMENT_BORROW_ITEM_FAILURE:
+      draft.itemBorrowLoading = false;
+      draft.itemBorrowFailure = payload.error;
       return draft;
 
     default:

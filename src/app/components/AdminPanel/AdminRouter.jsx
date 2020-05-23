@@ -16,7 +16,8 @@ import {
   AssignStaff,
   CreateItems,
   ViewItems,
-  ViewLentItems
+  ViewLentItems,
+  LendItems
 } from '../AdminPages';
 import ViewLabs from '../AdminPages/ViewLabs/ViewLabs';
 import CreateSupervisors from '../AdminPages/CreateSupervisors/CreateSupervisors';
@@ -68,6 +69,10 @@ export default function AdminRouter() {
       </Route>
       <Route exact path={`${match.url}/lentitems/list`}>
         <ViewLentItems />
+      </Route>
+      <Route exact path={`${match.url}/lenditems/lend`}>
+        {/** TODO: raname lend */}
+        <LendItems />
       </Route>
       <Route exact path={`${match.url}/administration/supervisor/add`}>
         <CreateSupervisors />

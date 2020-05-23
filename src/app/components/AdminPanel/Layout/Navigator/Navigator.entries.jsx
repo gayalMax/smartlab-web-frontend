@@ -119,11 +119,6 @@ const entries = [
         id: 'View Items',
         icon: <AiOutlineFileText />,
         route: '/admin/items/list'
-      },
-      {
-        id: 'View lent Items',
-        icon: <AiOutlineFileText />,
-        route: '/admin/lentitems/list'
       }
     ]
   },
@@ -153,14 +148,19 @@ const entries = [
         route: '#'
       },
       {
-        id: 'Lend Item',
+        id: 'Lend Items',
         icon: <AiOutlineSwap />,
-        route: '#'
+        route: '/admin/lenditems/lend'
       },
       {
         id: 'Temporary Handover',
         icon: <AiOutlineClockCircle />,
         route: '#'
+      },
+      {
+        id: 'View lent Items',
+        icon: <AiOutlineFileText />,
+        route: '/admin/lentitems/list'
       }
     ]
   }
