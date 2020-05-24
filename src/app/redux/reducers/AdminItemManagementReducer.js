@@ -127,7 +127,7 @@ const adminItemManagementReducer = produce((draft, { type, payload }) => {
       return draft;
 
     case ADMIN_ITEM_MANAGEMENT_SYNC_ITEM_REQUESTS_SUCCESS:
-      draft.syncedLentItems = payload.itemRequests;
+      draft.syncedItemRequests = payload.itemRequests;
       draft.itemRequestsSyncloading = false;
       draft.itemRequestsSyncSuccess = true;
       return draft;

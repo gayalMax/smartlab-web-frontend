@@ -5,7 +5,7 @@ import {
   ADMIN_ITEM_MANAGEMENT_BORROW_ITEM_FAILURE,
   ADMIN_ITEM_MANAGEMENT_BORROW_ITEM_SUCCESS
 } from '../../actionTypes';
-import { SERVER, SERVER_LEND_ITEM } from '../serverConstants';
+import { SERVER, SERVER_LEND_ITEM, SERVER_RETURN_ITEM } from '../serverConstants';
 
 /**
  * Action creator for beginning of requesting lent items
@@ -43,7 +43,7 @@ const AdminItemManagementBorrowItemFailure = error => ({
  * This is an action that will do the API call and fire other actions.
  * @returns Thunk for sync item requests in API call
  */
-export default function AdminItemManagementBorrowItem(itemId, requestId, token) {
+export default function AdminItemManagementBorrowItem(itemId, requestId, status, token) {
   return async dispatch => {
     dispatch(AdminItemManagementBorrowItemBegin());
 
@@ -57,21 +57,40 @@ export default function AdminItemManagementBorrowItem(itemId, requestId, token) 
     function onSuccess() {
       dispatch(AdminItemManagementBorrowItemSuccess(`${itemId} item has lend`));
     }
-
-    try {
-      const success = await axios.post(
-        `${SERVER}${SERVER_LEND_ITEM}`,
-        { itemId, requestId },
-        {
-          headers: { token }
+    if (status === 'ACCEPTED') {
+      try {
+        const success = await axios.post(
+          `${SERVER}${SERVER_LEND_ITEM}`,
+          { itemId, requestId },
+          {
+            headers: { token }
+          }
+        );
+        if (success.status !== 200) {
+          throw Error('Server responded with an error');
         }
-      );
-      if (success.status !== 200) {
-        throw Error('Server responded with an error');
+
+        onSuccess();
+      } catch (error) {
+        onError(error.response);
       }
-      onSuccess();
-    } catch (error) {
-      onError(error.response);
+    } else {
+      try {
+        const success = await axios.post(
+          `${SERVER}${SERVER_RETURN_ITEM}`,
+          { itemId, requestId },
+          {
+            headers: { token }
+          }
+        );
+        if (success.status !== 200) {
+          throw Error('Server responded with an error');
+        }
+
+        onSuccess();
+      } catch (error) {
+        onError(error.response);
+      }
     }
   };
 }

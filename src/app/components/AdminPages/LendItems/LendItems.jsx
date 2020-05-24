@@ -14,6 +14,9 @@ function LendItems() {
     itemRequestsSyncloading,
     itemRequestsSyncSuccess,
     itemRequestsSyncError,
+    itemBorrowLoading,
+    itemBorrowSuccess,
+    itemBorrowFailure,
     token,
     userId
   } = useSelector(state => ({
@@ -21,12 +24,13 @@ function LendItems() {
     token: state.auth.token,
     userId: state.auth.user.id
   }));
-
-  const addLentItem = (requestId, itemId) => () => {
-    dispatch(AdminItemManagementBorrowItem(requestId, itemId, token));
+  const addLentItem = (requestId, itemId, status) => () => {
+    dispatch(AdminItemManagementBorrowItem(requestId, itemId, status, token));
   };
 
-  const returnLentItem = () => () => {};
+  const returnLentItem = (requestId, itemId, status) => () => {
+    dispatch(AdminItemManagementBorrowItem(requestId, itemId, status, token));
+  };
 
   useEffect(() => {
     if (!itemRequestsSyncloading && !itemRequestsSyncSuccess && !itemRequestsSyncError) {
@@ -36,11 +40,12 @@ function LendItems() {
 
   return (
     <LendItemsPresenter
-      loading={itemRequestsSyncloading}
+      loading={itemRequestsSyncloading || itemBorrowLoading}
       itemRequests={syncedItemRequests}
       addLentItem={addLentItem}
       returnLentItem={returnLentItem}
-      error={itemRequestsSyncError}
+      error={itemRequestsSyncError || itemBorrowFailure}
+      success={itemBorrowSuccess}
     />
   );
 }

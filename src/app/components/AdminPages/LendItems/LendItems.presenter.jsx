@@ -13,7 +13,8 @@ function LendItemsPresenter({
   addLentItem,
   returnLentItem,
   loading,
-  error
+  error,
+  success
 }) {
   return (
     <ProgressOverlay visible={loading}>
@@ -49,10 +50,11 @@ function LendItemsPresenter({
                 title: 'Request status'
               }
             ]}
-            data={itemRequests.map(({ user, status, RequestItems }) => ({
-              firstName: user.firstName,
-              lastName: user.lastName,
-              email: user.email,
+            data={itemRequests.map(({ id, User, status, RequestItems }) => ({
+              id,
+              first_name: User.firstName,
+              last_name: User.lastName,
+              email: User.email,
               requestStatus: status,
               RequestItems
             }))}
@@ -80,7 +82,8 @@ function LendItemsPresenter({
 }
 
 LendItemsPresenter.defaultProps = {
-  error: null
+  error: null,
+  success: null
 };
 LendItemsPresenter.propTypes = {
   classes: PropTypes.object.isRequired,
@@ -88,6 +91,7 @@ LendItemsPresenter.propTypes = {
   addLentItem: PropTypes.func.isRequired,
   returnLentItem: PropTypes.func.isRequired,
   error: PropTypes.string,
+  success: PropTypes.bool,
   loading: PropTypes.bool.isRequired
 };
 

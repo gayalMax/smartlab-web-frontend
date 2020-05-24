@@ -74,20 +74,17 @@ export default function AdminItemManagementSyncItemRequests(userId, token) {
 
       const { labs } = successGetLabs.data;
       const itemRequests = [];
-
-      Promise.all(
+      const resolvedValues = await Promise.all(
         labs.map(({ id: labId }) =>
           axios.get(`${SERVER}${SERVER_SYNC_ITEM_REQUESTS_ALL}/${labId}`, {
             headers: { token }
           })
         )
-      ).then(resolvedValues => {
-        resolvedValues.forEach(value => {
-          const { data } = value;
-          itemRequests.push(data);
-        });
+      );
+      resolvedValues.forEach(value => {
+        const { data } = value;
+        itemRequests.push(data[0]);
       });
-
       onSuccess(itemRequests);
     } catch (error) {
       onError(error.response);

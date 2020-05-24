@@ -20,8 +20,8 @@ function SimpleTable({ rowData, requestId, classes, addLentItem, returnLentItem 
     return true;
   };
 
-  const handleRemoveIconVisibility = (status, borrowedDate) => {
-    if (status === 'ACCEPTED' && borrowedDate != null) {
+  const handleRemoveIconVisibility = status => {
+    if (status === 'BORROWED') {
       return false;
     }
     return true;
@@ -32,39 +32,61 @@ function SimpleTable({ rowData, requestId, classes, addLentItem, returnLentItem 
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Item</TableCell>
-            <TableCell align="right">Borrowed&nbsp;Date</TableCell>
-            <TableCell align="right">Due&nbsp;Date</TableCell>
-            <TableCell align="right">Returned&nbsp;Date</TableCell>
+            <TableCell>
+              <b>Item</b>
+            </TableCell>
+            <TableCell>
+              <b>ItemStatus</b>
+            </TableCell>
+            <TableCell align="right">
+              <b>Borrowed&nbsp;Date</b>
+            </TableCell>
+            <TableCell align="right">
+              <b>Due&nbsp;Date</b>
+            </TableCell>
+            <TableCell align="right">
+              <b>Returned&nbsp;Date</b>
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rowData.foreach(row => (
-            <TableRow key={row.item.id}>
+          {rowData.map(row => (
+            <TableRow key={row.Item.id}>
               <TableCell component="th" scope="row">
-                {row.item.itemSet.title}
+                {row.Item.ItemSet.title}
               </TableCell>
-              <TableCell align="right">{row.borrowedDate}</TableCell>
-              <TableCell align="right">{row.dueDate}</TableCell>
-              <TableCell align="right">{row.returnedDate}</TableCell>
+              <TableCell component="th" scope="row">
+                {row.status}
+              </TableCell>
+              <TableCell align="right">
+                {row.borrowedDate === null ? 'Not Yet' : row.borrowedDate}
+              </TableCell>
+              <TableCell align="right">{row.dueDate === null ? 'Not Yet' : row.dueDate}</TableCell>
+              <TableCell align="right">
+                {row.returnedDate === null ? 'Not Yet' : row.returnedDate}
+              </TableCell>
               <TableCell>
-                <Tooltip>
-                  <IconButton
-                    disabled={handleAddIconVisibility(row.status, row.borrowedDate)}
-                    onClick={addLentItem(requestId, row.item.id)}
-                  >
-                    <AiOutlineFileAdd />
-                  </IconButton>
+                <Tooltip title="Lend Item">
+                  <span>
+                    <IconButton
+                      disabled={handleAddIconVisibility(row.status, row.borrowedDate)}
+                      onClick={addLentItem(requestId, row.Item.id, row.status)}
+                    >
+                      <AiOutlineFileAdd />
+                    </IconButton>
+                  </span>
                 </Tooltip>
               </TableCell>
               <TableCell>
-                <Tooltip>
-                  <IconButton
-                    disabled={handleRemoveIconVisibility(row.status, row.borrowedDate)}
-                    onClick={returnLentItem(requestId, row.item.id)}
-                  >
-                    <AiOutlineDelete />
-                  </IconButton>
+                <Tooltip title="Return Item">
+                  <span>
+                    <IconButton
+                      disabled={handleRemoveIconVisibility(row.status)}
+                      onClick={returnLentItem(requestId, row.Item.id, row.status)}
+                    >
+                      <AiOutlineDelete />
+                    </IconButton>
+                  </span>
                 </Tooltip>
               </TableCell>
             </TableRow>
