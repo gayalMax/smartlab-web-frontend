@@ -14,7 +14,7 @@ import styles from './LendItems.styles';
 
 function SimpleTable({ rowData, requestId, classes, addLentItem, returnLentItem }) {
   const handleAddIconVisibility = (status, borrowedDate) => {
-    if (status === 'ACCEPTED' && borrowedDate == null) {
+    if (status === 'ACCEPTED' && borrowedDate === null) {
       return false;
     }
     return true;
@@ -79,7 +79,8 @@ SimpleTable.propTypes = {
   rowData: PropTypes.array.isRequired,
   classes: PropTypes.object.isRequired,
   addLentItem: PropTypes.func.isRequired,
-  returnLentItem: PropTypes.func.isRequired
+  returnLentItem: PropTypes.func.isRequired,
+  requestId: PropTypes.string.isRequired
 };
 
 export default withStyles(styles)(SimpleTable);
