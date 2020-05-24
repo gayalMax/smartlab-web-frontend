@@ -57,7 +57,7 @@ const responseSchema = yup.object().shape({
       Attributes: yup.array().of(
         yup.object().shape({
           key: yup.string().required(),
-          defaultValue: yup.string().required(),
+          defaultValue: yup.string(),
           editable: yup.boolean().required()
         })
       )
@@ -87,6 +87,7 @@ export default function AdminItemManagementSyncItemSets(token) {
         const { Itemsets } = responseSchema.validateSync(success.data);
         dispatch(AdminItemManagementSyncItemSetsSuccess({ itemsets: Itemsets }));
       } catch (err) {
+        console.log(err);
         dispatch(
           AdminItemManagementSyncItemSetsFailure(
             'Server connection failed. Please check your connection.'
