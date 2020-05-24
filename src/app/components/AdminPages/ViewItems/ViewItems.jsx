@@ -12,7 +12,7 @@ function ViewItems() {
       token: state.auth.token
     })
   );
-
+console.log(syncedItems);
   useEffect(() => {
     if (!itemsSyncLoading && !itemsSyncSuccess && !itemsSyncError) {
       dispatch(adminItemManagementSyncItems(token));

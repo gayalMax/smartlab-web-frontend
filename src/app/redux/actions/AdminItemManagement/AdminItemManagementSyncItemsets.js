@@ -85,6 +85,7 @@ export default function AdminItemManagementSyncItemSets(token) {
     function onSuccess(success) {
       try {
         const { Itemsets } = responseSchema.validateSync(success.data);
+
         dispatch(AdminItemManagementSyncItemSetsSuccess({ itemsets: Itemsets }));
       } catch (err) {
         console.log(err);

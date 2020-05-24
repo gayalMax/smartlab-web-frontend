@@ -83,6 +83,7 @@ export default function AdminRouter() {
       <Route exact path={`${match.url}/administration/supervisor/list`}>
         <ViewSupervisors />
       </Route>
+
       <Route>
         <PageNotFound />
       </Route>
