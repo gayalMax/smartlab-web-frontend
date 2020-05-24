@@ -14,7 +14,8 @@ import {
   AiOutlineUser,
   AiOutlineLogout,
   AiOutlineDashboard,
-  AiOutlineBlock
+  AiOutlineBlock,
+  AiOutlineBarcode
 } from 'react-icons/ai';
 
 /**
@@ -69,7 +70,7 @@ const entries = [
         route: '/admin/administration/supervisor/add'
       },
       {
-        id: 'Views Supervisors',
+        id: 'View Supervisors',
         icon: <AiOutlineUsergroupAdd />,
         route: '/admin/administration/supervisor/list'
       }
@@ -119,6 +120,11 @@ const entries = [
         id: 'View Items',
         icon: <AiOutlineFileText />,
         route: '/admin/items/list'
+      },
+      {
+        id: 'Generate Barcode',
+        icon: <AiOutlineBarcode />,
+        route: '/admin/items/generatebarcode'
       }
     ]
   },

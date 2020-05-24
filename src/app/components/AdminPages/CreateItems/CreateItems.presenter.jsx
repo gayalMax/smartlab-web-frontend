@@ -258,7 +258,7 @@ function CreateItemsPresenter({
                             disabled={isSubmitting}
                             onClick={submitForm}
                           >
-                            Create Itemset
+                            Create Item
                           </Button>
                         </Box>
                       </Grid>

@@ -59,6 +59,10 @@ const entries = [
   {
     path: '/admin/labs/assignstaff',
     name: 'Assign Staff Managers'
+  },
+  {
+    path: '/admin/items/generatebarcode',
+    name: 'Generate Barcode'
   }
 ];
 

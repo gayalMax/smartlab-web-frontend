@@ -38,7 +38,7 @@ const RealTimeReader = ({ onSubmit, variant, color }) => {
             variant={variant}
             onClick={() => dispatch(socketStart(token))}
           >
-            Connect to Mobile App
+            Connect to Mobile
           </Button>
         </Grid>
       </Grid>

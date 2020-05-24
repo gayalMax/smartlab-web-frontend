@@ -20,6 +20,7 @@ import {
 import ViewLabs from '../AdminPages/ViewLabs/ViewLabs';
 import CreateSupervisors from '../AdminPages/CreateSupervisors/CreateSupervisors';
 import ViewSupervisors from '../AdminPages/ViewSupervisors/ViewSupervisors';
+import GenerateBarcode from '../AdminPages/GenerateBarcode/GenerateBarcode';
 
 export default function AdminRouter() {
   const match = useRouteMatch();
@@ -64,6 +65,9 @@ export default function AdminRouter() {
       </Route>
       <Route exact path={`${match.url}/items/list`}>
         <ViewItems />
+      </Route>
+      <Route exact path={`${match.url}/items/generatebarcode`}>
+        <GenerateBarcode />
       </Route>
       <Route exact path={`${match.url}/administration/supervisor/add`}>
         <CreateSupervisors />
