@@ -91,14 +91,14 @@
         [] should handle ADMIN_ITEM_MANAGEMENT_SYNC_ITEMSETS_BEGIN
         [] should handle ADMIN_ITEM_MANAGEMENT_SYNC_ITEMSETS_SUCCESS
         [] should handle ADMIN_ITEM_MANAGEMENT_SYNC_ITEMSETS_FAILURE
-    [] Admin Lab Management Reducer
-        [] should return the initial state
-        [] should handle ADMIN_LABMANAGEMENT_CREATE_LAB_BEGIN
-        [] should handle ADMIN_LABMANAGEMENT_CREATE_LAB_SUCCESS
-        [] should handle ADMIN_LABMANAGEMENT_CREATE_LAB_FAILURE
-        [] should handle ADMIN_LAB_MANAGEMENT_SYNC_LABS_BEGIN
-        [] should handle ADMIN_LAB_MANAGEMENT_SYNC_LABS_SUCCESS
-        [] should handle ADMIN_LAB_MANAGEMENT_SYNC_LABS_FAILURE
+    [x] Admin Lab Management Reducer
+        [x] should return the initial state
+        [x] should handle ADMIN_LABMANAGEMENT_CREATE_LAB_BEGIN
+        [x] should handle ADMIN_LABMANAGEMENT_CREATE_LAB_SUCCESS
+        [x] should handle ADMIN_LABMANAGEMENT_CREATE_LAB_FAILURE
+        [x] should handle ADMIN_LAB_MANAGEMENT_SYNC_LABS_BEGIN
+        [x] should handle ADMIN_LAB_MANAGEMENT_SYNC_LABS_SUCCESS
+        [x] should handle ADMIN_LAB_MANAGEMENT_SYNC_LABS_FAILURE
     [] Admin Registration Reducer
         [] should return the initial state
         [] should handle ADMIN_REGISTRATION_SYNC_ROLES_BEGIN

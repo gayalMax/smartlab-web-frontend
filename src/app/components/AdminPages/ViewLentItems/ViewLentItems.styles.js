@@ -11,8 +11,10 @@ const styles = () => ({
   wrapper: {
     padding: '16px'
   },
-
-  margin: { marginRight: 5 }
+  image: {
+    borderRadius: 8,
+    width: '50px'
+  }
 });
 
 export default styles;

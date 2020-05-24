@@ -2,10 +2,16 @@ import adminItemManagementCreateItemset from './AdminItemManagement/adminItemMan
 import adminItemManagementSyncItemsets from './AdminItemManagement/AdminItemManagementSyncItemsets';
 import adminItemManagementCreateItem from './AdminItemManagement/adminItemManagementCreateItem';
 import adminItemManagementSyncItems from './AdminItemManagement/adminItemMangementSyncItems';
+import AdminItemManagementSyncLentItems from './AdminItemManagement/adminItemManagementSyncLentItems';
+import AdminItemManagementSyncItemRequests from './AdminItemManagement/adminItemManagementSyncItemRequests';
+import AdminItemManagementBorrowItem from './AdminItemManagement/adminItemManagementBorrowItem';
 
 export {
   adminItemManagementCreateItemset,
   adminItemManagementSyncItemsets,
   adminItemManagementCreateItem,
-  adminItemManagementSyncItems
+  adminItemManagementSyncItems,
+  AdminItemManagementSyncLentItems,
+  AdminItemManagementSyncItemRequests,
+  AdminItemManagementBorrowItem
 };

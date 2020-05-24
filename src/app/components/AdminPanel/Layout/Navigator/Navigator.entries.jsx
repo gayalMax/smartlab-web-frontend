@@ -8,11 +8,9 @@ import {
   AiOutlineFileText,
   AiOutlinePlusSquare,
   AiOutlineMinusSquare,
-  AiOutlineSearch,
   AiOutlineSwap,
   AiOutlineClockCircle,
   AiOutlineUser,
-  AiOutlineLogout,
   AiOutlineDashboard,
   AiOutlineBlock,
   AiOutlineBarcode
@@ -36,11 +34,6 @@ const entries = [
       {
         id: 'My Profile',
         icon: <AiOutlineUser />,
-        route: '#'
-      },
-      {
-        id: 'Logout',
-        icon: <AiOutlineLogout />,
         route: '#'
       }
     ]
@@ -149,19 +142,19 @@ const entries = [
     permissions: ['INVENTORY_MANAGER'],
     children: [
       {
-        id: 'Search Items',
-        icon: <AiOutlineSearch />,
-        route: '#'
-      },
-      {
-        id: 'Lend Item',
+        id: 'Lend/Receive',
         icon: <AiOutlineSwap />,
-        route: '#'
+        route: '/admin/lenditems/lend'
       },
       {
         id: 'Temporary Handover',
         icon: <AiOutlineClockCircle />,
         route: '#'
+      },
+      {
+        id: 'View lent Items',
+        icon: <AiOutlineFileText />,
+        route: '/admin/lentitems/list'
       }
     ]
   }

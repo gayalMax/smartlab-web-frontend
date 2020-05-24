@@ -4,7 +4,6 @@
 const initialState = {
   attributes: [],
   itemsets: [],
-
   syncedItemsets: [],
 
   createItemsetError: null,
@@ -25,7 +24,23 @@ const initialState = {
 
   itemsSyncLoading: false,
   itemsSyncSuccess: null,
-  itemsSyncError: null
+  itemsSyncError: null,
+
+  syncedLentItems: [],
+
+  lentItemsSyncLoading: false,
+  lentItemsSyncSuccess: null,
+  lentItemsSyncError: null,
+
+  syncedItemRequests: [],
+
+  itemRequestsSyncloading: false,
+  itemRequestsSyncSuccess: null,
+  itemRequestsSyncError: null,
+
+  itemBorrowLoading: false,
+  itemBorrowSuccess: null,
+  itemBorrowFailure: null
 };
 
 export default initialState;

@@ -1,18 +1,22 @@
 const styles = () => ({
   root: {
     maxWidth: 936,
-    margin: 'auto',
-    overflow: 'hidden'
+    margin: 'auto'
+  },
+
+  wrapper: {
+    padding: 20
+  },
+  item: {
+    marginBottom: 20
   },
   title: {
     fontSize: 16,
     fontWeight: 'bold'
   },
-  wrapper: {
-    padding: '16px'
-  },
-
-  margin: { marginRight: 5 }
+  table: {
+    minWidth: 650
+  }
 });
 
 export default styles;

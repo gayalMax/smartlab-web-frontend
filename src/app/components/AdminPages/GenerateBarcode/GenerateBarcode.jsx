@@ -64,9 +64,8 @@ function GenerateBarcode({ classes }) {
         </Box>
 
         <Grid item>
-          <Box py={1} textAlign="right">
+          <Box py={1} textAlign="center">
             <Button
-              style={{ marginRight: 5 }}
               className={classes.margin}
               variant="contained"
               color="primary"
@@ -75,7 +74,14 @@ function GenerateBarcode({ classes }) {
               Generate New Barcode
             </Button>
             <Button
-              style={{ marginRight: 5 }}
+              className={classes.margin}
+              variant="contained"
+              color="default"
+              onClick={() => navigator.clipboard.writeText(barcode)}
+            >
+              Copy Barcode
+            </Button>
+            <Button
               className={classes.margin}
               variant="contained"
               color="default"
@@ -84,7 +90,6 @@ function GenerateBarcode({ classes }) {
               Export as PDF
             </Button>
             <Button
-              className={classes.margin}
               variant="contained"
               color="default"
               onClick={() => exportComponentAsJPEG(componentRef)}
