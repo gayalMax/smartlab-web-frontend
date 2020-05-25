@@ -66,7 +66,7 @@ function AppAppBar(props) {
               variant="h6"
               underline="none"
               className={classes.rightLink}
-              href="https://openinventoryorg.github.io/docs/openinventoryorg.github.io/docs/"
+              href="https://openinventoryorg.github.io/docs/"
             >
               Documentation
             </Link>

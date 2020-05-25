@@ -2,11 +2,39 @@ import monolithic
 import time
 import unittest
 
+
 class TestHomePage(monolithic.MonolithicTest):
-    def _check_if_in_page_even_after_submit(self):
-        self.signUpButton.click()
-        time.sleep(0.5)
-        self.assertCurrentUrl('http://localhost:8000/register/medi')
+    def step_01_go_to_the_home_page(self):
+        self.browser.get(self.domain)
+        self.assertBrowserTitle('open inventory')
+
+    def step_02_go_to_documentation_1(self):
+        link = self.browser.find_element_by_xpath("//a[1][.='Documentation']")
+        link.click()
+        time.sleep(1)
+        self.assertCurrentUrl('https://openinventoryorg.github.io/docs/')
+        self.browser.execute_script("window.history.go(-1)")
+
+    def step_03_go_to_admin_console_1(self):
+        link = self.browser.find_element_by_xpath("//a[.='Sign In']")
+        link.click()
+        time.sleep(1)
+        self.assertCurrentUrl(self.domain+'login')
+        self.browser.execute_script("window.history.go(-1)")
+
+    def step_04_go_to_admin_console_2(self):
+        link = self.browser.find_element_by_xpath("(//a[.='Sign In'])[2]")
+        link.click()
+        time.sleep(1)
+        self.assertCurrentUrl(self.domain+'login')
+
+
+    # def step_03_
+
+    # def _check_if_in_page_even_after_submit(self):
+        # self.signUpButton.click()
+        # time.sleep(0.5)
+        # self.assertCurrentUrl('http://localhost:8000/register/medi')
 
     # def step_01_go_to_registerpage(self):
     #     self.browser.get('http://localhost:8000/register/medi')

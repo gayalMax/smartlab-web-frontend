@@ -50,6 +50,7 @@ class MonolithicTest(unittest.TestCase):
 
     def setUp(self):
         self.browser = webdriver.Chrome()
+        self.domain = 'http://localhost:3000/#/'
         self.browser.maximize_window()
         time.sleep(1)
         self.addCleanup(self.browser.quit)

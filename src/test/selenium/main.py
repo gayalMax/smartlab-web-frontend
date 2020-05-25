@@ -1,8 +1,9 @@
 import unittest
 import home_page
+import login_page
 
 if __name__ == "__main__":
-    test_classes_to_run = [home_page.TestHomePage, ]
+    test_classes_to_run = [home_page.TestHomePage, login_page.TestLoginPage]
 
     loader = unittest.TestLoader()
 
