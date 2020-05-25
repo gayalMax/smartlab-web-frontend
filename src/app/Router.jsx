@@ -9,7 +9,7 @@ import {
   SignInScreen,
   SignUpScreen,
   HomePage,
-  RequestItem
+  SupervisorView
 } from './components';
 
 function App() {
@@ -28,8 +28,8 @@ function App() {
         <Route exact path="/">
           <HomePage />
         </Route>
-        <Route exact path="/supervisor/request/item/:requestToken">
-          <RequestItem />
+        <Route exact path="/supervisor/:requestToken">
+          <SupervisorView />
         </Route>
         <Route>
           <PageNotFound />
