@@ -6,7 +6,7 @@ import {
   SUPERVISOR_ITEM_MANAGEMENT_ACCEPT_REQUEST_SUCCESS
 } from '../../actionTypes';
 import { SERVER, SERVER_ACCEPT_REQUEST_ITEM } from '../serverConstants';
-import { supervisorItemManagementSyncItem } from '../SupervisorItemManagementActions';
+import supervisorItemManagementSyncItem from './supervisorItemManagementSyncItem';
 
 /**
  * Action creator for beginning of requesting itemsets
