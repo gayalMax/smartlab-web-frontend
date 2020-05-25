@@ -140,7 +140,7 @@ const adminItemManagementReducer = produce((draft, { type, payload }) => {
     // borrow items
     case ADMIN_ITEM_MANAGEMENT_BORROW_ITEM_BEGIN:
       draft.itemBorrowLoading = true;
-      draft.itemBorrowSuccess = false;
+      draft.itemBorrowSuccess = null;
       return draft;
 
     case ADMIN_ITEM_MANAGEMENT_BORROW_ITEM_SUCCESS:

@@ -86,8 +86,6 @@ export default function adminLabManagementSyncLabs(token) {
     }
 
     function onSuccess(success) {
-      // console.log('success', success);
-
       try {
         const { labs } = responseSchema.validateSync(success.data);
         dispatch(adminLabManagementSyncLabsSuccess({ labs }));

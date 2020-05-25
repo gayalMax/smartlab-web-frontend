@@ -35,6 +35,7 @@ import moment from 'moment';
 import style from './SupervisorView.styles';
 import ProgressOverlay from '../Common/ProgressOverlay';
 import SuccessErrorAlert from '../Common/SuccessErrorAlert';
+import { PageNotFound } from '../AdminPages';
 
 function ListTile(props) {
   const { title, subtitle, icon } = props;
@@ -87,7 +88,7 @@ function SupervisorViewPresenter({
     setValue(newValue);
   };
 
-  if (request.User === undefined) return <div />;
+  if (request.User === undefined) return <PageNotFound />;
 
   return (
     <ProgressOverlay visible={loading}>

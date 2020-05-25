@@ -113,7 +113,6 @@ export default function AdminItemManagementSyncItems(token) {
       const success = await axios.get(`${SERVER}${SERVER_GET_ITEMS_ALL}`, {
         headers: { token }
       });
-      console.log(success);
       onSuccess(success);
     } catch (error) {
       onError(error.response);
