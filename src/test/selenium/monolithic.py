@@ -1,6 +1,7 @@
 import unittest
 import time
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 
 
 class MonolithicTest(unittest.TestCase):
@@ -18,6 +19,10 @@ class MonolithicTest(unittest.TestCase):
 
     def assertElementText(self, expected, element):
         self.assertIn(expected, element.text.lower())
+
+    def clearInputField(self, element):
+        while element.get_attribute('value') != '':
+            element.send_keys(Keys.BACKSPACE)
 
     def assertPanelLocked(self, button_id, is_locked):
         locked = True
@@ -51,6 +56,11 @@ class MonolithicTest(unittest.TestCase):
     def setUp(self):
         self.browser = webdriver.Chrome()
         self.domain = 'http://localhost:3000/#/'
+
+        # change email, password to valid email,pwds of the system
+        self.correct_email = 'admin@admin.com'
+        self.correct_password = 'ins'
+
         self.browser.maximize_window()
         time.sleep(1)
         self.addCleanup(self.browser.quit)

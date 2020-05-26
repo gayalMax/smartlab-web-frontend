@@ -13,6 +13,5 @@ if __name__ == "__main__":
         suites_list.append(suite)
 
     big_suite = unittest.TestSuite(suites_list)
-
     runner = unittest.TextTestRunner(verbosity=2)
     results = runner.run(big_suite)
