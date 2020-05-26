@@ -18,11 +18,23 @@ class MonolithicTest(unittest.TestCase):
         self.assertIn(expected, self.browser.current_url.lower())
 
     def assertElementText(self, expected, element):
-        self.assertIn(expected, element.text.lower())
+        self.assertIn(expected.lower(), element.text.lower())
 
     def clearInputField(self, element):
         while element.get_attribute('value') != '':
             element.send_keys(Keys.BACKSPACE)
+    
+    def login(self):
+        self.browser.get(self.domain+'login')
+        self.email = self.browser.find_element_by_name("email")
+        self.password = self.browser.find_element_by_name("password")
+        self.signin = self.browser.find_element_by_xpath(
+            "//button[.='Sign In']")
+        self.email.send_keys(self.correct_email)
+        self.password.send_keys(self.correct_password)
+        self.signin.click()
+        time.sleep(2)
+        self.assertCurrentUrl(self.domain+'admin/dashboard')
 
     def assertPanelLocked(self, button_id, is_locked):
         locked = True
