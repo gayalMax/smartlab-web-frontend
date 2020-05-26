@@ -60,17 +60,12 @@ function LendItemsPresenter({
         <Grid className={classes.wrapper} container direction="column" alignItems="stretch">
           <SuccessErrorAlert success={success} error={error} />
           <AdvancedTable
-            filtering
+            grouping
             columns={[
               {
                 field: 'requestStatus',
                 title: 'Request status',
                 searchable: false,
-                lookup: {
-                  ACCEPTED: 'Accepted',
-                  REJECTED: 'Rejected',
-                  PENDING: 'Pending'
-                },
                 render: row => (
                   <Chip
                     color="primary"
@@ -81,20 +76,19 @@ function LendItemsPresenter({
                 )
               },
               {
-                title: 'Student Name',
-                field: 'name'
-              },
-              {
                 title: 'Lab',
                 field: 'lab'
               },
               {
-                title: 'Student Email',
-                field: 'email'
+                title: 'Supervisor',
+                field: 'supervisor'
+              },
+              {
+                title: 'Student',
+                field: 'name'
               },
 
               {
-                title: 'Attributes',
                 sorting: false,
                 type: 'numeric',
                 render: row => (
@@ -109,13 +103,13 @@ function LendItemsPresenter({
                 )
               }
             ]}
-            data={itemRequests.map(({ id, User, status, RequestItems }) => ({
+            data={itemRequests.map(({ id, User, status, RequestItems, Supervisor }) => ({
               id,
-              name: `${User.firstName} ${User.lastName}`,
-              email: User.email,
-              lab: RequestItems[0].Item.Lab.title,
+              name: `${User.firstName} ${User.lastName} (${User.email})`,
+              lab: RequestItems[0] && RequestItems[0].Item.Lab.title,
               requestStatus: status,
-              RequestItems
+              RequestItems,
+              supervisor: `${Supervisor.firstName} ${Supervisor.lastName} (${Supervisor.email})`
             }))}
             title=""
           />
@@ -126,6 +120,7 @@ function LendItemsPresenter({
         <Dialog open={request != null} maxWidth="lg" onClose={closeDialog}>
           <DialogTitle>Items</DialogTitle>
           <DialogContent>
+            {JSON.stringify(request)}
             <AdvancedTable
               columns={[
                 {

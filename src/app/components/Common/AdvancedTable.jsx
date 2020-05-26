@@ -6,7 +6,7 @@ import MaterialTable from 'material-table';
 
 import tableIcons from './TableIcons';
 
-const AdvancedTable = ({ filtering, ...other }) => {
+const AdvancedTable = ({ filtering, grouping, ...other }) => {
   return (
     <div>
       <MaterialTable
@@ -18,7 +18,8 @@ const AdvancedTable = ({ filtering, ...other }) => {
         options={{
           exportButton: true,
           search: true,
-          filtering
+          filtering,
+          grouping
         }}
         {...other}
       />
@@ -27,11 +28,13 @@ const AdvancedTable = ({ filtering, ...other }) => {
 };
 
 AdvancedTable.defaultProps = {
-  filtering: false
+  filtering: false,
+  grouping: false
 };
 
 AdvancedTable.propTypes = {
-  filtering: PropTypes.bool
+  filtering: PropTypes.bool,
+  grouping: PropTypes.bool
 };
 
 export default AdvancedTable;
