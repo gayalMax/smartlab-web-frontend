@@ -45,6 +45,10 @@ function LendItems() {
     itemRequestsSyncError
   ]);
 
+  const onRefresh = () => {
+    dispatch(AdminItemManagementSyncItemRequests(userId, token));
+  };
+
   return (
     <LendItemsPresenter
       loading={itemRequestsSyncloading || itemBorrowLoading}
@@ -53,6 +57,7 @@ function LendItems() {
       returnLentItem={returnLentItem}
       error={itemRequestsSyncError || itemBorrowFailure}
       success={itemBorrowSuccess}
+      onRefresh={onRefresh}
     />
   );
 }

@@ -12,10 +12,11 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
-  Tooltip
+  Tooltip,
+  IconButton
 } from '@material-ui/core';
 import moment from 'moment';
-import { AiOutlineBars } from 'react-icons/ai';
+import { AiOutlineBars, AiOutlineSync } from 'react-icons/ai';
 import styles from './LendItems.styles';
 import AdvancedTable from '../../Common/AdvancedTable';
 import SuccessErrorAlert from '../../Common/SuccessErrorAlert';
@@ -28,7 +29,8 @@ function LendItemsPresenter({
   returnLentItem,
   loading,
   error,
-  success
+  success,
+  onRefresh
 }) {
   const [request, setRequest] = useState(null);
 
@@ -54,6 +56,13 @@ function LendItemsPresenter({
               <Grid item xs>
                 <p className={classes.title}>Lend/Receive</p>
               </Grid>
+            </Grid>
+            <Grid item>
+              <Tooltip title="Refresh Item List">
+                <IconButton onClick={onRefresh}>
+                  <AiOutlineSync />
+                </IconButton>
+              </Tooltip>
             </Grid>
           </Toolbar>
         </AppBar>
@@ -120,7 +129,6 @@ function LendItemsPresenter({
         <Dialog open={request != null} maxWidth="lg" onClose={closeDialog}>
           <DialogTitle>Items</DialogTitle>
           <DialogContent>
-            {JSON.stringify(request)}
             <AdvancedTable
               columns={[
                 {
@@ -226,7 +234,8 @@ LendItemsPresenter.propTypes = {
   returnLentItem: PropTypes.func.isRequired,
   error: PropTypes.string,
   success: PropTypes.bool,
-  loading: PropTypes.bool.isRequired
+  loading: PropTypes.bool.isRequired,
+  onRefresh: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(LendItemsPresenter);
