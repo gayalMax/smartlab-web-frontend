@@ -26,38 +26,38 @@ class ManageRolesPages(monolithic.MonolithicTest):
         self.createbutton = self.browser.find_element_by_xpath(
             "//button[.='Create Role']")
 
-    # def step_03_check_if_in_the_same_page_after_empty_button_click(self):
-    #     self.createbutton.click()
-    #     time.sleep(1)
-    #     self.assertCurrentUrl(self.currentUrl)
+    def step_03_check_if_in_the_same_page_after_empty_button_click(self):
+        self.createbutton.click()
+        time.sleep(1)
+        self.assertCurrentUrl(self.currentUrl)
 
-    # def step_04_fill_data(self):
-    #     self.name.send_keys(self.role)
-    #     self.admin_checkbox.click()
-    #     self.lab_manager_checkbox.click()
-    #     self.registrar_checkbox.click()
-    #     self.invent_manager_checkbox.click()
+    def step_04_fill_data(self):
+        self.name.send_keys(self.role)
+        self.admin_checkbox.click()
+        self.lab_manager_checkbox.click()
+        self.registrar_checkbox.click()
+        self.invent_manager_checkbox.click()
 
-    # def step_05_clear_data(self):
-    #     self.clearInputField(self.name)
-    #     self.admin_checkbox.click()
-    #     self.lab_manager_checkbox.click()
-    #     self.registrar_checkbox.click()
-    #     self.invent_manager_checkbox.click()
+    def step_05_clear_data(self):
+        self.clearInputField(self.name)
+        self.admin_checkbox.click()
+        self.lab_manager_checkbox.click()
+        self.registrar_checkbox.click()
+        self.invent_manager_checkbox.click()
 
-    # def step_06_fill_only_name_and_submit(self):
-    #     self.name.send_keys(self.role)
-    #     self.createbutton.click()
-    #     time.sleep(1)
-    #     self.assertCurrentUrl(self.currentUrl)
+    def step_06_fill_only_name_and_submit(self):
+        self.name.send_keys(self.role)
+        self.createbutton.click()
+        time.sleep(1)
+        self.assertCurrentUrl(self.currentUrl)
 
-    # def step_07_fill_only_permissions_and_submit(self):
-    #     self.clearInputField(self.name)
-    #     self.admin_checkbox.click()
-    #     self.registrar_checkbox.click()
-    #     self.createbutton.click()
-    #     time.sleep(1)
-    #     self.assertCurrentUrl(self.currentUrl)
+    def step_07_fill_only_permissions_and_submit(self):
+        self.clearInputField(self.name)
+        self.admin_checkbox.click()
+        self.registrar_checkbox.click()
+        self.createbutton.click()
+        time.sleep(1)
+        self.assertCurrentUrl(self.currentUrl)
 
     def step_08_create_role_success(self):
         self.clearInputField(self.name)
@@ -77,16 +77,16 @@ class ManageRolesPages(monolithic.MonolithicTest):
         expected = "Role '"+self.role+"' created successfully."
         self.assertElementText(expected, element)
 
-    # def step_09_create_role_error(self):
-    #     self.clearInputField(self.name)
-    #     self.name.send_keys(self.role)
-    #     self.createbutton.click()
-    #     time.sleep(2)
-    #     element = self.browser.find_element_by_xpath(
-    #         '//*[@id="root"]/div/div/div/main/div[1]/div/div[1]/div/div/div/div/div/div[2]')
-    #     expected = 'A role with the name '+self.role + \
-    #         ' is already created. Role name must be unique'
-    #     self.assertElementText(expected, element)
+    def step_09_create_role_error(self):
+        self.clearInputField(self.name)
+        self.name.send_keys(self.role)
+        self.createbutton.click()
+        time.sleep(2)
+        element = self.browser.find_element_by_xpath(
+            '//*[@id="root"]/div/div/div/main/div[1]/div/div[1]/div/div/div/div/div/div[2]')
+        expected = 'A role with the name '+self.role + \
+            ' is already created. Role name must be unique'
+        self.assertElementText(expected, element)
 
     def step_10_go_to_manage_roles_page(self):
         button = self.browser.find_element_by_xpath("//a[.='Manage Roles']")
@@ -106,9 +106,10 @@ class ManageRolesPages(monolithic.MonolithicTest):
         self.search_input = self.browser.find_element_by_xpath(
             '//input[@placeholder="Search"]')
         self.search_input.send_keys(self.role)
-        element = self.browser.find_element_by_xpath(
-            "//td[.='Minor staff']")
-        self.assertEqual(element.text.lower(), self.role)
+        time.sleep(2)
+        data = self.browser.find_elements_by_tag_name("td")
+        result = [each.text.lower() for each in data]
+        self.assertIn(self.role, result)
 
     def step_13_clear_search_bar_with_close_button(self):
         close_button = self.browser.find_element_by_xpath(

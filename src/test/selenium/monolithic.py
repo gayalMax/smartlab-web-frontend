@@ -23,11 +23,16 @@ class MonolithicTest(unittest.TestCase):
     def clearInputField(self, element):
         while element.get_attribute('value') != '':
             element.send_keys(Keys.BACKSPACE)
-    
+
+    def xpath_string_escape(self, input_str):
+        """ creates a concatenation of alternately-quoted strings that is always a valid XPath expression """
+        parts = input_str.split("'")
+        return "concat('" + "', \"'\" , '".join(parts) + "', '')"
+
     def login(self):
         self.browser.get(self.domain+'login')
         self.email = self.browser.find_element_by_name("email")
-        self.password = self.browser.find_element_by_name("password")   
+        self.password = self.browser.find_element_by_name("password")
         self.signin = self.browser.find_element_by_xpath(
             "//button[.='Sign In']")
         self.email.send_keys(self.correct_email)
