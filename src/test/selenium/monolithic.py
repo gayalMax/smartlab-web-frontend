@@ -49,7 +49,7 @@ class MonolithicTest(unittest.TestCase):
                 self.fail("{} failed ({}: {})".format(step, type(e), e))
 
     def setUp(self):
-        self.browser = webdriver.Chrome()
+        self.browser = webdriver.Chrome('C:/Users/sasmi/Downloads/New folder/chromedriver.exe')
         self.domain = 'http://localhost:3000/#/'
         self.browser.maximize_window()
         time.sleep(1)
