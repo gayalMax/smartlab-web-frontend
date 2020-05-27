@@ -3,7 +3,7 @@ import time
 import unittest
 
 
-class TestAddSupervisorPage(monolithic.MonolithicTest):
+class TestManageSupervisorsPages(monolithic.MonolithicTest):
     def step_01_go_to_the_add_supervisor_page(self):
         self.login()
         button = self.browser.find_element_by_xpath("//a[.='Add Supervisors']")
