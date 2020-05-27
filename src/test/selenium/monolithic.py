@@ -27,7 +27,7 @@ class MonolithicTest(unittest.TestCase):
     def login(self):
         self.browser.get(self.domain+'login')
         self.email = self.browser.find_element_by_name("email")
-        self.password = self.browser.find_element_by_name("password")
+        self.password = self.browser.find_element_by_name("password")   
         self.signin = self.browser.find_element_by_xpath(
             "//button[.='Sign In']")
         self.email.send_keys(self.correct_email)
