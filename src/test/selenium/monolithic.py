@@ -41,6 +41,17 @@ class MonolithicTest(unittest.TestCase):
         time.sleep(2)
         self.assertCurrentUrl(self.domain+'admin/dashboard')
 
+    def logout(self):
+        iconbutton = self.browser.find_element_by_xpath(
+            '//button[@class="MuiButtonBase-root MuiIconButton-root MuiIconButton-colorInherit"]')
+        iconbutton.click()
+        time.sleep(1)
+        logoutbutton = self.browser.find_element_by_xpath(
+            '//li[@role="menuitem"][@tabindex="-1"]')
+        logoutbutton.click()
+        time.sleep(2)
+        self.assertCurrentUrl(self.domain+'login')
+
     def assertPanelLocked(self, button_id, is_locked):
         locked = True
         button = self.browser.find_element_by_id(button_id)

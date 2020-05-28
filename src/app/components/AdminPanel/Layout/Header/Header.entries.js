@@ -37,6 +37,14 @@ const entries = [
     name: 'Manage Roles'
   },
   {
+    path: '/admin/administration/supervisor/add',
+    name: 'Add Supervisors'
+  },
+  {
+    path: '/admin/administration/superviosor/list',
+    name: 'View Supervisors'
+  },
+  {
     path: '/admin/lab/itemsets/create',
     name: 'Create Item Sets'
   },

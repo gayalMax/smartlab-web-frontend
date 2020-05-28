@@ -39,7 +39,9 @@ class TestViewUsersPage(monolithic.MonolithicTest):
             '//input[@placeholder="Search"]')
         self.assertEqual(search_input.get_attribute('value'), '')
 
-    
+    def step_06_logout(self):
+        self.logout()
+
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)

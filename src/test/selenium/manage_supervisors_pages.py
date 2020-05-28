@@ -131,6 +131,39 @@ class TestManageSupervisorsPages(monolithic.MonolithicTest):
         banner_msgs=self.browser.find_elements_by_xpath(self.xpath)
         self.assertTrue(len(banner_msgs) > 0)
 
+    def step_14_go_to_the_list_supervisor_page(self):
+        button = self.browser.find_element_by_xpath("//a[.='View Supervisors']")
+        button.click()
+        time.sleep(1)
+        self.assertCurrentUrl(
+            self.domain+'admin/administration/supervisor/list')
+    
+    def step_15_click_refresh_button_and_check_superviosor(self):
+        refresh = self.browser.find_element_by_xpath(
+            "//button[@title='Refresh Supervisors List']")
+        refresh.click()
+        time.sleep(1)
+        data = self.browser.find_elements_by_tag_name("td")
+        self.assertIn(self.email, [each.text.lower() for each in data])
+
+    def step_16_check_search_bar(self):
+        self.search_input = self.browser.find_element_by_xpath(
+            '//input[@placeholder="Search"]')
+        self.search_input.send_keys(self.email)
+        time.sleep(1)
+        data = self.browser.find_elements_by_tag_name("td")
+        result = [each.text.lower() for each in data]
+        self.assertIn(self.email, result)
+
+    def step_17_clear_search_bar_with_close_button(self):
+        close_button = self.browser.find_element_by_xpath(
+            '//div[@class="MuiInputAdornment-root MuiInputAdornment-positionEnd"]/button')
+        close_button.click()
+        self.assertEqual(self.search_input.get_attribute('value'), '')
+
+    def step_18_logout(self):
+        self.logout()
+
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)

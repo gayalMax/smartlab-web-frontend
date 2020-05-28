@@ -8,7 +8,7 @@ class TestHomePage(monolithic.MonolithicTest):
         self.browser.get(self.domain)
         self.assertBrowserTitle('open inventory')
 
-    def step_02_go_to_documentation_1(self):
+    def step_02_go_to_documentation(self):
         link = self.browser.find_element_by_xpath("//a[1][.='Documentation']")
         link.click()
         time.sleep(1)

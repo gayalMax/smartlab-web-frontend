@@ -75,6 +75,9 @@ class TestLoginPage(monolithic.MonolithicTest):
         self.signin.click()
         time.sleep(2)
         self.assertCurrentUrl(self.domain+'admin/dashboard')
+    
+    def step_12_logout(self):
+        self.logout()
 
 
 if __name__ == '__main__':

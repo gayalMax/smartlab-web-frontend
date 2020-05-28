@@ -139,6 +139,8 @@ class ManageRolesPages(monolithic.MonolithicTest):
         expected = "Role '"+self.role+"' deleted successfully."
         self.assertElementText(expected, element)
 
+    def step_17_logout(self):
+        self.logout()
 
 if __name__ == '__main__':
     unittest.main(verbosity=2)
