@@ -13,6 +13,7 @@ import AssignStaff from './AssignStaff/AssignStaff';
 import CreateItems from './CreateItems/CreateItems';
 import ViewLentItems from './ViewLentItems/ViewLentItems';
 import LendItems from './LendItems/LendItems';
+import ViewTemporaryItems from './ViewTemporaryItems/ViewTemporaryItems';
 
 export {
   Dashboard,
@@ -29,5 +30,6 @@ export {
   CreateItems,
   ViewItems,
   ViewLentItems,
-  LendItems
+  LendItems,
+  ViewTemporaryItems
 };

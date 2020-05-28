@@ -71,6 +71,10 @@ const entries = [
   {
     path: '/admin/items/generatebarcode',
     name: 'Generate Barcode'
+  },
+  {
+    path: '/admin/tempitems',
+    name: 'View Temporary Lent Items'
   }
 ];
 
