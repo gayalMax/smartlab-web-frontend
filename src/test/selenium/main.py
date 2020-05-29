@@ -4,6 +4,7 @@ import login_page
 import manage_roles_pages
 import view_users_page
 import manage_supervisors_pages
+import manage_laboratories_pages
 
 if __name__ == "__main__":
     test_classes_to_run = [
@@ -11,7 +12,8 @@ if __name__ == "__main__":
         login_page.TestLoginPage,
         manage_roles_pages.ManageRolesPages,
         view_users_page.TestViewUsersPage,
-        manage_supervisors_pages.TestManageSupervisorsPages
+        manage_supervisors_pages.TestManageSupervisorsPages,
+        manage_laboratories_pages.TestManageLaboratoriesPages
     ]
 
     loader = unittest.TestLoader()
