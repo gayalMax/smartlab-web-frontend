@@ -70,8 +70,8 @@ class MonolithicTest(unittest.TestCase):
         self.domain = 'http://localhost:3000/#/'
 
         # change email, password to valid email,pwds of the system
-        self.correct_email = 'admin@admin.com'
-        self.correct_password = 'ins'
+        self.correct_email = 'sasmithadasanayaka96@gmail.com'
+        self.correct_password = 'Abcd@123'
 
         self.browser.maximize_window()
         time.sleep(1)
