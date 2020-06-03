@@ -10,7 +10,6 @@ import {
   AiOutlineMinusSquare,
   AiOutlineSwap,
   AiOutlineClockCircle,
-  AiOutlineUser,
   AiOutlineDashboard,
   AiOutlineBlock,
   AiOutlineBarcode
@@ -30,11 +29,6 @@ const entries = [
         id: 'Dashboard',
         icon: <AiOutlineDashboard />,
         route: '/admin/dashboard'
-      },
-      {
-        id: 'My Profile',
-        icon: <AiOutlineUser />,
-        route: '#'
       }
     ]
   },
@@ -149,13 +143,13 @@ const entries = [
       {
         id: 'Temporary Handover',
         icon: <AiOutlineClockCircle />,
-        route: '#'
-      },
-      {
-        id: 'View lent Items',
-        icon: <AiOutlineFileText />,
-        route: '/admin/lentitems/list'
+        route: '/admin/tempitems'
       }
+      // {
+      //   id: 'View lent Items',
+      //   icon: <AiOutlineFileText />,
+      //   route: '/admin/lentitems/list'
+      // }
     ]
   }
 ];

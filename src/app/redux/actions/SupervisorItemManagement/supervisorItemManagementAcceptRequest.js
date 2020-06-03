@@ -6,6 +6,7 @@ import {
   SUPERVISOR_ITEM_MANAGEMENT_ACCEPT_REQUEST_SUCCESS
 } from '../../actionTypes';
 import { SERVER, SERVER_ACCEPT_REQUEST_ITEM } from '../serverConstants';
+import supervisorItemManagementSyncItem from './supervisorItemManagementSyncItem';
 
 /**
  * Action creator for beginning of requesting itemsets
@@ -42,7 +43,8 @@ export default function SupervisorItemManagementAcceptRequest(
 
     function onSuccess() {
       try {
-        dispatch(SupervisorItemManagementAcceptRequestSuccess('Succesfully accepted the request'));
+        dispatch(SupervisorItemManagementAcceptRequestSuccess('Successfully accepted the request'));
+        dispatch(supervisorItemManagementSyncItem(requestToken));
       } catch (err) {
         dispatch(
           SupervisorItemManagementAcceptRequestFailure(
@@ -53,9 +55,6 @@ export default function SupervisorItemManagementAcceptRequest(
     }
 
     try {
-      console.log(requestToken);
-      console.log(acceptValue);
-      console.log(acceptDeclineReason);
       const success = await axios.post(`${SERVER}${SERVER_ACCEPT_REQUEST_ITEM}`, {
         token: requestToken,
         value: acceptValue,
@@ -67,8 +66,6 @@ export default function SupervisorItemManagementAcceptRequest(
       }
       onSuccess();
     } catch (error) {
-      console.log(error.response);
-
       onError(error.response);
     }
   };

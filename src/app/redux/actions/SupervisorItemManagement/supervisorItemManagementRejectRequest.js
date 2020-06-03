@@ -6,6 +6,7 @@ import {
   SUPERVISOR_ITEM_MANAGEMENT_REJECT_REQUEST_SUCCESS
 } from '../../actionTypes';
 import { SERVER, SERVER_ACCEPT_REQUEST_ITEM } from '../serverConstants';
+import { supervisorItemManagementSyncItem } from '../SupervisorItemManagementActions';
 
 /**
  * Action creator for beginning of requesting itemsets
@@ -33,7 +34,6 @@ export default function SupervisorItemManagementRejectRequest(
 ) {
   return async dispatch => {
     dispatch(SupervisorItemManagementRejectRequestBegin());
-    console.log(requestToken);
     function onError(error) {
       let message;
       if (error) message = error.data.message;
@@ -43,7 +43,8 @@ export default function SupervisorItemManagementRejectRequest(
 
     function onSuccess() {
       try {
-        dispatch(SupervisorItemManagementRejectRequestSuccess('Succesfully rejected the request'));
+        dispatch(SupervisorItemManagementRejectRequestSuccess('Successfully rejected the request'));
+        dispatch(supervisorItemManagementSyncItem(requestToken));
       } catch (err) {
         dispatch(
           SupervisorItemManagementRejectRequestFailure(
@@ -62,7 +63,6 @@ export default function SupervisorItemManagementRejectRequest(
       if (success.status !== 200) {
         throw Error('Server responded with an error');
       }
-      console.log(success.status);
       onSuccess();
       complete();
     } catch (error) {

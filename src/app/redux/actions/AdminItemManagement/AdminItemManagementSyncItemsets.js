@@ -88,7 +88,6 @@ export default function AdminItemManagementSyncItemSets(token) {
 
         dispatch(AdminItemManagementSyncItemSetsSuccess({ itemsets: Itemsets }));
       } catch (err) {
-        console.log(err);
         dispatch(
           AdminItemManagementSyncItemSetsFailure(
             'Server connection failed. Please check your connection.'

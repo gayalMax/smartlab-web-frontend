@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import ViewLentItemsPresenter from './ViewLentItems.presenter';
+import ViewTemporaryItemsPresenter from './ViewTemporaryItems.presenter';
 import { AdminItemManagementSyncLentItems } from '../../../redux/actions/AdminItemManagementActions';
 
-function ViewLentItems() {
+function ViewTemporaryItems() {
   const dispatch = useDispatch();
   const {
     syncedLentItems,
@@ -26,7 +26,7 @@ function ViewLentItems() {
   };
 
   return (
-    <ViewLentItemsPresenter
+    <ViewTemporaryItemsPresenter
       lentItems={syncedLentItems}
       onRefresh={onRefresh}
       error={lentItemsSyncError}
@@ -35,4 +35,4 @@ function ViewLentItems() {
   );
 }
 
-export default ViewLentItems;
+export default ViewTemporaryItems;

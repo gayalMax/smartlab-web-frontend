@@ -8,19 +8,19 @@ import {
   IconButton,
   Tooltip,
   Toolbar,
-  Box
+  Box,
+  Chip
 } from '@material-ui/core';
 import { Image } from 'cloudinary-react';
 import { AiOutlineSync } from 'react-icons/ai';
 import AdvancedTable from '../../Common/AdvancedTable';
 import ProgressOverlay from '../../Common/ProgressOverlay';
 import SuccessErrorAlert from '../../Common/SuccessErrorAlert';
-import styles from './ViewLentItems.styles';
-import { capitalizeFirstLetter } from '../../../helpers/helpers';
+import styles from './ViewTemporaryItems.styles';
 
 const placeholder = 'https://via.placeholder.com/50';
 
-function ViewLentItemsPresenter({ classes, lentItems, onRefresh, error, loading }) {
+function ViewTemporaryItemsPresenter({ classes, lentItems, onRefresh, error, loading }) {
   return (
     <ProgressOverlay visible={loading}>
       <Paper className={classes.root}>
@@ -42,7 +42,6 @@ function ViewLentItemsPresenter({ classes, lentItems, onRefresh, error, loading 
         </AppBar>
         <Grid container direction="column" alignItems="stretch" className={classes.wrapper}>
           <SuccessErrorAlert success={null} error={error} />
-
           <Grid item>
             <Box px={2}>Below the list of items lent are given</Box>
           </Grid>
@@ -59,15 +58,33 @@ function ViewLentItemsPresenter({ classes, lentItems, onRefresh, error, loading 
                       <Image publicId={row.image} className={classes.image} />
                     )
                 },
-                { title: 'Lab', field: 'labTitle' },
-                { title: 'Serial Number', field: 'serialNumber' },
-                { title: 'Title', field: 'itemSetTitle', render: row => <b>{row.title}</b> }
+                {
+                  field: 'lab',
+                  title: 'Lab Title'
+                },
+                {
+                  field: 'title',
+                  title: 'Item Title'
+                },
+                {
+                  field: 'serialNumber',
+                  title: 'Serial Number',
+                  render: row => <Chip label={row.serialNumber} />
+                },
+                {
+                  field: 'status',
+                  title: 'Status',
+                  render: row => <Chip color="primary" label={row.status} />
+                }
               ]}
-              data={lentItems.map(({ labTitle, serialNumber, title, image }) => ({
-                labTitle: capitalizeFirstLetter(labTitle),
-                serialNumber,
-                title: capitalizeFirstLetter(title),
-                image
+              data={lentItems.map(({ lab, request }) => ({
+                id: request.id,
+                lab: lab.title,
+                title: request.Item.ItemSet.title,
+                serialNumber: request.Item.serialNumber,
+                image: request.Item.ItemSet.image,
+                status: request.status,
+                studentId: request.studentId
               }))}
               title=""
             />
@@ -78,15 +95,15 @@ function ViewLentItemsPresenter({ classes, lentItems, onRefresh, error, loading 
   );
 }
 
-ViewLentItemsPresenter.defaultProps = {
+ViewTemporaryItemsPresenter.defaultProps = {
   error: null
 };
 
-ViewLentItemsPresenter.propTypes = {
+ViewTemporaryItemsPresenter.propTypes = {
   classes: PropTypes.object.isRequired,
   lentItems: PropTypes.array.isRequired,
   onRefresh: PropTypes.func.isRequired,
   error: PropTypes.string,
   loading: PropTypes.bool.isRequired
 };
-export default withStyles(styles)(ViewLentItemsPresenter);
+export default withStyles(styles)(ViewTemporaryItemsPresenter);

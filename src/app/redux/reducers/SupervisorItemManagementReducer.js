@@ -33,7 +33,7 @@ const supervisorItemManagementReducer = produce((draft, { type, payload }) => {
       return draft;
     case SUPERVISOR_ITEM_MANAGEMENT_SYNC_ITEM_FAILURE:
       draft.itemsSyncLoading = false;
-      draft.itemsSyncErrorr = payload.error;
+      draft.itemsSyncError = payload.error;
       return draft;
     // accept request
     case SUPERVISOR_ITEM_MANAGEMENT_ACCEPT_REQUEST_BEGIN:
@@ -49,6 +49,7 @@ const supervisorItemManagementReducer = produce((draft, { type, payload }) => {
 
     case SUPERVISOR_ITEM_MANAGEMENT_ACCEPT_REQUEST_FAILURE:
       draft.acceptRequestLoading = false;
+      draft.acceptRequestSuccess = null;
       draft.acceptRequestError = payload.error;
       return draft;
 
@@ -67,6 +68,7 @@ const supervisorItemManagementReducer = produce((draft, { type, payload }) => {
 
     case SUPERVISOR_ITEM_MANAGEMENT_REJECT_REQUEST_FAILURE:
       draft.rejectRequestLoading = false;
+      draft.acceptRequestSuccess = null;
       draft.rejectRequestError = payload.error;
       return draft;
 

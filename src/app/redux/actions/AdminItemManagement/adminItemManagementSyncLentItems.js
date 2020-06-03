@@ -1,4 +1,4 @@
-// import axios from 'axios';
+import axios from 'axios';
 import * as yup from 'yup';
 
 import {
@@ -6,7 +6,7 @@ import {
   ADMIN_ITEM_MANAGEMENT_SYNC_LENT_ITEMS_SUCCESS,
   ADMIN_ITEM_MANAGEMENT_SYNC_LENT_ITEMS_FAILURE
 } from '../../actionTypes';
-// import { SERVER, SERVER_SYNC_LENTITEMS_ALL } from '../serverConstants';
+import { SERVER, SERVER_SYNC_LENTITEMS_TEMP } from '../serverConstants';
 
 /**
  * Action creator for beginning of requesting lent items
@@ -50,15 +50,25 @@ const responseSchema = yup.object().shape({
   lentItems: yup.array().of(
     yup.object().shape({
       id: yup.string().required(),
-      serialNumber: yup.string().required(),
-      ItemSet: yup
-        .object()
-        .shape({
+      title: yup.string().required(),
+      image: yup.string().required(),
+      requests: yup.array().of(
+        yup.object().shape({
           id: yup.string().required(),
-          title: yup.string().required(),
-          image: yup.string().nullable()
+          itemId: yup.string().required(),
+          studentId: yup.string().required(),
+          dueTime: yup.date().required(),
+          borrowedTime: yup.date().required(),
+          status: yup.string().required(),
+          Item: yup.object().shape({
+            serialNumber: yup.string().required(),
+            ItemSet: yup.object().shape({
+              title: yup.string().required(),
+              image: yup.string().required()
+            })
+          })
         })
-        .required()
+      )
     })
   )
 });
@@ -69,7 +79,7 @@ const responseSchema = yup.object().shape({
  * This is an action that will do the API call and fire other actions.
  * @returns Thunk for lab sign in API call
  */
-export default function AdminItemManagementSyncLentItems() {
+export default function AdminItemManagementSyncLentItems(token) {
   return async dispatch => {
     dispatch(AdminItemManagementSyncLentItemsBegin());
 
@@ -83,7 +93,22 @@ export default function AdminItemManagementSyncLentItems() {
     function onSuccess(success) {
       try {
         const { lentItems } = responseSchema.validateSync(success);
-        dispatch(AdminItemManagementSyncLentItemsSuccess({ lentItems }));
+        const items = [];
+        lentItems.forEach(lab => {
+          const labData = {
+            id: lab.id,
+            title: lab.title,
+            image: lab.image
+          };
+          lab.requests.forEach(request => {
+            items.push({
+              lab: labData,
+              request
+            });
+          });
+        });
+
+        dispatch(AdminItemManagementSyncLentItemsSuccess({ lentItems: items }));
       } catch (err) {
         dispatch(
           AdminItemManagementSyncLentItemsFailure(
@@ -94,11 +119,10 @@ export default function AdminItemManagementSyncLentItems() {
     }
 
     try {
-      // const success = await axios.get(`${SERVER}${SERVER_SYNC_LENTITEMS_ALL}`, {
-      //   headers: { token }
-      // });
-      const success = { lentItems: [] };
-      onSuccess(success);
+      const success = await axios.get(`${SERVER}${SERVER_SYNC_LENTITEMS_TEMP}`, {
+        headers: { token }
+      });
+      onSuccess(success.data);
     } catch (error) {
       onError(error.response);
     }

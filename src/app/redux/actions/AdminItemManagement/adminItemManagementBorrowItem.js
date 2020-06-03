@@ -6,6 +6,7 @@ import {
   ADMIN_ITEM_MANAGEMENT_BORROW_ITEM_SUCCESS
 } from '../../actionTypes';
 import { SERVER, SERVER_LEND_ITEM, SERVER_RETURN_ITEM } from '../serverConstants';
+import AdminItemManagementSyncItemRequests from './adminItemManagementSyncItemRequests';
 
 /**
  * Action creator for beginning of requesting lent items
@@ -43,7 +44,7 @@ const AdminItemManagementBorrowItemFailure = error => ({
  * This is an action that will do the API call and fire other actions.
  * @returns Thunk for sync item requests in API call
  */
-export default function AdminItemManagementBorrowItem(itemId, requestId, status, token) {
+export default function AdminItemManagementBorrowItem(userId, itemId, requestId, status, token) {
   return async dispatch => {
     dispatch(AdminItemManagementBorrowItemBegin());
 
@@ -55,42 +56,36 @@ export default function AdminItemManagementBorrowItem(itemId, requestId, status,
     }
 
     function onSuccess() {
-      dispatch(AdminItemManagementBorrowItemSuccess(`${itemId} item has lend`));
+      if (status === 'ACCEPTED') {
+        dispatch(AdminItemManagementBorrowItemSuccess('Item successfully lent.'));
+      } else {
+        dispatch(AdminItemManagementBorrowItemSuccess('Item successfully received.'));
+      }
+      dispatch(AdminItemManagementSyncItemRequests(userId, token));
     }
+
+    let endPoint;
     if (status === 'ACCEPTED') {
-      try {
-        const success = await axios.post(
-          `${SERVER}${SERVER_LEND_ITEM}`,
-          { itemId, requestId },
-          {
-            headers: { token }
-          }
-        );
-        if (success.status !== 200) {
-          throw Error('Server responded with an error');
-        }
-
-        onSuccess();
-      } catch (error) {
-        onError(error.response);
-      }
+      endPoint = `${SERVER}${SERVER_LEND_ITEM}`;
     } else {
-      try {
-        const success = await axios.post(
-          `${SERVER}${SERVER_RETURN_ITEM}`,
-          { itemId, requestId },
-          {
-            headers: { token }
-          }
-        );
-        if (success.status !== 200) {
-          throw Error('Server responded with an error');
-        }
+      endPoint = `${SERVER}${SERVER_RETURN_ITEM}`;
+    }
 
-        onSuccess();
-      } catch (error) {
-        onError(error.response);
+    try {
+      const success = await axios.post(
+        endPoint,
+        { itemId, requestId },
+        {
+          headers: { token }
+        }
+      );
+      if (success.status !== 200) {
+        throw Error('Server responded with an error');
       }
+
+      onSuccess();
+    } catch (error) {
+      onError(error.response);
     }
   };
 }

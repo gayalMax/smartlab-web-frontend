@@ -7,7 +7,7 @@ import {
   supervisorItemManagementSyncItem,
   supervisorItemManagementAcceptRequest,
   supervisorItemManagementRejectRequest
-} from '../../../redux/actions/SupervisorItemManagementActions';
+} from '../../redux/actions/SupervisorItemManagementActions';
 
 function RequestItem() {
   const dispatch = useDispatch();

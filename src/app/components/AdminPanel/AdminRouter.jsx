@@ -16,8 +16,12 @@ import {
   AssignStaff,
   CreateItems,
   ViewItems,
-  ViewLentItems,
-  LendItems
+<<<<<<< HEAD
+  // ViewLentItems,
+=======
+>>>>>>> master
+  LendItems,
+  ViewTemporaryItems
 } from '../AdminPages';
 import ViewLabs from '../AdminPages/ViewLabs/ViewLabs';
 import CreateSupervisors from '../AdminPages/CreateSupervisors/CreateSupervisors';
@@ -68,9 +72,12 @@ export default function AdminRouter() {
       <Route exact path={`${match.url}/items/list`}>
         <ViewItems />
       </Route>
-      <Route exact path={`${match.url}/lentitems/list`}>
+<<<<<<< HEAD
+      {/* <Route exact path={`${match.url}/lentitems/list`}>
         <ViewLentItems />
-      </Route>
+      </Route> */}
+=======
+>>>>>>> master
       <Route exact path={`${match.url}/lenditems/lend`}>
         <LendItems />
       </Route>
@@ -83,7 +90,9 @@ export default function AdminRouter() {
       <Route exact path={`${match.url}/administration/supervisor/list`}>
         <ViewSupervisors />
       </Route>
-
+      <Route exact path={`${match.url}/tempitems`}>
+        <ViewTemporaryItems />
+      </Route>
       <Route>
         <PageNotFound />
       </Route>
