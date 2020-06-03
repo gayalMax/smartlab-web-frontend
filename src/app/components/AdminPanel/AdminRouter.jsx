@@ -16,7 +16,10 @@ import {
   AssignStaff,
   CreateItems,
   ViewItems,
+<<<<<<< HEAD
   // ViewLentItems,
+=======
+>>>>>>> master
   LendItems,
   ViewTemporaryItems
 } from '../AdminPages';
@@ -69,9 +72,12 @@ export default function AdminRouter() {
       <Route exact path={`${match.url}/items/list`}>
         <ViewItems />
       </Route>
+<<<<<<< HEAD
       {/* <Route exact path={`${match.url}/lentitems/list`}>
         <ViewLentItems />
       </Route> */}
+=======
+>>>>>>> master
       <Route exact path={`${match.url}/lenditems/lend`}>
         <LendItems />
       </Route>

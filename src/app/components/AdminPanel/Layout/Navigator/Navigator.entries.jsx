@@ -10,7 +10,6 @@ import {
   AiOutlineMinusSquare,
   AiOutlineSwap,
   AiOutlineClockCircle,
-  AiOutlineUser,
   AiOutlineDashboard,
   AiOutlineBlock,
   AiOutlineBarcode
@@ -30,11 +29,6 @@ const entries = [
         id: 'Dashboard',
         icon: <AiOutlineDashboard />,
         route: '/admin/dashboard'
-      },
-      {
-        id: 'My Profile',
-        icon: <AiOutlineUser />,
-        route: '#'
       }
     ]
   },

@@ -11,7 +11,10 @@ import ViewItemSets from './ViewItemSets/ViewItemSets';
 import ViewItems from './ViewItems/ViewItems';
 import AssignStaff from './AssignStaff/AssignStaff';
 import CreateItems from './CreateItems/CreateItems';
+<<<<<<< HEAD
 // import ViewLentItems from './ViewLentItems/ViewLentItems';
+=======
+>>>>>>> master
 import LendItems from './LendItems/LendItems';
 import ViewTemporaryItems from './ViewTemporaryItems/ViewTemporaryItems';
 
@@ -29,7 +32,10 @@ export {
   ViewItemSets,
   CreateItems,
   ViewItems,
+<<<<<<< HEAD
   // ViewLentItems,
+=======
+>>>>>>> master
   LendItems,
   ViewTemporaryItems
 };

@@ -29,6 +29,14 @@ const entries = [
     name: 'Retract Invitations'
   },
   {
+    path: '/admin/administration/supervisor/add',
+    name: 'Add Supervisors'
+  },
+  {
+    path: '/admin/administration/supervisor/list',
+    name: 'View Supervisors'
+  },
+  {
     path: '/admin/administration/roles/create',
     name: 'Create New Role'
   },
