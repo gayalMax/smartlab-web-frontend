@@ -70,8 +70,7 @@ const responseSchema = yup.object().shape({
         .required(),
       ItemAttributes: yup.array().of(
         yup.object().shape({
-          key: yup.string().required(),
-          value: yup.string().required()
+          key: yup.string().required()
         })
       )
     })
