@@ -24,12 +24,12 @@ function LendItems() {
     token: state.auth.token,
     userId: state.auth.user.id
   }));
-  const addLentItem = (requestId, itemId, status) => () => {
-    dispatch(AdminItemManagementBorrowItem(requestId, itemId, status, token));
+  const addLentItem = (requestId, itemId, status) => {
+    dispatch(AdminItemManagementBorrowItem(userId, itemId, requestId, status, token));
   };
 
-  const returnLentItem = (requestId, itemId, status) => () => {
-    dispatch(AdminItemManagementBorrowItem(requestId, itemId, status, token));
+  const returnLentItem = (requestId, itemId, status) => {
+    dispatch(AdminItemManagementBorrowItem(userId, itemId, requestId, status, token));
   };
 
   useEffect(() => {
@@ -45,6 +45,10 @@ function LendItems() {
     itemRequestsSyncError
   ]);
 
+  const onRefresh = () => {
+    dispatch(AdminItemManagementSyncItemRequests(userId, token));
+  };
+
   return (
     <LendItemsPresenter
       loading={itemRequestsSyncloading || itemBorrowLoading}
@@ -53,6 +57,7 @@ function LendItems() {
       returnLentItem={returnLentItem}
       error={itemRequestsSyncError || itemBorrowFailure}
       success={itemBorrowSuccess}
+      onRefresh={onRefresh}
     />
   );
 }

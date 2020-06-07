@@ -1,9 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Paper, AppBar, Grid, Toolbar, withStyles } from '@material-ui/core';
+import {
+  Paper,
+  AppBar,
+  Grid,
+  Toolbar,
+  withStyles,
+  Chip,
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Tooltip,
+  IconButton
+} from '@material-ui/core';
+import moment from 'moment';
+import { AiOutlineBars, AiOutlineSync } from 'react-icons/ai';
 import styles from './LendItems.styles';
 import AdvancedTable from '../../Common/AdvancedTable';
-import MaterialTable from './MaterialTable';
 import SuccessErrorAlert from '../../Common/SuccessErrorAlert';
 import ProgressOverlay from '../../Common/ProgressOverlay';
 
@@ -14,8 +29,24 @@ function LendItemsPresenter({
   returnLentItem,
   loading,
   error,
-  success
+  success,
+  onRefresh
 }) {
+  const [request, setRequest] = useState(null);
+
+  const requestDialog = content => () => setRequest(content);
+  const closeDialog = () => setRequest(null);
+
+  const dateLabel = time => {
+    return time === null ? (
+      'Not Yet'
+    ) : (
+      <Tooltip title={time.toString()}>
+        <i>{moment(time).fromNow()}</i>
+      </Tooltip>
+    );
+  };
+
   return (
     <ProgressOverlay visible={loading}>
       <Paper className={classes.root}>
@@ -26,57 +57,168 @@ function LendItemsPresenter({
                 <p className={classes.title}>Lend/Receive</p>
               </Grid>
             </Grid>
+            <Grid item>
+              <Tooltip title="Refresh Item List">
+                <IconButton onClick={onRefresh}>
+                  <AiOutlineSync />
+                </IconButton>
+              </Tooltip>
+            </Grid>
           </Toolbar>
         </AppBar>
         <Grid className={classes.wrapper} container direction="column" alignItems="stretch">
           <SuccessErrorAlert success={success} error={error} />
           <AdvancedTable
-            // TODO : stop sorting
+            grouping
             columns={[
               {
-                title: 'Student First Name',
-                field: 'first_name'
-              },
-              {
-                title: 'Student Last Name',
-                field: 'last_name'
-              },
-              {
-                title: 'Student Email',
-                field: 'email'
-              },
-              {
                 field: 'requestStatus',
-                title: 'Request status'
-              }
-            ]}
-            data={itemRequests.map(({ id, User, status, RequestItems }) => ({
-              id,
-              first_name: User.firstName,
-              last_name: User.lastName,
-              email: User.email,
-              requestStatus: status,
-              RequestItems
-            }))}
-            detailPanel={[
+                title: 'Request status',
+                searchable: false,
+                render: row => (
+                  <Chip
+                    color="primary"
+                    style={{ margin: '2px' }}
+                    size="small"
+                    label={row.requestStatus}
+                  />
+                )
+              },
               {
-                tooltip: 'Show Request Items',
-                render: rowData => {
-                  return (
-                    <MaterialTable
-                      requestId={rowData.id}
-                      rowData={rowData.RequestItems}
-                      addLentItem={addLentItem}
-                      returnLentItem={returnLentItem}
-                    />
-                  );
-                }
+                title: 'Lab',
+                field: 'lab'
+              },
+              {
+                title: 'Supervisor',
+                field: 'supervisor'
+              },
+              {
+                title: 'Student',
+                field: 'name'
+              },
+
+              {
+                sorting: false,
+                type: 'numeric',
+                render: row => (
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={requestDialog(row)}
+                    startIcon={<AiOutlineBars />}
+                  >
+                    Items
+                  </Button>
+                )
               }
             ]}
+            data={itemRequests.map(({ id, User, status, RequestItems, Supervisor }) => ({
+              id,
+              name: `${User.firstName} ${User.lastName} (${User.email})`,
+              lab: RequestItems[0] && RequestItems[0].Item.Lab.title,
+              requestStatus: status,
+              RequestItems,
+              supervisor: `${Supervisor.firstName} ${Supervisor.lastName} (${Supervisor.email})`
+            }))}
             title=""
           />
         </Grid>
       </Paper>
+
+      {request && (
+        <Dialog open={request != null} maxWidth="lg" onClose={closeDialog}>
+          <DialogTitle>Items</DialogTitle>
+          <DialogContent>
+            <AdvancedTable
+              columns={[
+                {
+                  title: 'Item Name',
+                  field: 'item'
+                },
+                {
+                  title: 'Serial Number',
+                  field: 'serialNumber',
+                  render: row => <Chip size="small" label={row.serialNumber} />
+                },
+                {
+                  title: 'Status',
+                  field: 'status',
+                  render: row => <Chip size="small" label={row.status} />
+                },
+                {
+                  title: 'Borrowed Date',
+                  field: 'borrowedDate',
+                  searchable: false,
+                  render: row => dateLabel(row.borrowedDate)
+                },
+                {
+                  title: 'Due Date',
+                  field: 'dueDate',
+                  searchable: false,
+                  render: row => dateLabel(row.dueDate)
+                },
+                {
+                  title: 'Returned Date',
+                  field: 'returnedDate',
+                  searchable: false,
+                  render: row => dateLabel(row.returnedDate)
+                },
+                {
+                  title: 'Actions',
+                  type: 'numeric',
+                  render: row => {
+                    if (row.status === 'ACCEPTED' && row.borrowedDate === null) {
+                      return (
+                        <Button
+                          variant="contained"
+                          color="secondary"
+                          onClick={() => {
+                            addLentItem(request.id, row.id, row.status);
+                            closeDialog();
+                          }}
+                        >
+                          Lend
+                        </Button>
+                      );
+                    }
+
+                    if (row.status === 'BORROWED') {
+                      return (
+                        <Button
+                          variant="contained"
+                          color="secondary"
+                          onClick={() => {
+                            returnLentItem(request.id, row.id, row.status);
+                            closeDialog();
+                          }}
+                        >
+                          Receive
+                        </Button>
+                      );
+                    }
+                    return '';
+                  }
+                }
+              ]}
+              data={request.RequestItems.map(item => ({
+                id: item.Item.id,
+                item: item.Item.ItemSet.title,
+                serialNumber: item.Item.serialNumber,
+                status: item.status,
+                borrowedDate: item.borrowedDate,
+                dueDate: item.dueDate,
+                returnedDate: item.returnedDate
+              }))}
+              title=""
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={closeDialog} color="primary">
+              Close
+            </Button>
+          </DialogActions>
+        </Dialog>
+      )}
     </ProgressOverlay>
   );
 }
@@ -92,7 +234,8 @@ LendItemsPresenter.propTypes = {
   returnLentItem: PropTypes.func.isRequired,
   error: PropTypes.string,
   success: PropTypes.bool,
-  loading: PropTypes.bool.isRequired
+  loading: PropTypes.bool.isRequired,
+  onRefresh: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(LendItemsPresenter);

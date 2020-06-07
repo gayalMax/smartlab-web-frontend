@@ -82,6 +82,7 @@ export default function AdminItemManagementSyncItemRequests(userId, token) {
         const { data } = value;
         data.forEach(entry => itemRequests.push(entry));
       });
+
       onSuccess(itemRequests);
     } catch (error) {
       onError(error.response);

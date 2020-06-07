@@ -73,14 +73,12 @@ function CreateItems() {
     const complete = () => {
       setSubmitting(false);
     };
-    values.attributes.forEach((attribute, index) => {
-      if (!attribute.editable) {
-        values.attributes.splice(index, 1);
-      }
-    });
+
+    const filteredAttributes = values.attributes.filter(attribute => attribute.editable);
+
     const itemValues = {
       ...values,
-      attributes: values.attributes.map(attribute => ({
+      attributes: filteredAttributes.map(attribute => ({
         key: attribute.key,
         value: attribute.value
       }))

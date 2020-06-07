@@ -81,7 +81,6 @@ export default function authRequestInvitation(invitationToken) {
     function onSuccess(success) {
       try {
         const validatedData = responseSchema.validateSync(success.data);
-        console.log(validatedData);
         dispatch(authRequestInvitationSuccess(validatedData));
       } catch (err) {
         dispatch(

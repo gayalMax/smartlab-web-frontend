@@ -29,7 +29,7 @@ function GenerateBarcode({ classes }) {
     const digits = 15;
     const pad = 10 ** (digits - 1);
     const bc = Math.floor(pad + Math.random() * 9 * pad);
-    return `GEN${bc}`;
+    return `gen${bc}`;
   };
 
   const [barcode, setBarcode] = useState(getNewBarcode());

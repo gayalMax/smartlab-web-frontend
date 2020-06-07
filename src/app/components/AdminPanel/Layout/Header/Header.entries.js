@@ -29,6 +29,14 @@ const entries = [
     name: 'Retract Invitations'
   },
   {
+    path: '/admin/administration/supervisor/add',
+    name: 'Add Supervisors'
+  },
+  {
+    path: '/admin/administration/supervisor/list',
+    name: 'View Supervisors'
+  },
+  {
     path: '/admin/administration/roles/create',
     name: 'Create New Role'
   },
@@ -79,6 +87,10 @@ const entries = [
   {
     path: '/admin/items/generatebarcode',
     name: 'Generate Barcode'
+  },
+  {
+    path: '/admin/tempitems',
+    name: 'View Temporary Lent Items'
   }
 ];
 

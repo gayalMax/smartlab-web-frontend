@@ -15,16 +15,17 @@ import {
   DialogContentText,
   // ListItem,
   // ListItemText,
-  Button
+  Button,
+  Paper
 } from '@material-ui/core';
 // import AssignmentIcon from '@material-ui/icons/Assignment';
 // import { Image } from 'cloudinary-react';
 import { TextField } from 'formik-material-ui';
 import { Formik, Form, Field } from 'formik';
 import styles from './RequestItem.styles';
-import ProgressOverlay from '../../Common/ProgressOverlay';
-import SuccessErrorAlert from '../../Common/SuccessErrorAlert';
-import AdvancedTable from '../../Common/AdvancedTable';
+import ProgressOverlay from '../Common/ProgressOverlay';
+import SuccessErrorAlert from '../Common/SuccessErrorAlert';
+import AdvancedTable from '../Common/AdvancedTable';
 
 // const placeholder = 'https://via.placeholder.com/50';
 
@@ -56,97 +57,99 @@ function RequestItemPresenter({
         justify="center"
         style={{ minHeight: '100vh' }}
       >
-        <Grid container direction="column" alignItems="center" className={classes.wrapper}>
-          <SuccessErrorAlert success={success} error={error} />
+        <Paper>
+          <Grid container direction="column" alignItems="center" className={classes.wrapper}>
+            <SuccessErrorAlert success={success} error={error} />
 
-          <Grid item>
-            <Box px={4} pb={2}>
-              <AppBar position="static" color="transparent" elevation={0}>
-                <Toolbar>
-                  <Grid container spacing={2} alignItems="center">
-                    <Grid item xs>
-                      <p className={classes.title}> Requested Items</p>
-                    </Grid>
-                  </Grid>
-                  <Grid item>
-                    <Tooltip title="Refresh Item List">
-                      <IconButton onClick={onRefresh}>
-                        <AiOutlineSync />
-                      </IconButton>
-                    </Tooltip>
-                  </Grid>
-                </Toolbar>
-              </AppBar>
-            </Box>
-          </Grid>
-
-          <Grid item>
-            <AdvancedTable
-              columns={[
-                {
-                  title: 'Item Id',
-                  field: 'id',
-                  cellStyle: { paddingLeft: '0px' },
-                  sorting: false
-                },
-                {
-                  title: 'Lab',
-                  field: 'lab',
-                  cellStyle: { paddingLeft: '0px' },
-                  sorting: false
-                },
-                {
-                  title: 'Reason',
-                  field: 'reason',
-                  cellStyle: { paddingLeft: '0px' },
-                  sorting: false
-                },
-                {
-                  title: 'Email Address',
-                  field: 'user',
-                  cellStyle: { paddingLeft: '0px' },
-                  sorting: false
-                }
-              ]}
-              data={[
-                {
-                  id: items.id,
-                  reason: items.reason,
-                  lab: items.Lab && items.Lab.title,
-                  user: items.User && items.User.email
-                }
-              ]}
-              title=""
-            />
-          </Grid>
-
-          <Grid item container direction="column" alignItems="center">
             <Grid item>
-              <Box>
-                <Tooltip title="Accept the requested items">
-                  <Button
-                    className={classes.margin}
-                    variant="contained"
-                    color="primary"
-                    onClick={onAccept}
-                  >
-                    Accept
-                  </Button>
-                </Tooltip>
-                <Tooltip title="Reject the requested items">
-                  <Button
-                    className={classes.margin}
-                    variant="contained"
-                    color="primary"
-                    onClick={openDialog}
-                  >
-                    Reject
-                  </Button>
-                </Tooltip>
+              <Box px={4} pb={2}>
+                <AppBar position="static" color="transparent" elevation={0}>
+                  <Toolbar>
+                    <Grid container spacing={2} alignItems="center">
+                      <Grid item xs>
+                        <p className={classes.title}> Requested Items</p>
+                      </Grid>
+                    </Grid>
+                    <Grid item>
+                      <Tooltip title="Refresh Item List">
+                        <IconButton onClick={onRefresh}>
+                          <AiOutlineSync />
+                        </IconButton>
+                      </Tooltip>
+                    </Grid>
+                  </Toolbar>
+                </AppBar>
               </Box>
             </Grid>
+
+            <Grid item>
+              <AdvancedTable
+                columns={[
+                  {
+                    title: 'Item Id',
+                    field: 'id',
+                    cellStyle: { paddingLeft: '0px' },
+                    sorting: false
+                  },
+                  {
+                    title: 'Lab',
+                    field: 'lab',
+                    cellStyle: { paddingLeft: '0px' },
+                    sorting: false
+                  },
+                  {
+                    title: 'Reason',
+                    field: 'reason',
+                    cellStyle: { paddingLeft: '0px' },
+                    sorting: false
+                  },
+                  {
+                    title: 'Email Address',
+                    field: 'user',
+                    cellStyle: { paddingLeft: '0px' },
+                    sorting: false
+                  }
+                ]}
+                data={[
+                  {
+                    id: items.id,
+                    reason: items.reason,
+                    lab: items.Lab && items.Lab.title,
+                    user: items.User && items.User.email
+                  }
+                ]}
+                title=""
+              />
+            </Grid>
+
+            <Grid item container direction="column" alignItems="center">
+              <Grid item>
+                <Box>
+                  <Tooltip title="Accept the requested items">
+                    <Button
+                      className={classes.margin}
+                      variant="contained"
+                      color="primary"
+                      onClick={onAccept}
+                    >
+                      Accept
+                    </Button>
+                  </Tooltip>
+                  <Tooltip title="Reject the requested items">
+                    <Button
+                      className={classes.margin}
+                      variant="contained"
+                      color="primary"
+                      onClick={openDialog}
+                    >
+                      Reject
+                    </Button>
+                  </Tooltip>
+                </Box>
+              </Grid>
+            </Grid>
           </Grid>
-        </Grid>
+        </Paper>
 
         <Dialog open={open} onClose={closeDialog} scroll="paper">
           <DialogTitle id="alert-dialog-title">Are you sure to reject the request</DialogTitle>

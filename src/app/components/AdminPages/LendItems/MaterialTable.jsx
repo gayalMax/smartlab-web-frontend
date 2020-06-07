@@ -2,41 +2,48 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
+import { Chip, Tooltip } from '@material-ui/core';
+import moment from 'moment';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
-import { IconButton, Tooltip } from '@material-ui/core';
-import { AiOutlineFileAdd, AiOutlineDelete } from 'react-icons/ai';
+import Button from '@material-ui/core/Button';
 import styles from './LendItems.styles';
 
 function SimpleTable({ rowData, requestId, classes, addLentItem, returnLentItem }) {
-  const handleAddIconVisibility = (status, borrowedDate) => {
-    if (status === 'ACCEPTED' && borrowedDate === null) {
-      return false;
-    }
-    return true;
+  const showLendButton = (status, borrowedDate) => {
+    return status === 'ACCEPTED' && borrowedDate === null;
   };
 
-  const handleRemoveIconVisibility = status => {
-    if (status === 'BORROWED') {
-      return false;
-    }
-    return true;
+  const showReturnButton = status => {
+    return status === 'BORROWED';
+  };
+
+  const dateLabel = time => {
+    return time === null ? (
+      'Not Yet'
+    ) : (
+      <Tooltip title={time.toString()}>
+        <i>{moment(time).fromNow()}</i>
+      </Tooltip>
+    );
   };
 
   return (
-    <TableContainer component={Paper}>
-      <Table className={classes.table} aria-label="simple table">
+    <TableContainer>
+      <Table className={classes.table}>
         <TableHead>
           <TableRow>
             <TableCell>
               <b>Item</b>
             </TableCell>
             <TableCell>
-              <b>ItemStatus</b>
+              <b>SN</b>
+            </TableCell>
+            <TableCell>
+              <b>Status</b>
             </TableCell>
             <TableCell align="right">
               <b>Borrowed&nbsp;Date</b>
@@ -47,6 +54,9 @@ function SimpleTable({ rowData, requestId, classes, addLentItem, returnLentItem 
             <TableCell align="right">
               <b>Returned&nbsp;Date</b>
             </TableCell>
+            <TableCell>
+              <b>Action</b>
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -55,39 +65,35 @@ function SimpleTable({ rowData, requestId, classes, addLentItem, returnLentItem 
               <TableCell component="th" scope="row">
                 {row.Item.ItemSet.title}
               </TableCell>
-              <TableCell component="th" scope="row">
-                {row.status}
-              </TableCell>
-              <TableCell align="right">
-                {row.borrowedDate === null ? 'Not Yet' : row.borrowedDate}
-              </TableCell>
-              <TableCell align="right">{row.dueDate === null ? 'Not Yet' : row.dueDate}</TableCell>
-              <TableCell align="right">
-                {row.returnedDate === null ? 'Not Yet' : row.returnedDate}
+              <TableCell>
+                <Chip size="small" label={row.Item.serialNumber} />
               </TableCell>
               <TableCell>
-                <Tooltip title="Lend Item">
-                  <span>
-                    <IconButton
-                      disabled={handleAddIconVisibility(row.status, row.borrowedDate)}
-                      onClick={addLentItem(requestId, row.Item.id, row.status)}
-                    >
-                      <AiOutlineFileAdd />
-                    </IconButton>
-                  </span>
-                </Tooltip>
+                <Chip size="small" label={row.status} />
               </TableCell>
+              <TableCell align="right">{dateLabel(row.borrowedDate)}</TableCell>
+              <TableCell align="right">{dateLabel(row.dueDate)}</TableCell>
+              <TableCell align="right">{dateLabel(row.returnedDate)}</TableCell>
               <TableCell>
-                <Tooltip title="Return Item">
-                  <span>
-                    <IconButton
-                      disabled={handleRemoveIconVisibility(row.status)}
-                      onClick={returnLentItem(requestId, row.Item.id, row.status)}
-                    >
-                      <AiOutlineDelete />
-                    </IconButton>
-                  </span>
-                </Tooltip>
+                {showLendButton(row.status, row.borrowedDate) && (
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={addLentItem(requestId, row.Item.id, row.status)}
+                  >
+                    Lend
+                  </Button>
+                )}
+
+                {showReturnButton(row.status) && (
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={returnLentItem(requestId, row.Item.id, row.status)}
+                  >
+                    Receive
+                  </Button>
+                )}
               </TableCell>
             </TableRow>
           ))}
