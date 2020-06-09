@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { PropTypes } from 'prop-types';
 import { useSelector } from 'react-redux';
 import { Switch, Route, Redirect, HashRouter } from 'react-router-dom';
@@ -11,6 +11,7 @@ import {
   HomePage,
   SupervisorView
 } from './components';
+import { SERVER } from './redux/actions/serverConstants';
 
 function App() {
   return (
@@ -21,6 +22,9 @@ function App() {
         </Route>
         <Route exact path="/register/:registrationToken">
           <SignUpScreen />
+        </Route>
+        <Route path="/superadmin">
+          <DirectRedirect url={`${SERVER}/admin`} />
         </Route>
         <PrivateRoute path="/admin">
           <AdminPanel />
@@ -67,6 +71,18 @@ function PrivateRoute({ children, ...rest }) {
     />
   );
 }
+
+function DirectRedirect({ url }) {
+  useEffect(() => {
+    window.location.href = url;
+  }, [url]);
+
+  return <div />;
+}
+
+DirectRedirect.propTypes = {
+  url: PropTypes.node.isRequired
+};
 
 PrivateRoute.propTypes = {
   children: PropTypes.node.isRequired

@@ -12,7 +12,8 @@ import {
   AiOutlineClockCircle,
   AiOutlineDashboard,
   AiOutlineBlock,
-  AiOutlineBarcode
+  AiOutlineBarcode,
+  AiOutlineCode
 } from 'react-icons/ai';
 
 /**
@@ -22,7 +23,7 @@ import {
  */
 const entries = [
   {
-    id: 'Account',
+    id: 'Dashboard',
     permissions: null,
     children: [
       {
@@ -33,7 +34,18 @@ const entries = [
     ]
   },
   {
-    id: 'Administration',
+    id: 'Site Administration',
+    permissions: ['ADMINISTRATOR'],
+    children: [
+      {
+        id: 'Super Admin Dashboard',
+        icon: <AiOutlineCode />,
+        route: '/superadmin'
+      }
+    ]
+  },
+  {
+    id: 'User Administration',
     permissions: ['ADMINISTRATOR'],
     children: [
       {
