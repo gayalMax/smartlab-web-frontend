@@ -3,7 +3,7 @@ import time
 import unittest
 
 
-class Test(monolithic.MonolithicTest):
+class TestRetractInvitationPage(monolithic.MonolithicTest):
     def step_01_go_to_the_retract_invitation_page(self):
         self.login()
         button = self.browser.find_element_by_xpath(

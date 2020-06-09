@@ -9,7 +9,7 @@ class TestCreateItemSetsPage(monolithic.MonolithicTest):
         button = self.browser.find_element_by_xpath(
             "//a[.='Create Item Sets']")
         button.click()
-        time.sleep(1)
+        time.sleep(2)
         self.assertCurrentUrl(self.domain+'admin/lab/itemsets/create')
 
     def step_02_find_all_fields(self):
@@ -60,7 +60,7 @@ class TestCreateItemSetsPage(monolithic.MonolithicTest):
         time.sleep(1)
         self.assertCurrentUrl(self.currentUrl)
 
-    def stetp_09_create_itemset_success(self):
+    def step_09_create_itemset_success(self):
         self.clearInputField(self.attribute_value)
         self.item_set_title.send_keys(self.title)
         self.attribute_name.send_keys(self.attribute)

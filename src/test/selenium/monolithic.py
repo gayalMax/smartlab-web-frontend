@@ -82,12 +82,15 @@ class MonolithicTest(unittest.TestCase):
                 self.fail("{} failed ({}: {})".format(step, type(e), e))
 
     def setUp(self):
-        self.browser = webdriver.Chrome('C:/Users/sasmi/Downloads/New folder/chromedriver.exe')
-        self.domain = 'http://localhost:3000/#/'
+        #for linux
+        self.browser = webdriver.Chrome()
+        #for Windows specify the path
+        # self.browser = webdriver.Chrome('C:/Users/sasmi/Downloads/New folder/chromedriver.exe')
+        self.domain = 'https://openinventoryorg.github.io/web-frontend/#/'
 
         # change email, password to valid email,pwds of the system
-        self.correct_email = 'sasmithadasanayaka96@gmail.com'
-        self.correct_password = 'Abcd@123'
+        self.correct_email = 'openinventorysystem@gmail.com'
+        self.correct_password = 'password'
 
         self.browser.maximize_window()
         time.sleep(1)

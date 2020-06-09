@@ -4,10 +4,11 @@ import unittest
 from selenium.webdriver.common.keys import Keys
 
 
-class Test(monolithic.MonolithicTest):
+class TestInviteUsersPage(monolithic.MonolithicTest):
     def step_01_go_to_the_invite_user_page(self):
         self.login()
         button = self.browser.find_element_by_xpath("//a[.='Invite Users']")
+        button.location_once_scrolled_into_view
         button.click()
         time.sleep(1)
         self.assertCurrentUrl(

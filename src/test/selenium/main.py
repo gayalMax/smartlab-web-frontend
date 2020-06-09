@@ -5,6 +5,11 @@ import manage_roles_pages
 import view_users_page
 import manage_supervisors_pages
 import manage_laboratories_pages
+import create_item_sets_pages
+import create_items_pages
+import invite_users_page
+import retract_invitaitons_page
+import temporary_handover_page
 
 if __name__ == "__main__":
     test_classes_to_run = [
@@ -13,7 +18,12 @@ if __name__ == "__main__":
         manage_roles_pages.ManageRolesPages,
         view_users_page.TestViewUsersPage,
         manage_supervisors_pages.TestManageSupervisorsPages,
-        manage_laboratories_pages.TestManageLaboratoriesPages
+        manage_laboratories_pages.TestManageLaboratoriesPages,
+        create_item_sets_pages.TestCreateItemSetsPage,
+        create_items_pages.TestCreateItemSetsPage,
+        invite_users_page.TestInviteUsersPage,
+        retract_invitaitons_page.TestRetractInvitationPage,
+        temporary_handover_page.TestTemporaryHandoverPage
     ]
 
     loader = unittest.TestLoader()
