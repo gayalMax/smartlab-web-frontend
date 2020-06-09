@@ -58,12 +58,6 @@ function HeaderPresenter({ classes, handleEvent, headerState }) {
               open={Boolean(headerState.anchor)}
               onClose={handleEvent(EVENTS.MENU_CLOSE)}
             >
-              <MenuItem key="profile" onClick={handleEvent(EVENTS.MENU_CLOSE)}>
-                <ListItemIcon>
-                  <AiOutlineUser />
-                </ListItemIcon>
-                <Typography variant="inherit">My Profile</Typography>
-              </MenuItem>
               <MenuItem key="logout" onClick={handleEvent(EVENTS.SIGN_OUT)}>
                 <ListItemIcon>
                   <AiOutlineLogout />
