@@ -56,11 +56,10 @@ function ProductValues(props) {
             <div className={classes.item}>
               <AiOutlineCompass className={classes.icon} />
               <Typography variant="h5" className={classes.title}>
-                The best luxury hotels
+                Time Saving
               </Typography>
               <Typography className={classes.text}>
-                From the latest trendy boutique hotel to the iconic palace with XXL pool , go for a
-                mini-vacation just a few subway stops away from your home.
+                This is the time to reduce paperwork for inventory management system and save our time.
               </Typography>
             </div>
           </Grid>
@@ -68,11 +67,10 @@ function ProductValues(props) {
             <div className={classes.item}>
               <AiOutlineCode className={classes.icon} />
               <Typography variant="h5" className={classes.title}>
-                New experiences
+                More efficient
               </Typography>
               <Typography className={classes.text}>
-                Privatize a pool, take a Japanese bath or wake up in 900m2 of garden… your Sundays
-                will not be alike.
+                Open inventory system supports more efficient way to lend a lab item without going place to place.
               </Typography>
             </div>
           </Grid>
@@ -80,11 +78,10 @@ function ProductValues(props) {
             <div className={classes.item}>
               <AiOutlineApple className={classes.icon} />
               <Typography variant="h5" className={classes.title}>
-                Exclusive rates
+                Free of charge
               </Typography>
               <Typography className={classes.text}>
-                By registering, you will access specially negotiated rates that you will not find
-                anywhere else.
+                Open inventory system is open source project. So anyone can experience this application.
               </Typography>
             </div>
           </Grid>
