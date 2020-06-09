@@ -11,7 +11,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import { Tooltip, Menu, MenuItem, ListItemIcon } from '@material-ui/core';
-import { AiOutlineUser, AiOutlineLogout } from 'react-icons/ai';
+import { AiOutlineLogout } from 'react-icons/ai';
 
 import { styles, docsLink } from './Header.styles';
 import * as EVENTS from './Header.events';
