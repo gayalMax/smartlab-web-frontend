@@ -51,7 +51,7 @@ const responseSchema = yup.object().shape({
     yup.object().shape({
       id: yup.string().required(),
       title: yup.string().required(),
-      image: yup.string().required(),
+      image: yup.string().nullable(),
       requests: yup.array().of(
         yup.object().shape({
           id: yup.string().required(),
@@ -64,7 +64,7 @@ const responseSchema = yup.object().shape({
             serialNumber: yup.string().required(),
             ItemSet: yup.object().shape({
               title: yup.string().required(),
-              image: yup.string().required()
+              image: yup.string().nullable()
             })
           })
         })
