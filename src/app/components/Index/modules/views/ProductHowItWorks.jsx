@@ -77,7 +77,7 @@ function ProductHowItWorks(props) {
     <section className={classes.root}>
       <Container className={classes.container}>
         <Typography variant="h4" marked="center" className={classes.title} component="h2">
-          How it works for Students
+          How it works
         </Typography>
         <div>
           <Grid container spacing={5}>
@@ -95,7 +95,7 @@ function ProductHowItWorks(props) {
                 <div className={classes.number}>2.</div>
                 <AiOutlineDownload className={classes.icon} />
                 <Typography className={classes.text}>
-                  Download Mobile Application from Playstore/Appstore.
+                  Download Mobile Application from Following Link.
                 </Typography>
               </div>
             </Grid>
@@ -116,10 +116,9 @@ function ProductHowItWorks(props) {
           variant="contained"
           className={classes.button}
           component="a"
-          href="https://play.google.com/store/apps?hl=en"
-          target="_blank"
+          href="https://openinventoryorg.github.io/web-frontend/app/openinventory.apk"
         >
-          Download Student Mobile App
+          Download Mobile App
         </Button>
         <Box pt={2}>
           <Typography className={classes.bottomText}>

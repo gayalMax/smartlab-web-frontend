@@ -11,7 +11,7 @@ function Copyright() {
   return (
     <>
       {'© '}
-      <Link color="inherit" href="https://openinventory.com/">
+      <Link color="inherit" href="https://openinventoryorg.github.io/web-frontend/">
         Open Inventory Systems&nbsp;
       </Link>
       {new Date().getFullYear()}
