@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { AiOutlineSync, AiOutlineDelete } from 'react-icons/ai';
+import { AiOutlineSync } from 'react-icons/ai';
 import {
   Paper,
   Grid,
@@ -17,15 +17,7 @@ import ProgressOverlay from '../../Common/ProgressOverlay';
 import SuccessErrorAlert from '../../Common/SuccessErrorAlert';
 import AdvancedTable from '../../Common/AdvancedTable';
 
-function ViewSupervisorsPresenter({
-  classes,
-  supervisors,
-  error,
-  loading,
-  onRefresh,
-  deleteSupervisor,
-  success
-}) {
+function ViewSupervisorsPresenter({ classes, supervisors, error, loading, onRefresh, success }) {
   return (
     <ProgressOverlay visible={loading}>
       <Paper className={classes.root}>
@@ -33,7 +25,7 @@ function ViewSupervisorsPresenter({
           <Toolbar>
             <Grid container spacing={2} alignItems="center">
               <Grid item xs>
-                <p className={classes.title}>View Users</p>
+                <p className={classes.title}>View Supervisors</p>
               </Grid>
             </Grid>
             <Grid item>
@@ -61,13 +53,6 @@ function ViewSupervisorsPresenter({
                 { title: 'Name', field: 'name' },
                 { title: 'Email', field: 'email' }
               ]}
-              actions={[
-                {
-                  icon: () => <AiOutlineDelete />,
-                  tooltip: 'Delete Supervisor',
-                  onClick: (event, row) => deleteSupervisor(row)
-                }
-              ]}
               data={supervisors.map(({ id, firstName, lastName, email }) => ({
                 id,
                 name: `${firstName} ${lastName}`,
@@ -93,7 +78,6 @@ ViewSupervisorsPresenter.propTypes = {
   error: PropTypes.string,
   loading: PropTypes.bool.isRequired,
   onRefresh: PropTypes.func.isRequired,
-  deleteSupervisor: PropTypes.func.isRequired,
   success: PropTypes.string
 };
 
