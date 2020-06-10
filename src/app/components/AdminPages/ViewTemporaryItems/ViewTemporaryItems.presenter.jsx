@@ -59,6 +59,11 @@ function ViewTemporaryItemsPresenter({ classes, lentItems, onRefresh, error, loa
                     )
                 },
                 {
+                  field: 'studentId',
+                  title: 'Student Id',
+                  render: row => <Chip label={row.studentId} />
+                },
+                {
                   field: 'lab',
                   title: 'Lab Title'
                 },
