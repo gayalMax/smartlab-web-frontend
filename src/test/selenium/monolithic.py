@@ -38,7 +38,7 @@ class MonolithicTest(unittest.TestCase):
         self.email.send_keys(self.correct_email)
         self.password.send_keys(self.correct_password)
         self.signin.click()
-        time.sleep(2)
+        time.sleep(5)
         self.assertCurrentUrl(self.domain+'admin/dashboard')
 
     def logout(self):
@@ -47,7 +47,7 @@ class MonolithicTest(unittest.TestCase):
         iconbutton.click()
         time.sleep(1)
         logoutbutton = self.browser.find_element_by_xpath(
-            '//li[@role="menuitem"][@tabindex="-1"]')
+            '//li[@role="menuitem"][@tabindex="0"]')
         logoutbutton.click()
         time.sleep(2)
         self.assertCurrentUrl(self.domain+'login')
@@ -82,10 +82,10 @@ class MonolithicTest(unittest.TestCase):
                 self.fail("{} failed ({}: {})".format(step, type(e), e))
 
     def setUp(self):
-        #for linux
-        self.browser = webdriver.Chrome()
-        #for Windows specify the path
-        # self.browser = webdriver.Chrome('C:/Users/sasmi/Downloads/New folder/chromedriver.exe')
+        # for linux
+        # self.browser = webdriver.Chrome()
+        # for Windows specify the path
+        self.browser = webdriver.Chrome('C:/chromedriver.exe')
         self.domain = 'https://openinventoryorg.github.io/web-frontend/#/'
 
         # change email, password to valid email,pwds of the system

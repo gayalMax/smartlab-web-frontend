@@ -22,6 +22,7 @@ class TestCreateItemSetsPage(monolithic.MonolithicTest):
             "//input[@name='serialNumber']")
         self.createbutton = self.browser.find_element_by_xpath(
             "//button[.='Create Item']")
+        time.sleep(5)
 
     def step_03_check_if_in_the_same_page_after_empty_button_click(self):
         self.createbutton.click()
@@ -46,9 +47,11 @@ class TestCreateItemSetsPage(monolithic.MonolithicTest):
         self.assertCurrentUrl(self.currentUrl)
 
     def step_06_fill_only_lab_and_submit(self):
+        time.sleep(1)
         lab = self.browser.find_element_by_xpath(
             "//div[@id='mui-component-select-lab']")
         lab.click()
+        time.sleep(1)
         lab1 = self.browser.find_element_by_xpath(
             "//li[starts-with(.,'test lab')]")
         lab1.click()

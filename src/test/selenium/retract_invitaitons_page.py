@@ -22,7 +22,7 @@ class TestRetractInvitationPage(monolithic.MonolithicTest):
 
     def step_03_retract_invitation(self):
         retract_button = self.browser.find_element_by_xpath(
-            "//button[@class='MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary']")
+            "//button[@class='MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedSecondary'][@tabindex='0']")
         retract_button.click()
         time.sleep(2)
 

@@ -74,7 +74,7 @@ class TestManageLaboratoriesPages(monolithic.MonolithicTest):
         self.labtitle_placeholder.send_keys(self.labtitle)
         self.labsubtitle_placeholder.send_keys(self.labsubtitle)
         self.add_button.click()
-        time.sleep(1)
+        time.sleep(4)
         banner_msgs = self.browser.find_elements_by_xpath(self.xpath)
         self.assertTrue(len(banner_msgs) > 0)
 
@@ -87,10 +87,11 @@ class TestManageLaboratoriesPages(monolithic.MonolithicTest):
             self.domain+'admin/labs/assignstaff')
 
     def step_10_click_refresh_button_and_check_superviosor(self):
+        time.sleep(1)
         refresh = self.browser.find_element_by_xpath(
             "//button[@title='Refresh Labs']")
         refresh.click()
-        time.sleep(1)
+        time.sleep(5 )
         data = self.browser.find_elements_by_tag_name("td")
         self.assertIn(self.labtitle, [each.text.lower() for each in data])
 

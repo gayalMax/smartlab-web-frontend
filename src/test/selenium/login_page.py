@@ -63,6 +63,7 @@ class TestLoginPage(monolithic.MonolithicTest):
         self.clearInputField(self.password)
         self.email.send_keys(self.correct_email)
         self.password.send_keys('fasdfdfa')
+        time.sleep(1)
         self.signin.click()
         time.sleep(1)
         self.assertCurrentUrl(self.domain+'login')
