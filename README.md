@@ -1,6 +1,6 @@
-# Open Inventory Web Application
+# NVP Web Application
 
-> An open source inventory management template for lab management.
+> A volunteering platform
 
 ## Build
 
